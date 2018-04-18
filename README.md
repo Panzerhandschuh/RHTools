@@ -4,8 +4,8 @@ Rhythm Horizon Tools
 ## RHLib
 Provides functionality for reading/writing files from StepMania and Rhythm Horizon
 
-## RHConverter
+## Converter
 Converts StepMania files to Rhythm Horizon files
 
-## RHMixer
+## Mixer
 Randomizes the arrows on Rhythm Horizon charts
