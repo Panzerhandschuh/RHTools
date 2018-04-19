@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib
+namespace RHTools.RHLib.RH
 {
-	public class RHCacheFile
+	public class RHGFile
 	{
 	}
 }
