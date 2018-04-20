@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RHTools.RHLib.RH
 {
-	public class RHGuid
+	public class RhGuid
 	{
 		public byte[] guid;
 
-		public RHGuid(byte[] bytes)
+		public RhGuid(byte[] bytes)
 		{
 			guid = bytes;
 		}

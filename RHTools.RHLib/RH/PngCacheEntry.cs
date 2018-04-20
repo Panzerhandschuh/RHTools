@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace RHTools.RHLib.RH
 {
-	public class CacheEntry : IBinarySerializable
+	public class PngCacheEntry : IBinarySerializable
 	{
 		public CacheType type;
-		public RHGuid guid;
-		public byte[] unknown1;
+		public RhGuid guid;
+		public byte entryEnd; // Always 255?
 
 		public void Serialize(BinaryWriter writer)
 		{
 			throw new NotImplementedException();
 		}
 
-		public static CacheEntry Deserialize(BinaryReader reader)
+		public static PngCacheEntry Deserialize(BinaryReader reader)
 		{
-			CacheEntry entry = new CacheEntry();
+			PngCacheEntry entry = new PngCacheEntry();
 
 			entry.type = (CacheType)reader.ReadByte();
 			entry.guid = reader.ReadRHGuid();
-			entry.unknown1 = reader.ReadBytes(6);
+			entry.entryEnd = reader.ReadByte();
 
 			return entry;
 		}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RHTools.RHLib.SM
 {
-    public class SMFile
+    public class SmFile
     {
     }
 }

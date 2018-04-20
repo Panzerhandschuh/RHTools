@@ -9,14 +9,9 @@ namespace RHTools.RHLib.RH
 {
 	public class CacheFile : IBinarySerializable
 	{
-		public byte unknown1; // Always 0?
-		public int numOggEntries;
-		public List<CacheEntry> entries;
-
-		public CacheFile()
-		{
-			entries = new List<CacheEntry>();
-		}
+		public byte unknown1; // Version number?
+		public OggCacheEntry[] oggEntries;
+		public PngCacheEntry[] pngEntries;
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -28,12 +23,8 @@ namespace RHTools.RHLib.RH
 			CacheFile file = new CacheFile();
 
 			file.unknown1 = reader.ReadByte();
-			file.numOggEntries = reader.ReadInt32();
-			for (int i = 0; i < file.numOggEntries; i++)
-			{
-				CacheEntry entry = CacheEntry.Deserialize(reader);
-				file.entries.Add(entry);
-			}
+			file.oggEntries = reader.ReadArray(() => OggCacheEntry.Deserialize(reader));
+			file.pngEntries = reader.ReadArray(() => PngCacheEntry.Deserialize(reader));
 
 			return file;
 		}

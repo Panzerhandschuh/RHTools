@@ -42,14 +42,15 @@
   <ItemGroup>
     <Compile Include="BinaryReaderExtensions.cs" />
     <Compile Include="IBinarySerializable.cs" />
-    <Compile Include="RH\CacheEntry.cs" />
+    <Compile Include="RH\OggCacheEntry.cs" />
     <Compile Include="RH\CacheFile.cs" />
     <Compile Include="RH\CacheType.cs" />
-    <Compile Include="RH\RHCFile.cs" />
-    <Compile Include="RH\RHGFile.cs" />
-    <Compile Include="RH\RHGuid.cs" />
-    <Compile Include="RH\RHSFile.cs" />
-    <Compile Include="SM\SMFile.cs" />
+    <Compile Include="RH\PngCacheEntry.cs" />
+    <Compile Include="RH\RhcFile.cs" />
+    <Compile Include="RH\RhgFile.cs" />
+    <Compile Include="RH\RhGuid.cs" />
+    <Compile Include="RH\RhsFile.cs" />
+    <Compile Include="SM\SmFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

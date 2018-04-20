@@ -9,9 +9,10 @@ namespace RHTools.RHLib.RH
 	public enum CacheType : byte
 	{
 		Unknown = 0,
-		RHS = 1,
-		RHC = 2,
-		RHG = 3,
-		OGG = 4
+		Rhs = 1,
+		Rhc = 2,
+		Rhg = 3,
+		Ogg = 4,
+		Png = 5
 	}
 }

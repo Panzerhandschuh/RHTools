@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RHTools.RHLib.RH
 {
-	public class RHCFile
+	public class RhcFile
 	{
 	}
 }
