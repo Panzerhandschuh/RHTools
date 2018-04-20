@@ -13,7 +13,7 @@ namespace RHTools.RHLib.Test
 		[TestMethod]
 		public void ReadCacheFile()
 		{
-			using (Stream stream = File.Open(cacheFilePath, FileMode.Open))
+			using (Stream stream = File.Open(cacheFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
 			using (BinaryReader reader = new BinaryReader(stream))
 			{
 				CacheFile file = CacheFile.Deserialize(reader);

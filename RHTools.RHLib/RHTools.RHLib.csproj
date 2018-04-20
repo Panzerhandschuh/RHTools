@@ -44,11 +44,12 @@
     <Compile Include="IBinarySerializable.cs" />
     <Compile Include="RH\OggCacheEntry.cs" />
     <Compile Include="RH\CacheFile.cs" />
-    <Compile Include="RH\CacheType.cs" />
+    <Compile Include="RH\CacheEntryType.cs" />
     <Compile Include="RH\PngCacheEntry.cs" />
     <Compile Include="RH\RhcFile.cs" />
     <Compile Include="RH\RhgFile.cs" />
     <Compile Include="RH\RhGuid.cs" />
+    <Compile Include="RH\RhsCacheEntry.cs" />
     <Compile Include="RH\RhsFile.cs" />
     <Compile Include="SM\SmFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

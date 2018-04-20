@@ -12,6 +12,7 @@ namespace RHTools.RHLib.RH
 		public byte unknown1; // Version number?
 		public OggCacheEntry[] oggEntries;
 		public PngCacheEntry[] pngEntries;
+		public RhsCacheEntry[] rhsEntries;
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -25,6 +26,7 @@ namespace RHTools.RHLib.RH
 			file.unknown1 = reader.ReadByte();
 			file.oggEntries = reader.ReadArray(() => OggCacheEntry.Deserialize(reader));
 			file.pngEntries = reader.ReadArray(() => PngCacheEntry.Deserialize(reader));
+			file.rhsEntries = reader.ReadArray(() => RhsCacheEntry.Deserialize(reader));
 
 			return file;
 		}

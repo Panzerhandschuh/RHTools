@@ -9,7 +9,7 @@ namespace RHTools.RHLib.RH
 {
 	public class OggCacheEntry : IBinarySerializable
 	{
-		public CacheType type;
+		public CacheEntryType type;
 		public RhGuid guid;
 		public byte[] unknown1;
 		public byte entryEnd; // Always 255?
@@ -23,8 +23,8 @@ namespace RHTools.RHLib.RH
 		{
 			OggCacheEntry entry = new OggCacheEntry();
 
-			entry.type = (CacheType)reader.ReadByte();
-			entry.guid = reader.ReadRHGuid();
+			entry.type = (CacheEntryType)reader.ReadByte();
+			entry.guid = reader.ReadRhGuid();
 			entry.unknown1 = reader.ReadBytes(5);
 			entry.entryEnd = reader.ReadByte();
 
