@@ -9,7 +9,7 @@ namespace RHTools.RHLib.RH
 {
 	public class CacheFile : IBinarySerializable
 	{
-		public byte unknown1; // Version number?
+		public byte version; // Uncertain, but most likely a version number
 		public OggCacheEntry[] oggEntries;
 		public PngCacheEntry[] pngEntries;
 		public RhsCacheEntry[] rhsEntries;
@@ -23,7 +23,7 @@ namespace RHTools.RHLib.RH
 		{
 			CacheFile file = new CacheFile();
 
-			file.unknown1 = reader.ReadByte();
+			file.version = reader.ReadByte();
 			file.oggEntries = reader.ReadArray(() => OggCacheEntry.Deserialize(reader));
 			file.pngEntries = reader.ReadArray(() => PngCacheEntry.Deserialize(reader));
 			file.rhsEntries = reader.ReadArray(() => RhsCacheEntry.Deserialize(reader));
