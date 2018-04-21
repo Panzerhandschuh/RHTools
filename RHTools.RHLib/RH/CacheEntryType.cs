@@ -19,7 +19,10 @@ namespace RHTools.RHLib.RH
 		ChartName = 8,
 		TimingData = 9,
 		Unknown4 = 10,
-		DisplayArtist = 14,
+		Unknown5 = 11,
+		Unknown6 = 12,
+		DisplayAuthor = 13, // For charts
+		DisplayArtist = 14, // For songs
 		Artist = 20,
 		ArtistName = 33,
 		ArtistType = 35,

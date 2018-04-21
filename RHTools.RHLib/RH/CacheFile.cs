@@ -13,6 +13,7 @@ namespace RHTools.RHLib.RH
 		public OggCacheEntry[] oggEntries;
 		public PngCacheEntry[] pngEntries;
 		public RhsCacheEntry[] rhsEntries;
+		public RhcCacheEntry[] rhcEntries;
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -27,6 +28,7 @@ namespace RHTools.RHLib.RH
 			file.oggEntries = reader.ReadArray(OggCacheEntry.Deserialize);
 			file.pngEntries = reader.ReadArray(PngCacheEntry.Deserialize);
 			file.rhsEntries = reader.ReadArray(RhsCacheEntry.Deserialize);
+			file.rhcEntries = reader.ReadArray(RhcCacheEntry.Deserialize);
 
 			return file;
 		}

@@ -49,6 +49,7 @@
     <Compile Include="RH\CacheFile.cs" />
     <Compile Include="RH\CacheEntryType.cs" />
     <Compile Include="RH\PngCacheEntry.cs" />
+    <Compile Include="RH\RhcCacheEntry.cs" />
     <Compile Include="RH\RhcFile.cs" />
     <Compile Include="RH\RhgFile.cs" />
     <Compile Include="RH\RhGuid.cs" />
