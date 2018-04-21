@@ -18,12 +18,11 @@ namespace RHTools.RHLib.RH
 		Unknown2 = 7,
 		ChartName = 8,
 		Unknown3 = 9, // Used after chart names in RHS entries
-		Unknown4 = 10, // 17 bytes. Used after the empty entry
+		Unknown4 = 10, // 14 bytes. Used after the empty entry
 		Unknown5 = 11, // 9 bytes
-		Unknown6 = 12, // ? bytes. Used after the empty entry
-		Artist2 = 14,
-		Unknown7 = 20, // 17 bytes. Used after the empty entry
-		Artist1 = 33,
+		DisplayArtist = 14,
+		ExtraArtistIndicator = 20, // 26 bytes. Used after the empty entry
+		Artists = 33,
 		Empty = 35, // 2 bytes? Used after artist1 in RHS entries. Seems to always be followed by 0x00FF
 		EndOfEntry = 255
 	}
