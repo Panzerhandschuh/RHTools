@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BinaryReaderExtensions.cs" />
     <Compile Include="IBinarySerializable.cs" />
+    <Compile Include="ITextSerializable.cs" />
     <Compile Include="RH\OggCacheEntry.cs" />
     <Compile Include="RH\CacheFile.cs" />
     <Compile Include="RH\CacheEntryType.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="RH\RhGuid.cs" />
     <Compile Include="RH\RhsCacheEntry.cs" />
     <Compile Include="RH\RhsFile.cs" />
+    <Compile Include="SM\MsdFile.cs" />
+    <Compile Include="SM\MsdValue.cs" />
     <Compile Include="SM\SmFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

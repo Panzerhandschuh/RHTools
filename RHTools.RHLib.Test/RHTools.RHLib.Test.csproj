@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="RH\CacheFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SM\MsdFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
