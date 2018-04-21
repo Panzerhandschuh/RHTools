@@ -17,7 +17,7 @@ namespace RHTools.RHLib.RH
 		Unknown1 = 6,
 		Unknown2 = 7,
 		ChartName = 8,
-		Unknown3 = 9, // Used after chart names in RHS entries. Might be related to timing data.
+		TimingData = 9,
 		Unknown4 = 10,
 		DisplayArtist = 14,
 		Artist = 20,

@@ -23,12 +23,17 @@ namespace RHTools.RHLib
 			return new string(chars);
 		}
 		
-		public static T[] ReadArray<T>(this BinaryReader reader, Func<T> deserializeFunc)
+		public static T[] ReadArray<T>(this BinaryReader reader, Func<BinaryReader, T> deserializeFunc)
 		{
 			int length = reader.ReadInt32();
+			return ReadArray(reader, deserializeFunc, length);
+		}
+
+		public static T[] ReadArray<T>(this BinaryReader reader, Func<BinaryReader, T> deserializeFunc, int length)
+		{
 			T[] array = new T[length];
 			for (int i = 0; i < length; i++)
-				array[i] = deserializeFunc();
+				array[i] = deserializeFunc(reader);
 
 			return array;
 		}

@@ -24,9 +24,9 @@ namespace RHTools.RHLib.RH
 			CacheFile file = new CacheFile();
 
 			file.version = reader.ReadByte();
-			file.oggEntries = reader.ReadArray(() => OggCacheEntry.Deserialize(reader));
-			file.pngEntries = reader.ReadArray(() => PngCacheEntry.Deserialize(reader));
-			file.rhsEntries = reader.ReadArray(() => RhsCacheEntry.Deserialize(reader));
+			file.oggEntries = reader.ReadArray(OggCacheEntry.Deserialize);
+			file.pngEntries = reader.ReadArray(PngCacheEntry.Deserialize);
+			file.rhsEntries = reader.ReadArray(RhsCacheEntry.Deserialize);
 
 			return file;
 		}

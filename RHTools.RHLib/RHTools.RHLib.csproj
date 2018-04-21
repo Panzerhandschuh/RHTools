@@ -54,6 +54,8 @@
     <Compile Include="RH\RhGuid.cs" />
     <Compile Include="RH\RhsCacheEntry.cs" />
     <Compile Include="RH\RhsFile.cs" />
+    <Compile Include="RH\TimingData.cs" />
+    <Compile Include="RH\TimingDataEntry.cs" />
     <Compile Include="SM\MsdFile.cs" />
     <Compile Include="SM\MsdValue.cs" />
     <Compile Include="SM\SmFile.cs" />

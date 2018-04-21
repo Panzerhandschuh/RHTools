@@ -14,7 +14,7 @@ namespace RHTools.RHLib.RH
 		public RhGuid oggGuid;
 		public RhGuid pngGuid;
 		public string chartName;
-		public byte[] unknown1;
+		public TimingData timingData;
 		public List<Artist> artists;
 		public string displayArtist;
 
@@ -52,10 +52,8 @@ namespace RHTools.RHLib.RH
 					case CacheEntryType.ChartName:
 						entry.chartName = reader.ReadShortPrefixedString();
 						break;
-					case CacheEntryType.Unknown3:
-						byte[] unknown3Type = reader.ReadBytes(2); // First byte is always 0?
-						int numBytes = ((unknown3Type[1] + 1) * 12) - 1;
-						entry.unknown1 = reader.ReadBytes(numBytes);
+					case CacheEntryType.TimingData:
+						entry.timingData = TimingData.Deserialize(reader);
 						break;
 					case CacheEntryType.Unknown4:
 						reader.ReadBytes(14);
