@@ -15,13 +15,12 @@ namespace RHTools.RHLib.RH
 		public RhGuid pngGuid;
 		public string chartName;
 		public byte[] unknown1;
-		public List<string> artists;
-		public byte[] unknown2;
+		public List<Artist> artists;
 		public string displayArtist;
 
 		public RhsCacheEntry()
 		{
-			artists = new List<string>();
+			artists = new List<Artist>();
 		}
 
 		public void Serialize(BinaryWriter writer)
@@ -55,19 +54,14 @@ namespace RHTools.RHLib.RH
 						break;
 					case CacheEntryType.Unknown3:
 						byte[] unknown3Type = reader.ReadBytes(2); // First byte is always 0?
-						int numBytes = (unknown3Type[1] + 1) * 12;
+						int numBytes = ((unknown3Type[1] + 1) * 12) - 1;
 						entry.unknown1 = reader.ReadBytes(numBytes);
 						break;
 					case CacheEntryType.Unknown4:
 						reader.ReadBytes(14);
 						break;
-					case CacheEntryType.Artists:
-						entry.artists.Add(reader.ReadShortPrefixedString());
-						break;
-					case CacheEntryType.Empty:
-						byte[] empty = reader.ReadBytes(2); // 0x00FF or 0x01FF? 0 or 1 might indicate Artist vs Contributor
-						break;
-					case CacheEntryType.ExtraArtistIndicator: // Seems to indicate additional artists (followed by 0x21 / 33)
+					case CacheEntryType.Artist:
+						entry.artists.Add(Artist.Deserialize(reader));
 						break;
 					case CacheEntryType.DisplayArtist:
 						entry.displayArtist = reader.ReadShortPrefixedString();
