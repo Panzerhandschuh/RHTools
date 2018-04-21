@@ -9,7 +9,7 @@ namespace RHTools.RHLib.RH
 {
 	public class TimingDataEntry : IBinarySerializable
 	{
-		public byte[] unknown;
+		public byte[] unknown1;
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -20,7 +20,7 @@ namespace RHTools.RHLib.RH
 		{
 			TimingDataEntry entry = new TimingDataEntry();
 
-			entry.unknown = reader.ReadBytes(12);
+			entry.unknown1 = reader.ReadBytes(12);
 
 			return entry;
 		}

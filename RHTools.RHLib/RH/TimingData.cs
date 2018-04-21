@@ -9,7 +9,7 @@ namespace RHTools.RHLib.RH
 {
 	public class TimingData : IBinarySerializable
 	{
-		public byte[] unknown;
+		public byte[] unknown1;
 		public TimingDataEntry[] entries;
 
 		public void Serialize(BinaryWriter writer)
@@ -23,7 +23,7 @@ namespace RHTools.RHLib.RH
 
 			reader.ReadByte(); // Always 0?
 			int numEntries = reader.ReadInt32();
-			data.unknown = reader.ReadBytes(8); // Unknown
+			data.unknown1 = reader.ReadBytes(8); // Unknown
 			data.entries = reader.ReadArray(TimingDataEntry.Deserialize, numEntries);
 
 			return data;

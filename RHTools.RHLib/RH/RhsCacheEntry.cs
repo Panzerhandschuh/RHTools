@@ -16,6 +16,7 @@ namespace RHTools.RHLib.RH
 		public string chartName;
 		public TimingData timingData;
 		public List<Artist> artists;
+		public byte[] unknown1;
 		public string displayArtist;
 
 		public RhsCacheEntry()
@@ -56,7 +57,7 @@ namespace RHTools.RHLib.RH
 						entry.timingData = TimingData.Deserialize(reader);
 						break;
 					case CacheEntryType.Unknown4:
-						reader.ReadBytes(14);
+						entry.unknown1 = reader.ReadBytes(14);
 						break;
 					case CacheEntryType.DisplayArtist:
 						entry.displayArtist = reader.ReadShortPrefixedString();
