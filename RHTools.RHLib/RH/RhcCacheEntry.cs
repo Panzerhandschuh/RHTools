@@ -32,6 +32,7 @@ namespace RHTools.RHLib.RH
 		{
 			RhcCacheEntry entry = new RhcCacheEntry();
 
+			// TODO: Remove duplicate logic for parsing cache entry types
 			CacheEntryType type;
 			while ((type = (CacheEntryType)reader.ReadByte()) != CacheEntryType.EndOfEntry)
 			{

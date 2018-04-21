@@ -16,7 +16,7 @@ namespace RHTools.RHLib.RH
 		Png = 5,
 		Unknown1 = 6,
 		Unknown2 = 7,
-		ChartName = 8,
+		ChartName = 8, // Also applies to group names
 		TimingData = 9,
 		Unknown4 = 10,
 		Unknown5 = 11,
