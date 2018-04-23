@@ -36,6 +36,7 @@ namespace RHTools.RHLib.RH
 			RhsFile file = new RhsFile();
 
 			file.version = reader.ReadByte();
+
 			RhsEntryType type;
 			while ((type = (RhsEntryType)reader.ReadByte()) != RhsEntryType.EndOfEntry)
 			{

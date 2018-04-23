@@ -8,7 +8,7 @@ namespace RHTools.RHLib.RH
 {
 	public enum CacheEntryType : byte
 	{
-		Internal = 0, // Used after RHS guid in RHS entries. It seems to reference some internal guid.
+		Internal = 0, // Might be a guid for online file sharing
 		Rhs = 1,
 		Rhc = 2,
 		Rhg = 3,
