@@ -51,7 +51,7 @@ namespace RHTools.RHLib.RH
 						entry.groupName = reader.ReadShortPrefixedString();
 						break;
 					default:
-						throw new Exception("Unknown song property data type: " + type);
+						throw new Exception("Unknown cache entry type: " + type);
 				}
 			}
 

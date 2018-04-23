@@ -21,9 +21,9 @@ namespace RHTools.RHLib.RH
 		{
 			Artist artist = new Artist();
 
-			reader.ReadByte(); // ALways 0x21? This might be an artist name indicator
+			reader.ReadByte(); // ALways 0x21? Probably is an artist name indicator
 			artist.artist = reader.ReadShortPrefixedString();
-			reader.ReadByte(); // Always 0x23? This might be an artist type indicator
+			reader.ReadByte(); // Always 0x23? Probably is an artist type indicator
 			artist.type = (ArtistType)reader.ReadByte();
 			reader.ReadByte(); // Always 0xFF? Probably indicates the end of the entry
 

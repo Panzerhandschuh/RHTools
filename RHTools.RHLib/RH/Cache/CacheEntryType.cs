@@ -23,7 +23,7 @@ namespace RHTools.RHLib.RH
 		Unknown6 = 12,
 		DisplayAuthor = 13, // For charts
 		DisplayArtist = 14, // For songs
-		Artist = 20,
+		Artists = 20,
 		ArtistName = 33,
 		ArtistType = 35,
 		EndOfEntry = 255

@@ -63,11 +63,11 @@ namespace RHTools.RHLib.RH
 					case CacheEntryType.DisplayArtist:
 						entry.displayArtist = reader.ReadShortPrefixedString();
 						break;
-					case CacheEntryType.Artist:
+					case CacheEntryType.Artists:
 						entry.artists.Add(Artist.Deserialize(reader));
 						break;
 					default:
-						throw new Exception("Unknown song property data type: " + type);
+						throw new Exception("Unknown cache entry type: " + type);
 				}
 			}
 			
