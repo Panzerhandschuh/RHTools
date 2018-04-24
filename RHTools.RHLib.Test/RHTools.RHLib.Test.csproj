@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="RH\Cache\CacheFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RH\RHC\RhcFileTest.cs" />
     <Compile Include="RH\RHG\RhgFileTest.cs" />
     <Compile Include="RH\RHS\RhsFileTest.cs" />
     <Compile Include="SM\MsdFileTest.cs" />
@@ -63,9 +64,7 @@
       <Name>RHTools.RHLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RH\RHC\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
