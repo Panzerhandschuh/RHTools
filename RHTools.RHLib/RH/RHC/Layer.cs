@@ -13,11 +13,11 @@ namespace RHTools.RHLib.RH
 		public string layerName;
 		public byte[] unknown2;
 		public NoteFlags panelConfig;
-		public Dictionary<NoteFlags, List<int>> notes;
+		public Dictionary<NoteFlags, List<Note>> notes;
 
 		public Layer()
 		{
-			notes = new Dictionary<NoteFlags, List<int>>();
+			notes = new Dictionary<NoteFlags, List<Note>>();
 		}
 
 		public void Serialize(BinaryWriter writer)
@@ -51,21 +51,18 @@ namespace RHTools.RHLib.RH
 		{
 			if (layer.panelConfig.HasFlag(flags))
 			{
-				List<int> beats = ReadNotes(reader);
-				layer.notes.Add(flags, beats);
+				List<Note> notes = ReadNotes(reader);
+				layer.notes.Add(flags, notes);
 			}
 		}
 
-		private static List<int> ReadNotes(BinaryReader reader)
+		private static List<Note> ReadNotes(BinaryReader reader)
 		{
-			List<int> beats = new List<int>();
+			List<Note> beats = new List<Note>();
 
 			int numNotes = reader.ReadInt32();
 			for (int i = 0; i < numNotes; i++)
-			{
-				reader.ReadByte();
-				beats.Add(reader.ReadInt32());
-			}
+				beats.Add(Note.Deserialize(reader));
 
 			return beats;
 		}
