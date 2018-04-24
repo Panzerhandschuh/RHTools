@@ -11,6 +11,8 @@ namespace RHTools.RHLib.RH
 	{
 		public byte[] unknown1;
 		public string layerName;
+		public bool isEnabled;
+		public bool isFake;
 		public byte[] unknown2;
 		public NoteFlags panelConfig;
 		public Dictionary<NoteFlags, List<Note>> notes;
@@ -31,7 +33,26 @@ namespace RHTools.RHLib.RH
 
 			layer.unknown1 = reader.ReadBytes(2);
 			layer.layerName = reader.ReadShortPrefixedString();
-			layer.unknown2 = reader.ReadBytes(15);
+
+			LayerEntryType type;
+			while ((type = (LayerEntryType)reader.ReadByte()) != LayerEntryType.EndOfEntry)
+			{
+				switch (type)
+				{
+					case LayerEntryType.IsFake:
+						layer.isFake = true;
+						break;
+					case LayerEntryType.IsEnabled:
+						layer.isEnabled = true;
+						break;
+					case LayerEntryType.LayerProperties:
+						layer.unknown2 = reader.ReadBytes(12);
+						break;
+					default:
+						throw new Exception("Unknown layer entry type: " + type);
+				}
+			}
+
 			layer.panelConfig = (NoteFlags)reader.ReadInt32();
 
 			TryReadNotes(reader, layer, NoteFlags.DownLeft);
