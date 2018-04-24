@@ -52,6 +52,7 @@
     <Compile Include="RH\Cache\RhcCacheEntry.cs" />
     <Compile Include="RH\RHC\Layer.cs" />
     <Compile Include="RH\RHC\Note.cs" />
+    <Compile Include="RH\RHC\NoteType.cs" />
     <Compile Include="RH\RHC\RhcEntryType.cs" />
     <Compile Include="RH\RHC\RhcFile.cs" />
     <Compile Include="RH\Cache\RhgCacheEntry.cs" />

@@ -9,7 +9,7 @@ namespace RHTools.RHLib.RH
 {
 	public class Note : IBinarySerializable
 	{
-		public bool isHold;
+		public NoteType type;
 		public int startBeat;
 		public int duration;
 
@@ -22,9 +22,9 @@ namespace RHTools.RHLib.RH
 		{
 			Note note = new Note();
 
-			note.isHold = reader.ReadBoolean();
+			note.type = (NoteType)reader.ReadByte();
 			note.startBeat = reader.ReadInt32();
-			if (note.isHold)
+			if (note.type == NoteType.Hold)
 				note.duration = reader.ReadInt32();
 
 			return note;
