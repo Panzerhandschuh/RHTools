@@ -54,6 +54,7 @@
     <Compile Include="RH\RHG\RhgFileTest.cs" />
     <Compile Include="RH\RHS\RhsFileTest.cs" />
     <Compile Include="SM\MsdFileTest.cs" />
+    <Compile Include="SM\SmFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
