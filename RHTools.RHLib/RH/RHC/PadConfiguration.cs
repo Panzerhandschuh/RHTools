@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace RHTools.RHLib.RH
 {
-	public enum NoteType
+	public enum PadConfiguration : byte
 	{
-		Regular = 0,
-		Hold = 1,
-		Mine = 2
+		Single,
+		Double
 	}
 }

@@ -55,17 +55,36 @@ namespace RHTools.RHLib.RH
 
 			layer.panelConfig = (NoteFlags)reader.ReadInt32();
 
-			TryReadNotes(reader, layer, NoteFlags.DownLeft);
-			TryReadNotes(reader, layer, NoteFlags.Left);
-			TryReadNotes(reader, layer, NoteFlags.UpLeft);
-			TryReadNotes(reader, layer, NoteFlags.Down);
-			TryReadNotes(reader, layer, NoteFlags.Center);
-			TryReadNotes(reader, layer, NoteFlags.Up);
-			TryReadNotes(reader, layer, NoteFlags.UpRight);
-			TryReadNotes(reader, layer, NoteFlags.Right);
-			TryReadNotes(reader, layer, NoteFlags.DownRight);
+			TryReadPad1Notes(reader, layer);
+			TryReadPad2Notes(reader, layer);
 
 			return layer;
+		}
+
+		private static void TryReadPad1Notes(BinaryReader reader, Layer layer)
+		{
+			TryReadNotes(reader, layer, NoteFlags.Pad1DownLeft);
+			TryReadNotes(reader, layer, NoteFlags.Pad1Left);
+			TryReadNotes(reader, layer, NoteFlags.Pad1UpLeft);
+			TryReadNotes(reader, layer, NoteFlags.Pad1Down);
+			TryReadNotes(reader, layer, NoteFlags.Pad1Center);
+			TryReadNotes(reader, layer, NoteFlags.Pad1Up);
+			TryReadNotes(reader, layer, NoteFlags.Pad1UpRight);
+			TryReadNotes(reader, layer, NoteFlags.Pad1Right);
+			TryReadNotes(reader, layer, NoteFlags.Pad1DownRight);
+		}
+
+		private static void TryReadPad2Notes(BinaryReader reader, Layer layer)
+		{
+			TryReadNotes(reader, layer, NoteFlags.Pad2DownLeft);
+			TryReadNotes(reader, layer, NoteFlags.Pad2Left);
+			TryReadNotes(reader, layer, NoteFlags.Pad2UpLeft);
+			TryReadNotes(reader, layer, NoteFlags.Pad2Down);
+			TryReadNotes(reader, layer, NoteFlags.Pad2Center);
+			TryReadNotes(reader, layer, NoteFlags.Pad2Up);
+			TryReadNotes(reader, layer, NoteFlags.Pad2UpRight);
+			TryReadNotes(reader, layer, NoteFlags.Pad2Right);
+			TryReadNotes(reader, layer, NoteFlags.Pad2DownRight);
 		}
 
 		private static void TryReadNotes(BinaryReader reader, Layer layer, NoteFlags flags)

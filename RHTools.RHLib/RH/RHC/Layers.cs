@@ -10,7 +10,8 @@ namespace RHTools.RHLib.RH
 {
 	public class Layers : IBinarySerializable
 	{
-		public byte[] unknown1;
+		public byte unknown1;
+		public PadConfiguration padConfig;
 		public List<Layer> layers;
 
 		public Layers()
@@ -27,12 +28,12 @@ namespace RHTools.RHLib.RH
 		{
 			Layers layers = new Layers();
 
-			layers.unknown1 = reader.ReadBytes(2);
+			layers.unknown1 = reader.ReadByte();
+			layers.padConfig = (PadConfiguration)reader.ReadByte();
 			byte numLayers = reader.ReadByte();
 			for (int i = 0; i < numLayers; i++)
 				layers.layers.Add(Layer.Deserialize(reader));
 			
-
 			return layers;
 		}
 	}
