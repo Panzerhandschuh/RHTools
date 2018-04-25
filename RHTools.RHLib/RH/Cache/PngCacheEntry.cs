@@ -9,9 +9,7 @@ namespace RHTools.RHLib.RH
 {
 	public class PngCacheEntry : IBinarySerializable
 	{
-		public CacheEntryType type;
 		public RhGuid guid;
-		public byte entryEnd; // Always 255?
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -22,9 +20,9 @@ namespace RHTools.RHLib.RH
 		{
 			PngCacheEntry entry = new PngCacheEntry();
 
-			entry.type = (CacheEntryType)reader.ReadByte();
+			reader.ReadByte(); // Always 5
 			entry.guid = reader.ReadRhGuid();
-			entry.entryEnd = reader.ReadByte();
+			reader.ReadByte(); // Always 255
 
 			return entry;
 		}

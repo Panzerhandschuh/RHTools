@@ -9,10 +9,8 @@ namespace RHTools.RHLib.RH
 {
 	public class OggCacheEntry : IBinarySerializable
 	{
-		public CacheEntryType type;
 		public RhGuid guid;
-		public byte[] unknown1;
-		public byte entryEnd; // Always 255?
+		public float length;
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -23,10 +21,11 @@ namespace RHTools.RHLib.RH
 		{
 			OggCacheEntry entry = new OggCacheEntry();
 
-			entry.type = (CacheEntryType)reader.ReadByte();
+			reader.ReadByte(); // Always 4
 			entry.guid = reader.ReadRhGuid();
-			entry.unknown1 = reader.ReadBytes(5);
-			entry.entryEnd = reader.ReadByte();
+			reader.ReadByte(); // Always 13
+			entry.length = reader.ReadSingle();
+			reader.ReadByte(); // Always 255
 
 			return entry;
 		}
