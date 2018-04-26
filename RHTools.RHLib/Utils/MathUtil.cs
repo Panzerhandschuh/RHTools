@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.RH.Utils
+namespace RHTools.RHLib.Utils
 {
 	public static class MathUtil
 	{

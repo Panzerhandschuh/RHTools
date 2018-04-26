@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +19,13 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write(version);
+
+			writer.Write(oggEntries);
+			writer.Write(pngEntries);
+			writer.Write(rhsEntries);
+			writer.Write(rhcEntries);
+			writer.Write(rhgEntries);
 		}
 
 		public static CacheFile Deserialize(BinaryReader reader)

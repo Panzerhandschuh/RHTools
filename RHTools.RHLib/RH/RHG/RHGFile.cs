@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,17 +41,17 @@ namespace RHTools.RHLib.RH
 					case RhgEntryType.Rhg:
 						file.rhgGuid = reader.ReadRhGuid();
 						break;
+					case RhgEntryType.Internal:
+						file.internalGuid = reader.ReadRhGuid();
+						break;
+					case RhgEntryType.Png:
+						file.pngGuid = reader.ReadRhGuid();
+						break;
 					case RhgEntryType.PackName:
 						file.packName = reader.ReadShortPrefixedString();
 						break;
 					case RhgEntryType.Rhc:
 						file.rhcGuids.Add(reader.ReadRhGuid());
-						break;
-					case RhgEntryType.Png:
-						file.pngGuid = reader.ReadRhGuid();
-						break;
-					case RhgEntryType.Internal:
-						file.internalGuid = reader.ReadRhGuid();
 						break;
 					default:
 						throw new Exception("Unknown group entry type: " + type);

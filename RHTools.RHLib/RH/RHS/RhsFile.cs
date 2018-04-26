@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,6 +46,9 @@ namespace RHTools.RHLib.RH
 					case RhsEntryType.Rhs:
 						file.rhsGuid = reader.ReadRhGuid();
 						break;
+					case RhsEntryType.Internal:
+						file.internalGuid = reader.ReadRhGuid();
+						break;
 					case RhsEntryType.Ogg:
 						file.oggGuid = reader.ReadRhGuid();
 						break;
@@ -63,14 +67,11 @@ namespace RHTools.RHLib.RH
 					case RhsEntryType.DisplayBpm:
 						file.displayBpm = reader.ReadSingle();
 						break;
-					case RhsEntryType.Internal:
-						file.internalGuid = reader.ReadRhGuid();
+					case RhsEntryType.Unknown2:
+						file.unknown2 = reader.ReadBytes(16);
 						break;
 					case RhsEntryType.Artists:
 						file.artists.Add(Artist.Deserialize(reader));
-						break;
-					case RhsEntryType.Unknown2:
-						file.unknown2 = reader.ReadBytes(16);
 						break;
 					default:
 						throw new Exception("Unknown song entry type: " + type);

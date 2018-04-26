@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,7 +26,15 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.WriteOptionalData((byte)CacheEntryType.Rhc, rhcGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.Rhs, rhsGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.Internal, internalGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.ChartName, chartName, (x) => writer.WriteShortPrefixedString(x));
+			writer.WriteOptionalData((byte)CacheEntryType.PreviewStart, unknown1, (x) => writer.Write(x));
+			writer.WritePrefixedList((byte)CacheEntryType.Artists, artists, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.PreviewLength, unknown2, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.DisplayAuthor, displayAuthor, (x) => writer.WriteShortPrefixedString(x));
+			writer.Write((byte)CacheEntryType.EndOfEntry);
 		}
 
 		public static RhcCacheEntry Deserialize(BinaryReader reader)
@@ -38,14 +47,14 @@ namespace RHTools.RHLib.RH
 			{
 				switch (type)
 				{
-					case CacheEntryType.Internal:
-						entry.internalGuid = reader.ReadRhGuid();
+					case CacheEntryType.Rhc:
+						entry.rhcGuid = reader.ReadRhGuid();
 						break;
 					case CacheEntryType.Rhs:
 						entry.rhsGuid = reader.ReadRhGuid();
 						break;
-					case CacheEntryType.Rhc:
-						entry.rhcGuid = reader.ReadRhGuid();
+					case CacheEntryType.Internal:
+						entry.internalGuid = reader.ReadRhGuid();
 						break;
 					case CacheEntryType.ChartName:
 						entry.chartName = reader.ReadShortPrefixedString();
@@ -53,14 +62,14 @@ namespace RHTools.RHLib.RH
 					case CacheEntryType.PreviewStart:
 						entry.unknown1 = reader.ReadBytes(7);
 						break;
+					case CacheEntryType.Artists:
+						entry.artists.Add(Artist.Deserialize(reader));
+						break;
 					case CacheEntryType.PreviewLength:
 						entry.unknown2 = reader.ReadBytes(36);
 						break;
 					case CacheEntryType.DisplayAuthor:
 						entry.displayAuthor = reader.ReadShortPrefixedString();
-						break;
-					case CacheEntryType.Artists:
-						entry.artists.Add(Artist.Deserialize(reader));
 						break;
 					default:
 						throw new Exception("Unknown cache entry type: " + type);

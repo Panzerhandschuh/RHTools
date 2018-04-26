@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write((byte)CacheEntryType.ArtistName);
+			writer.WriteShortPrefixedString(artist);
+			writer.Write((byte)CacheEntryType.ArtistType);
+			writer.Write((byte)type);
+			writer.Write((byte)CacheEntryType.EndOfEntry);
 		}
 
 		public static Artist Deserialize(BinaryReader reader)

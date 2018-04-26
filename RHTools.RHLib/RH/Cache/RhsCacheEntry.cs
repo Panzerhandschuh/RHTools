@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,7 +29,18 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.WriteOptionalData((byte)CacheEntryType.Rhs, rhsGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.Internal, internalGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.Ogg, oggGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.Png, pngGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.ChartName, chartName, (x) => writer.WriteShortPrefixedString(x));
+			writer.WriteOptionalData((byte)CacheEntryType.TimingData, timingData, (x) => writer.Write(x));
+			writer.WritePrefixedList((byte)CacheEntryType.Artists, artists, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.DisplayBpm, displayBpm, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.PreviewStart, previewStart, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.PreviewLength, previewLength, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.DisplayArtist, displayArtist, (x) => writer.WriteShortPrefixedString(x));
+			writer.Write((byte)CacheEntryType.EndOfEntry);
 		}
 
 		public static RhsCacheEntry Deserialize(BinaryReader reader)
@@ -41,11 +53,11 @@ namespace RHTools.RHLib.RH
 			{
 				switch (type)
 				{
-					case CacheEntryType.Internal:
-						entry.internalGuid = reader.ReadRhGuid();
-						break;
 					case CacheEntryType.Rhs:
 						entry.rhsGuid = reader.ReadRhGuid();
+						break;
+					case CacheEntryType.Internal:
+						entry.internalGuid = reader.ReadRhGuid();
 						break;
 					case CacheEntryType.Ogg:
 						entry.oggGuid = reader.ReadRhGuid();
@@ -59,6 +71,9 @@ namespace RHTools.RHLib.RH
 					case CacheEntryType.TimingData:
 						entry.timingData = TimingData.Deserialize(reader);
 						break;
+					case CacheEntryType.Artists:
+						entry.artists.Add(Artist.Deserialize(reader));
+						break;
 					case CacheEntryType.DisplayBpm:
 						entry.displayBpm = reader.ReadSingle(); // Always -1
 						break;
@@ -70,9 +85,6 @@ namespace RHTools.RHLib.RH
 						break;
 					case CacheEntryType.DisplayArtist:
 						entry.displayArtist = reader.ReadShortPrefixedString();
-						break;
-					case CacheEntryType.Artists:
-						entry.artists.Add(Artist.Deserialize(reader));
 						break;
 					default:
 						throw new Exception("Unknown cache entry type: " + type);

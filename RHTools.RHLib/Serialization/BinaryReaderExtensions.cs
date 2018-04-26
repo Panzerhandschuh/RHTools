@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib
+namespace RHTools.RHLib.Serialization
 {
 	public static class BinaryReaderExtensions
 	{

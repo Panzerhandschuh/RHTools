@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +16,9 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write(beat);
+			writer.Write(startBpm);
+			writer.Write(endBpm);
 		}
 
 		public static TimingDataEntry Deserialize(BinaryReader reader)

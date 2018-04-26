@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.RHLib.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,11 +43,11 @@ namespace RHTools.RHLib.RH
 					case RhcEntryType.Rhc:
 						file.rhcGuid = reader.ReadRhGuid();
 						break;
+					case RhcEntryType.Internal:
+						file.internalGuid = reader.ReadRhGuid();
+						break;
 					case RhcEntryType.Rhs:
 						file.rhsGuid = reader.ReadRhGuid();
-						break;
-					case RhcEntryType.Layers:
-						file.layers = Layers.Deserialize(reader);
 						break;
 					case RhcEntryType.ChartName:
 						file.chartName = reader.ReadShortPrefixedString();
@@ -54,11 +55,11 @@ namespace RHTools.RHLib.RH
 					case RhcEntryType.Unknown1:
 						file.unknown1 = reader.ReadBytes(2);
 						break;
-					case RhcEntryType.Internal:
-						file.internalGuid = reader.ReadRhGuid();
-						break;
 					case RhcEntryType.Artists:
 						file.artists.Add(Artist.Deserialize(reader));
+						break;
+					case RhcEntryType.Layers:
+						file.layers = Layers.Deserialize(reader);
 						break;
 					default:
 						throw new Exception("Unknown chart entry type: " + type);
