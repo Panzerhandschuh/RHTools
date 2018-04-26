@@ -9,7 +9,9 @@ namespace RHTools.RHLib.RH
 {
 	public class TimingDataEntry : IBinarySerializable
 	{
-		public byte[] unknown1;
+		public int beat; // Uncertain
+		public float startBpm; // Uncertain
+		public float endBpm; // Uncertain
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -20,7 +22,9 @@ namespace RHTools.RHLib.RH
 		{
 			TimingDataEntry entry = new TimingDataEntry();
 
-			entry.unknown1 = reader.ReadBytes(12);
+			entry.beat = reader.ReadInt32();
+			entry.startBpm = reader.ReadSingle();
+			entry.endBpm = reader.ReadSingle();
 
 			return entry;
 		}

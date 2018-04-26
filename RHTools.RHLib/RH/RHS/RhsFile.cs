@@ -17,7 +17,7 @@ namespace RHTools.RHLib.RH
 		public TimingData timingData;
 		public float previewStart;
 		public float previewEnd;
-		public float unknown1;
+		public float displayBpm; // Uncertain. Always -1?
 		public byte[] unknown2;
 		public List<Artist> artists;
 
@@ -60,8 +60,8 @@ namespace RHTools.RHLib.RH
 					case RhsEntryType.PreviewEnd:
 						file.previewEnd = reader.ReadSingle();
 						break;
-					case RhsEntryType.Unknown1:
-						file.unknown1 = reader.ReadSingle();
+					case RhsEntryType.DisplayBpm:
+						file.displayBpm = reader.ReadSingle();
 						break;
 					case RhsEntryType.Internal:
 						file.internalGuid = reader.ReadRhGuid();

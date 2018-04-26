@@ -16,7 +16,9 @@ namespace RHTools.RHLib.RH
 		public string chartName;
 		public TimingData timingData;
 		public List<Artist> artists;
-		public byte[] unknown1;
+		public float displayBpm; // Always -1. Uncertain if this is the actual meaning (maybe values other than -1 override the song BPM).
+		public float previewStart;
+		public float previewLength;
 		public string displayArtist;
 
 		public RhsCacheEntry()
@@ -57,8 +59,14 @@ namespace RHTools.RHLib.RH
 					case CacheEntryType.TimingData:
 						entry.timingData = TimingData.Deserialize(reader);
 						break;
-					case CacheEntryType.Unknown4:
-						entry.unknown1 = reader.ReadBytes(14);
+					case CacheEntryType.DisplayBpm:
+						entry.displayBpm = reader.ReadSingle(); // Always -1
+						break;
+					case CacheEntryType.PreviewStart:
+						entry.previewStart = reader.ReadSingle();
+						break;
+					case CacheEntryType.PreviewLength:
+						entry.previewLength = reader.ReadSingle();
 						break;
 					case CacheEntryType.DisplayArtist:
 						entry.displayArtist = reader.ReadShortPrefixedString();

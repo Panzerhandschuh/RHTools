@@ -14,7 +14,7 @@ namespace RHTools.RHLib.RH
 		TimingData = 3,
 		PreviewStart = 4,
 		PreviewEnd = 5,
-		Unknown1 = 6, // Might be display BPM but usually (always?) deserializes to -1
+		DisplayBpm = 6, // Might be display BPM but usually (always?) deserializes to -1
 		Internal = 8, // Might be a guid for online file sharing
 		Artists = 32,
 		ArtistName = 33,

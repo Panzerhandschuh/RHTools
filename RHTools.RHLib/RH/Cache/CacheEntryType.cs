@@ -14,13 +14,11 @@ namespace RHTools.RHLib.RH
 		Rhg = 3,
 		Ogg = 4,
 		Png = 5,
-		Unknown1 = 6,
-		Unknown2 = 7,
 		ChartName = 8, // Also applies to group names
 		TimingData = 9,
-		Unknown4 = 10,
-		Unknown5 = 11,
-		Unknown6 = 12,
+		DisplayBpm = 10, // Uncertain. The values are always -1.
+		PreviewStart = 11, // This might have a different meaning for RHC entries
+		PreviewLength = 12, // This might have a different meaning for RHC entries
 		DisplayAuthor = 13, // For charts
 		DisplayArtist = 14, // For songs
 		Artists = 20,

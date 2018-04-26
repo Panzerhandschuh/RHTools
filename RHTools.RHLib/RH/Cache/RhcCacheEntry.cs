@@ -50,10 +50,10 @@ namespace RHTools.RHLib.RH
 					case CacheEntryType.ChartName:
 						entry.chartName = reader.ReadShortPrefixedString();
 						break;
-					case CacheEntryType.Unknown5:
+					case CacheEntryType.PreviewStart:
 						entry.unknown1 = reader.ReadBytes(7);
 						break;
-					case CacheEntryType.Unknown6:
+					case CacheEntryType.PreviewLength:
 						entry.unknown2 = reader.ReadBytes(36);
 						break;
 					case CacheEntryType.DisplayAuthor:
