@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.Utils
+namespace RHTools.Serialization.Utils
 {
 	public static class MathUtil
 	{

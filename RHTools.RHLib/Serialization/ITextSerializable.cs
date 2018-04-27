@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.Serialization
+namespace RHTools.Serialization.Serialization
 {
 	public interface ITextSerializable
 	{

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RHTools.RHLib.RH;
-using RHTools.RHLib.Serialization;
+using RHTools.Serialization.RH;
+using RHTools.Serialization.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.Test.RH
+namespace RHTools.Serialization.Test.RH
 {
 	[TestClass]
 	public class RhsFileTest

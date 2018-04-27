@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.RH
+namespace RHTools.Serialization.RH
 {
 	[Flags]
 	public enum NoteFlags

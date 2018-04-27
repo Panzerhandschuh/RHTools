@@ -1,4 +1,4 @@
-﻿using RHTools.RHLib.Serialization;
+﻿using RHTools.Serialization.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.SM
+namespace RHTools.Serialization.SM
 {
     // Full list of tags: https://github.com/stepmania/stepmania/blob/4df85929cc2e41ef8c24bddea17d90fe44fb2807/src/NotesLoaderSM.cpp#L217
     public class SmFile : ITextSerializable

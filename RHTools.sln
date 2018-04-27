@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.RHLib", "RHTools.RHLib\RHTools.RHLib.csproj", "{B98BFD20-36AC-4A37-957A-C80CB5DDE6B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Serialization", "RHTools.RHLib\RHTools.Serialization.csproj", "{B98BFD20-36AC-4A37-957A-C80CB5DDE6B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Converter", "RHTools.Converter\RHTools.Converter.csproj", "{A3A17531-FE15-4886-889D-40D6B347B31A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Mixer", "RHTools.Mixer\RHTools.Mixer.csproj", "{A888BD70-E484-4136-8532-6B939DC91001}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.RHLib.Test", "RHTools.RHLib.Test\RHTools.RHLib.Test.csproj", "{6DD91CDF-523F-4B3E-B309-35512293BA13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Serialization.Test", "RHTools.RHLib.Test\RHTools.Serialization.Test.csproj", "{6DD91CDF-523F-4B3E-B309-35512293BA13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

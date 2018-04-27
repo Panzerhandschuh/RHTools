@@ -1,4 +1,4 @@
-﻿using RHTools.RHLib.Serialization;
+﻿using RHTools.Serialization.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.SM
+namespace RHTools.Serialization.SM
 {
     public class Bpm : ITextSerializable
 	{

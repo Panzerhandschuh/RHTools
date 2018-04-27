@@ -2,10 +2,10 @@
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RHTools.RHLib.RH;
-using RHTools.RHLib.Serialization;
+using RHTools.Serialization.RH;
+using RHTools.Serialization.Serialization;
 
-namespace RHTools.RHLib.Test
+namespace RHTools.Serialization.Test.RH
 {
 	[TestClass]
 	public class CacheFileTest

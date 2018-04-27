@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RHTools.RHLib.SM;
+using RHTools.Serialization.SM;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.Test.SM
+namespace RHTools.Serialization.Test.SM
 {
 	[TestClass]
 	public class SmFileTest

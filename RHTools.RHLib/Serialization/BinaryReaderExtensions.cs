@@ -1,4 +1,4 @@
-﻿using RHTools.RHLib.RH;
+﻿using RHTools.Serialization.RH;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.Serialization
+namespace RHTools.Serialization.Serialization
 {
 	public static class BinaryReaderExtensions
 	{

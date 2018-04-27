@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.RHLib.SM
+namespace RHTools.Serialization.SM
 {
     public enum Difficulty
     {
