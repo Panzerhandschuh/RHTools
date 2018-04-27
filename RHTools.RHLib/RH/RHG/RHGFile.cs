@@ -24,7 +24,14 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write(version);
+
+			writer.WriteOptionalData((byte)RhgEntryType.Rhg, rhgGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhgEntryType.Internal, internalGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhgEntryType.Png, pngGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhgEntryType.PackName, packName, (x) => writer.WriteShortPrefixedString(x));
+			writer.WritePrefixedList((byte)RhgEntryType.Rhc, rhcGuids, (x) => writer.Write(x));
+			writer.Write((byte)RhgEntryType.EndOfEntry);
 		}
 
 		public static RhgFile Deserialize(BinaryReader reader)
