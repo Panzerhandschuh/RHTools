@@ -17,7 +17,7 @@ namespace RHTools.RHLib.RH
 		public string songTitle;
 		public TimingData timingData;
 		public float previewStart;
-		public float previewEnd;
+		public float previewLength;
 		public float displayBpm; // Uncertain. Always -1?
 		public byte[] unknown2;
 		public List<Artist> artists;
@@ -29,7 +29,19 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write(version);
+
+			writer.WriteOptionalData((byte)RhsEntryType.Rhs, rhsGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.Internal, internalGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.Ogg, oggGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.SongTitle, songTitle, (x) => writer.WriteShortPrefixedString(x));
+			writer.WriteOptionalData((byte)RhsEntryType.TimingData, timingData, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.PreviewStart, previewStart, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.PreviewLength, previewLength, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.DisplayBpm, displayBpm, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.Unknown2, unknown2, (x) => writer.Write(x));
+			writer.WritePrefixedList((byte)RhsEntryType.Artists, artists, (x) => writer.Write(x));
+			writer.Write((byte)RhsEntryType.EndOfEntry);
 		}
 
 		public static RhsFile Deserialize(BinaryReader reader)
@@ -61,8 +73,8 @@ namespace RHTools.RHLib.RH
 					case RhsEntryType.PreviewStart:
 						file.previewStart = reader.ReadSingle();
 						break;
-					case RhsEntryType.PreviewEnd:
-						file.previewEnd = reader.ReadSingle();
+					case RhsEntryType.PreviewLength:
+						file.previewLength = reader.ReadSingle();
 						break;
 					case RhsEntryType.DisplayBpm:
 						file.displayBpm = reader.ReadSingle();
