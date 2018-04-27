@@ -7,8 +7,8 @@
     <ProjectGuid>{B98BFD20-36AC-4A37-957A-C80CB5DDE6B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RHTools.RHLib</RootNamespace>
-    <AssemblyName>RHTools.RHLib</AssemblyName>
+    <RootNamespace>RHTools.Serialization</RootNamespace>
+    <AssemblyName>RHTools.Serialization</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

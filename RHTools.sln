@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Serialization", "RHTools.RHLib\RHTools.Serialization.csproj", "{B98BFD20-36AC-4A37-957A-C80CB5DDE6B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Serialization", "RHTools.Serialization\RHTools.Serialization.csproj", "{B98BFD20-36AC-4A37-957A-C80CB5DDE6B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Serialization.Test", "RHTools.RHLib.Test\RHTools.Serialization.Test.csproj", "{6DD91CDF-523F-4B3E-B309-35512293BA13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Serialization.Test", "RHTools.Serialization.Test\RHTools.Serialization.Test.csproj", "{6DD91CDF-523F-4B3E-B309-35512293BA13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
