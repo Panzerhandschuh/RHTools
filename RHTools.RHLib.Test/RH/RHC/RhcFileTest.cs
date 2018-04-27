@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RHTools.RHLib.RH;
+using RHTools.RHLib.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,21 @@ namespace RHTools.RHLib.Test.RH
 			List<RhcFile> rhcFiles = new List<RhcFile>();
 			foreach (string file in files)
 				rhcFiles.Add(ReadRhcFile(file));
+		}
+
+		[TestMethod]
+		public void WriteRhcFileBytesEqualsOriginalRhcFileBytes()
+		{
+			string[] files = Directory.GetFiles(gameDir, "*.rhc");
+			foreach (string file in files)
+			{
+				RhcFile rhcFile = ReadRhcFile(file);
+
+				byte[] writeBytes = rhcFile.SerializeToBytes();
+				byte[] originalBytes = File.ReadAllBytes(file);
+
+				Assert.IsTrue(Enumerable.SequenceEqual(originalBytes, writeBytes));
+			}
 		}
 
 		private RhcFile ReadRhcFile(string path)

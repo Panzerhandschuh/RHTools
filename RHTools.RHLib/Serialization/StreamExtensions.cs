@@ -9,12 +9,12 @@ namespace RHTools.RHLib.Serialization
 {
 	public static class StreamExtensions
 	{
-		public static byte[] GetBytes(this Stream stream)
+		public static byte[] ReadAllBytes(this Stream stream)
 		{
-			using (MemoryStream memStream = new MemoryStream())
+			using (MemoryStream memoryStream = new MemoryStream())
 			{
-				stream.CopyTo(memStream);
-				return memStream.ToArray();
+				stream.CopyTo(memoryStream);
+				return memoryStream.ToArray();
 			}
 		}
 	}

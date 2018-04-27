@@ -37,5 +37,26 @@ namespace RHTools.RHLib.Serialization
 
 			return array;
 		}
+
+		public static List<T> ReadList<T>(this BinaryReader reader, Func<BinaryReader, T> deserializeFunc)
+		{
+			int length = reader.ReadInt32();
+			return ReadList(reader, deserializeFunc, length);
+		}
+
+		public static List<T> ReadBytePrefixedList<T>(this BinaryReader reader, Func<BinaryReader, T> deserializeFunc)
+		{
+			byte length = reader.ReadByte();
+			return ReadList(reader, deserializeFunc, length);
+		}
+
+		public static List<T> ReadList<T>(BinaryReader reader, Func<BinaryReader, T> deserializeFunc, int length)
+		{
+			List<T> list = new List<T>(length);
+			for (int i = 0; i < length; i++)
+				list.Add(deserializeFunc(reader));
+
+			return list;
+		}
 	}
 }

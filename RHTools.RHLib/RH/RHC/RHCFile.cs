@@ -26,7 +26,16 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write(version);
+
+			writer.WriteOptionalData((byte)RhcEntryType.Rhc, rhcGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhcEntryType.Internal, internalGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhcEntryType.Rhs, rhsGuid, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhcEntryType.ChartName, chartName, (x) => writer.WriteShortPrefixedString(x));
+			writer.WriteOptionalData((byte)RhcEntryType.Unknown1, unknown1, (x) => writer.Write(x));
+			writer.WritePrefixedList((byte)RhcEntryType.Artists, artists, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhcEntryType.Layers, layers, (x) => writer.Write(x));
+			writer.Write((byte)RhcEntryType.EndOfEntry);
 		}
 
 		public static RhcFile Deserialize(BinaryReader reader)

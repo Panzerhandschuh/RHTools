@@ -21,7 +21,9 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write(unknown1);
+			writer.Write((byte)padConfig);
+			writer.WriteBytePrefixedList(layers);
 		}
 
 		public static Layers Deserialize(BinaryReader reader)
@@ -30,9 +32,7 @@ namespace RHTools.RHLib.RH
 
 			layers.unknown1 = reader.ReadByte();
 			layers.padConfig = (PadConfiguration)reader.ReadByte();
-			byte numLayers = reader.ReadByte();
-			for (int i = 0; i < numLayers; i++)
-				layers.layers.Add(Layer.Deserialize(reader));
+			layers.layers = reader.ReadBytePrefixedList(Layer.Deserialize);
 			
 			return layers;
 		}

@@ -25,7 +25,30 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write(unknown1);
+			writer.WriteShortPrefixedString(layerName);
+
+			if (isFake)
+				writer.Write((byte)LayerEntryType.IsFake);
+			if (isEnabled)
+				writer.Write((byte)LayerEntryType.IsEnabled);
+			if (unknown2 != null)
+			{
+				writer.Write((byte)LayerEntryType.LayerProperties);
+				writer.Write(unknown2);
+			}
+			writer.Write((byte)LayerEntryType.EndOfEntry);
+
+			writer.Write((int)panelConfig);
+
+			foreach (NoteFlags flags in Enum.GetValues(typeof(NoteFlags)))
+				TryWriteNotes(writer, flags);
+		}
+		
+		private void TryWriteNotes(BinaryWriter writer, NoteFlags flags)
+		{
+			if (panelConfig.HasFlag(flags))
+				writer.Write(notes[flags]);
 		}
 
 		public static Layer Deserialize(BinaryReader reader)
@@ -56,56 +79,19 @@ namespace RHTools.RHLib.RH
 
 			layer.panelConfig = (NoteFlags)reader.ReadInt32();
 
-			TryReadPad1Notes(reader, layer);
-			TryReadPad2Notes(reader, layer);
+			foreach (NoteFlags flags in Enum.GetValues(typeof(NoteFlags)))
+				TryReadNotes(reader, layer, flags);
 
 			return layer;
 		}
-
-		private static void TryReadPad1Notes(BinaryReader reader, Layer layer)
-		{
-			TryReadNotes(reader, layer, NoteFlags.Pad1DownLeft);
-			TryReadNotes(reader, layer, NoteFlags.Pad1Left);
-			TryReadNotes(reader, layer, NoteFlags.Pad1UpLeft);
-			TryReadNotes(reader, layer, NoteFlags.Pad1Down);
-			TryReadNotes(reader, layer, NoteFlags.Pad1Center);
-			TryReadNotes(reader, layer, NoteFlags.Pad1Up);
-			TryReadNotes(reader, layer, NoteFlags.Pad1UpRight);
-			TryReadNotes(reader, layer, NoteFlags.Pad1Right);
-			TryReadNotes(reader, layer, NoteFlags.Pad1DownRight);
-		}
-
-		private static void TryReadPad2Notes(BinaryReader reader, Layer layer)
-		{
-			TryReadNotes(reader, layer, NoteFlags.Pad2DownLeft);
-			TryReadNotes(reader, layer, NoteFlags.Pad2Left);
-			TryReadNotes(reader, layer, NoteFlags.Pad2UpLeft);
-			TryReadNotes(reader, layer, NoteFlags.Pad2Down);
-			TryReadNotes(reader, layer, NoteFlags.Pad2Center);
-			TryReadNotes(reader, layer, NoteFlags.Pad2Up);
-			TryReadNotes(reader, layer, NoteFlags.Pad2UpRight);
-			TryReadNotes(reader, layer, NoteFlags.Pad2Right);
-			TryReadNotes(reader, layer, NoteFlags.Pad2DownRight);
-		}
-
+		
 		private static void TryReadNotes(BinaryReader reader, Layer layer, NoteFlags flags)
 		{
 			if (layer.panelConfig.HasFlag(flags))
 			{
-				List<Note> notes = ReadNotes(reader);
+				List<Note> notes = reader.ReadList(Note.Deserialize);
 				layer.notes.Add(flags, notes);
 			}
-		}
-
-		private static List<Note> ReadNotes(BinaryReader reader)
-		{
-			List<Note> beats = new List<Note>();
-
-			int numNotes = reader.ReadInt32();
-			for (int i = 0; i < numNotes; i++)
-				beats.Add(Note.Deserialize(reader));
-
-			return beats;
 		}
 	}
 }

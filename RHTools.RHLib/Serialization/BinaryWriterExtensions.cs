@@ -35,6 +35,14 @@ namespace RHTools.RHLib.Serialization
 				obj.Serialize(writer);
 		}
 
+		public static void WriteBytePrefixedList(this BinaryWriter writer, IEnumerable<IBinarySerializable> objs)
+		{
+			writer.Write((byte)objs.Count());
+
+			foreach (IBinarySerializable obj in objs)
+				obj.Serialize(writer);
+		}
+
 		/// <summary>
 		/// Writes data with a byte prefix if the data is not null
 		/// </summary>

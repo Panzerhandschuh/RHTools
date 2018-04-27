@@ -16,7 +16,10 @@ namespace RHTools.RHLib.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			throw new NotImplementedException();
+			writer.Write((byte)type);
+			writer.Write(startBeat);
+			if (type == NoteType.Hold)
+				writer.Write(duration);
 		}
 
 		public static Note Deserialize(BinaryReader reader)

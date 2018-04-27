@@ -43,6 +43,7 @@
     <Compile Include="Serialization\BinaryReaderExtensions.cs" />
     <Compile Include="Serialization\BinaryWriterExtensions.cs" />
     <Compile Include="Serialization\IBinarySerializable.cs" />
+    <Compile Include="Serialization\IBinarySerializableExtensions.cs" />
     <Compile Include="Serialization\ITextSerializable.cs" />
     <Compile Include="RH\Artist.cs" />
     <Compile Include="RH\ArtistType.cs" />

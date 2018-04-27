@@ -15,29 +15,23 @@ namespace RHTools.RHLib.Test
 		[TestMethod]
 		public void ReadCacheFile()
 		{
-			CacheFile file = DeserializeCacheFile();
+			CacheFile file = ReadCacheFile(cacheFilePath);
 		}
 
 		[TestMethod]
 		public void WriteCacheFileBytesEqualsOriginalCacheFileBytes()
 		{
-			CacheFile file = DeserializeCacheFile();
+			CacheFile file = ReadCacheFile(cacheFilePath);
 
-			byte[] writeBytes;
-			using (MemoryStream stream = new MemoryStream())
-			using (BinaryWriter writer = new BinaryWriter(stream))
-			{
-				file.Serialize(writer);
-				writeBytes = stream.ToArray();
-			}
-
+			byte[] writeBytes = file.SerializeToBytes();
 			byte[] originalBytes = File.ReadAllBytes(cacheFilePath);
+
 			Assert.IsTrue(Enumerable.SequenceEqual(originalBytes, writeBytes));
 		}
 
-		private static CacheFile DeserializeCacheFile()
+		private static CacheFile ReadCacheFile(string path)
 		{
-			using (Stream stream = File.Open(cacheFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+			using (Stream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
 			using (BinaryReader reader = new BinaryReader(stream))
 			{
 				return CacheFile.Deserialize(reader);
