@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Serialization.Serialization
+namespace RHTools.Serialization
 {
-	public interface IBinarySerializable
+	public interface ITextSerializable
 	{
-		void Serialize(BinaryWriter writer);
+		void Serialize(StreamWriter writer);
 	}
 }

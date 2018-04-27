@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RHTools.Serialization.RH;
-using RHTools.Serialization.Serialization;
 
 namespace RHTools.Serialization.Test.RH
 {

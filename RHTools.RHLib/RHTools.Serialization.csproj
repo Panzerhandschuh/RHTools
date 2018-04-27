@@ -40,11 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Serialization\BinaryReaderExtensions.cs" />
-    <Compile Include="Serialization\BinaryWriterExtensions.cs" />
-    <Compile Include="Serialization\IBinarySerializable.cs" />
-    <Compile Include="Serialization\IBinarySerializableExtensions.cs" />
-    <Compile Include="Serialization\ITextSerializable.cs" />
+    <Compile Include="Extensions\BinaryReaderExtensions.cs" />
+    <Compile Include="Extensions\BinaryWriterExtensions.cs" />
+    <Compile Include="Interfaces\IBinarySerializable.cs" />
+    <Compile Include="Extensions\IBinarySerializableExtensions.cs" />
+    <Compile Include="Interfaces\ITextSerializable.cs" />
     <Compile Include="RH\Artist.cs" />
     <Compile Include="RH\ArtistType.cs" />
     <Compile Include="RH\Cache\OggCacheEntry.cs" />
@@ -70,7 +70,7 @@
     <Compile Include="RH\RHS\RhsFile.cs" />
     <Compile Include="RH\TimingData.cs" />
     <Compile Include="RH\TimingDataEntry.cs" />
-    <Compile Include="Serialization\StreamExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="SM\BackgroundChanges.cs" />
     <Compile Include="SM\Bpms.cs" />
