@@ -30,11 +30,7 @@ namespace RHTools.Serialization.Test.RH
 
 		private static CacheFile ReadCacheFile(string path)
 		{
-			using (Stream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
-			using (BinaryReader reader = new BinaryReader(stream))
-			{
-				return CacheFile.Deserialize(reader);
-			}
+			return IBinarySerializableExtensions.Deserialize(path, CacheFile.Deserialize);
 		}
 	}
 }

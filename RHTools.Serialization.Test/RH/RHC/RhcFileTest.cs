@@ -46,11 +46,7 @@ namespace RHTools.Serialization.Test.RH
 
 		private RhcFile ReadRhcFile(string path)
 		{
-			using (Stream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
-			using (BinaryReader reader = new BinaryReader(stream))
-			{
-				return RhcFile.Deserialize(reader);
-			}
+			return IBinarySerializableExtensions.Deserialize(path, RhcFile.Deserialize);
 		}
 	}
 }
