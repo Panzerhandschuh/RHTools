@@ -11,7 +11,7 @@ namespace RHTools.Serialization.SM
 	{
         public string chartType;
         public string description;
-        public Difficulty difficulty;
+        public string difficulty;
         public int meter;
         public float[] grooveRadarValues; // Unused
         public NoteData noteData;
@@ -27,7 +27,7 @@ namespace RHTools.Serialization.SM
 
 			notes.chartType = parameters[1];
 			notes.description = parameters[2];
-			notes.difficulty = (Difficulty)Enum.Parse(typeof(Difficulty), parameters[3]);
+			notes.difficulty = parameters[3];
 			notes.meter = int.Parse(parameters[4]);
 			notes.grooveRadarValues = GetGrooveRadarValues(parameters[5]);
 			notes.noteData = NoteData.Deserialize(parameters[6]);
@@ -37,8 +37,12 @@ namespace RHTools.Serialization.SM
 
 		private static float[] GetGrooveRadarValues(string parameter)
 		{
-			return parameter.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-				.Select(x => float.Parse(x)).ToArray();
+			string[] strValues = parameter.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+			float[] values = new float[strValues.Length];
+			for (int i = 0; i < strValues.Length; i++)
+				float.TryParse(strValues[i], out values[i]);
+
+			return values;
 		}
 	}
 }

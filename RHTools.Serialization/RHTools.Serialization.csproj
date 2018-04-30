@@ -43,6 +43,7 @@
     <Compile Include="BpmChange.cs" />
     <Compile Include="Extensions\BinaryReaderExtensions.cs" />
     <Compile Include="Extensions\BinaryWriterExtensions.cs" />
+    <Compile Include="Extensions\ITextSerializableExtensions.cs" />
     <Compile Include="Interfaces\IBinarySerializable.cs" />
     <Compile Include="Extensions\IBinarySerializableExtensions.cs" />
     <Compile Include="Interfaces\ITextSerializable.cs" />

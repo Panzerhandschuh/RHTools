@@ -27,20 +27,20 @@ namespace RHTools.Serialization.SM
         {
             BackgroundChange change = new BackgroundChange();
 
-            string[] values = changeValue.Split('=');
+            string[] values = changeValue.Split('=').Select(x => x.Trim()).ToArray();
             for (int i = 0; i < values.Length; i++)
             {
                 string value = values[i];
                 switch (i)
                 {
                     case 0:
-                        change.startBeat = float.Parse(value);
+						float.TryParse(value, out change.startBeat);
                         break;
                     case 1:
                         change.file1 = value; // TODO: Add conversion
                         break;
                     case 2:
-                        change.rate = float.Parse(value);
+						float.TryParse(value, out change.rate);
                         break;
                     case 3:
                         change.transition = value; // TODO: Add conversion

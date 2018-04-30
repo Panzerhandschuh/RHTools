@@ -33,9 +33,9 @@ namespace RHTools.Serialization.SM
             else
             {
                 displayBpm.bpmType = DisplayBpmType.Specified;
-                displayBpm.minBpm = float.Parse(parameters[1]);
-                if (parameters.Count > 2)
-                    displayBpm.maxBpm = float.Parse(parameters[2]);
+				float.TryParse(parameters[1], out displayBpm.minBpm);
+				if (parameters.Count > 2)
+					float.TryParse(parameters[2], out displayBpm.maxBpm);
                 else
                     displayBpm.maxBpm = displayBpm.minBpm;
             }

@@ -21,9 +21,9 @@ namespace RHTools.Serialization.SM
         {
             Stop stop = new Stop();
 
-            string[] values = stopValue.Split('=');
-            stop.beat = float.Parse(values[0]);
-            stop.seconds = float.Parse(values[1]);
+            string[] values = stopValue.Split('=').Select(x => x.Trim()).ToArray();
+			float.TryParse(values[0], out stop.beat);
+			float.TryParse(values[1], out stop.seconds);
 
             return stop;
         }
@@ -32,6 +32,11 @@ namespace RHTools.Serialization.SM
     public class Stops : ITextSerializable
 	{
         public List<Stop> stops;
+
+		public Stops()
+		{
+			stops = new List<Stop>();
+		}
 
         public void Serialize(StreamWriter writer)
         {

@@ -95,7 +95,7 @@ namespace RHTools.Serialization.SM
                         file.music = parameters[1];
                         break;
                     case "OFFSET":
-                        file.offset = float.Parse(parameters[1]);
+						float.TryParse(parameters[1], out file.offset);
                         break;
                     case "BPMS":
                         file.bpms = Bpms.Deserialize(parameters);
@@ -104,10 +104,10 @@ namespace RHTools.Serialization.SM
                         file.stops = Stops.Deserialize(parameters);
                         break;
                     case "SAMPLESTART":
-                        file.sampleStart = float.Parse(parameters[1]);
+						float.TryParse(parameters[1], out file.sampleStart);
                         break;
                     case "SAMPLELENGTH":
-                        file.sampleLength = float.Parse(parameters[1]);
+						float.TryParse(parameters[1], out file.sampleLength);
                         break;
                     case "DISPLAYBPM":
                         file.displayBpm = DisplayBpm.Deserialize(parameters);

@@ -21,11 +21,11 @@ namespace RHTools.Serialization.SM
         {
             Bpm bpm = new Bpm();
 
-            string[] values = bpmValue.Split('=');
-            bpm.beat = float.Parse(values[0]);
-            bpm.bpm = float.Parse(values[1]);
+            string[] values = bpmValue.Split('=').Select(x => x.Trim()).ToArray();
+			float.TryParse(values[0], out bpm.beat);
+			float.TryParse(values[1], out bpm.bpm);
 
-            return bpm;
+			return bpm;
         }
     }
 
