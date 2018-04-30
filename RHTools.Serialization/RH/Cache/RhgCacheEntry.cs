@@ -12,7 +12,7 @@ namespace RHTools.Serialization.RH
 		public RhGuid rhgGuid;
 		public RhGuid internalGuid;
 		public RhGuid pngGuid;
-		public string groupName;
+		public string packName;
 		public List<RhGuid> rhcGuids;
 
 		public RhgCacheEntry()
@@ -25,7 +25,7 @@ namespace RHTools.Serialization.RH
 			writer.WriteOptionalData((byte)CacheEntryType.Rhg, rhgGuid, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.Internal, internalGuid, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.Png, pngGuid, (x) => writer.Write(x));
-			writer.WriteOptionalData((byte)CacheEntryType.ChartName, groupName, (x) => writer.WriteShortPrefixedString(x));
+			writer.WriteOptionalData((byte)CacheEntryType.ChartName, packName, (x) => writer.WriteShortPrefixedString(x));
 			writer.WritePrefixedList((byte)CacheEntryType.Rhc, rhcGuids, (x) => writer.Write(x));
 			writer.Write((byte)CacheEntryType.EndOfEntry);
 		}
@@ -50,7 +50,7 @@ namespace RHTools.Serialization.RH
 						entry.pngGuid = reader.ReadRhGuid();
 						break;
 					case CacheEntryType.ChartName:
-						entry.groupName = reader.ReadShortPrefixedString();
+						entry.packName = reader.ReadShortPrefixedString();
 						break;
 					case CacheEntryType.Rhc:
 						entry.rhcGuids.Add(reader.ReadRhGuid());

@@ -50,7 +50,7 @@ namespace RHTools.Serialization
 			return ReadList(reader, deserializeFunc, length);
 		}
 
-		public static List<T> ReadList<T>(BinaryReader reader, Func<BinaryReader, T> deserializeFunc, int length)
+		public static List<T> ReadList<T>(this BinaryReader reader, Func<BinaryReader, T> deserializeFunc, int length)
 		{
 			List<T> list = new List<T>(length);
 			for (int i = 0; i < length; i++)

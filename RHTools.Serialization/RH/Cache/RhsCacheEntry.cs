@@ -13,7 +13,7 @@ namespace RHTools.Serialization.RH
 		public RhGuid internalGuid;
 		public RhGuid oggGuid;
 		public RhGuid pngGuid;
-		public string chartName;
+		public string songTitle;
 		public TimingData timingData;
 		public List<Artist> artists;
 		public float displayBpm; // Always -1. Uncertain if this is the actual meaning (maybe values other than -1 override the song BPM).
@@ -32,7 +32,7 @@ namespace RHTools.Serialization.RH
 			writer.WriteOptionalData((byte)CacheEntryType.Internal, internalGuid, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.Ogg, oggGuid, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.Png, pngGuid, (x) => writer.Write(x));
-			writer.WriteOptionalData((byte)CacheEntryType.ChartName, chartName, (x) => writer.WriteShortPrefixedString(x));
+			writer.WriteOptionalData((byte)CacheEntryType.ChartName, songTitle, (x) => writer.WriteShortPrefixedString(x));
 			writer.WriteOptionalData((byte)CacheEntryType.TimingData, timingData, (x) => writer.Write(x));
 			writer.WritePrefixedList((byte)CacheEntryType.Artists, artists, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.DisplayBpm, displayBpm, (x) => writer.Write(x));
@@ -65,7 +65,7 @@ namespace RHTools.Serialization.RH
 						entry.pngGuid = reader.ReadRhGuid();
 						break;
 					case CacheEntryType.ChartName:
-						entry.chartName = reader.ReadShortPrefixedString();
+						entry.songTitle = reader.ReadShortPrefixedString();
 						break;
 					case CacheEntryType.TimingData:
 						entry.timingData = TimingData.Deserialize(reader);

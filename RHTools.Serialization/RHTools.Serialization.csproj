@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BpmChange.cs" />
     <Compile Include="Extensions\BinaryReaderExtensions.cs" />
     <Compile Include="Extensions\BinaryWriterExtensions.cs" />
     <Compile Include="Interfaces\IBinarySerializable.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="Interfaces\ITextSerializable.cs" />
     <Compile Include="RH\Artist.cs" />
     <Compile Include="RH\ArtistType.cs" />
+    <Compile Include="RH\Cache\CacheSynchronizer.cs" />
     <Compile Include="RH\Cache\OggCacheEntry.cs" />
     <Compile Include="RH\Cache\CacheFile.cs" />
     <Compile Include="RH\Cache\CacheEntryType.cs" />

@@ -14,7 +14,7 @@ namespace RHTools.Serialization.RH
 		Rhg = 3,
 		Ogg = 4,
 		Png = 5,
-		ChartName = 8, // Also applies to group names
+		ChartName = 8, // Also applies to song titles and pack names
 		TimingData = 9,
 		DisplayBpm = 10, // Uncertain. The values are always -1.
 		PreviewStart = 11, // This might have a different meaning for RHC entries

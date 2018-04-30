@@ -10,6 +10,11 @@ namespace RHTools.Serialization.RH
 	{
 		public byte[] guid;
 
+		public RhGuid()
+		{
+			guid = new byte[16];
+		}
+
 		public RhGuid(byte[] bytes)
 		{
 			guid = bytes;

@@ -19,7 +19,7 @@ namespace RHTools.Serialization.RH
 		Artists = 32,
 		ArtistName = 33,
 		ArtistType = 35,
-		Unknown2 = 64, // Might be related to display BPM, song length, number of charts, and/or packs containing song
+		Png = 64,
 		EndOfEntry = 255
 	}
 }

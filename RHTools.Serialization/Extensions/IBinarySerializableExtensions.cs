@@ -11,7 +11,7 @@ namespace RHTools.Serialization
 	{
 		public static void SerializeToFile(this IBinarySerializable obj, string path)
 		{
-			using (Stream stream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+			using (Stream stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Write))
 			using (BinaryWriter writer = new BinaryWriter(stream))
 			{
 				obj.Serialize(writer);

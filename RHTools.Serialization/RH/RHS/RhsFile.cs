@@ -18,7 +18,7 @@ namespace RHTools.Serialization.RH
 		public float previewStart;
 		public float previewLength;
 		public float displayBpm; // Uncertain. Always -1?
-		public byte[] unknown2;
+		public RhGuid pngGuid;
 		public List<Artist> artists;
 
 		public RhsFile()
@@ -38,7 +38,7 @@ namespace RHTools.Serialization.RH
 			writer.WriteOptionalData((byte)RhsEntryType.PreviewStart, previewStart, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)RhsEntryType.PreviewLength, previewLength, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)RhsEntryType.DisplayBpm, displayBpm, (x) => writer.Write(x));
-			writer.WriteOptionalData((byte)RhsEntryType.Unknown2, unknown2, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.Png, pngGuid, (x) => writer.Write(x));
 			writer.WritePrefixedList((byte)RhsEntryType.Artists, artists, (x) => writer.Write(x));
 			writer.Write((byte)RhsEntryType.EndOfEntry);
 		}
@@ -78,8 +78,8 @@ namespace RHTools.Serialization.RH
 					case RhsEntryType.DisplayBpm:
 						file.displayBpm = reader.ReadSingle();
 						break;
-					case RhsEntryType.Unknown2:
-						file.unknown2 = reader.ReadBytes(16);
+					case RhsEntryType.Png:
+						file.pngGuid = reader.ReadRhGuid();
 						break;
 					case RhsEntryType.Artists:
 						file.artists.Add(Artist.Deserialize(reader));

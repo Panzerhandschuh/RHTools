@@ -9,6 +9,7 @@ namespace RHTools.Serialization.RH
 {
 	public class Layer : IBinarySerializable
 	{
+		// Note: Missing layer property active ranges
 		public byte[] unknown1;
 		public string layerName;
 		public bool isEnabled;

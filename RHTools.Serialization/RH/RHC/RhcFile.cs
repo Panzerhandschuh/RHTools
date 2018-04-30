@@ -14,7 +14,7 @@ namespace RHTools.Serialization.RH
 		public RhGuid internalGuid;
 		public RhGuid rhsGuid;
 		public string chartName;
-		public byte[] unknown1;
+		public ushort unknown1;
 		public List<Artist> artists;
 		public Layers layers;
 
@@ -61,7 +61,7 @@ namespace RHTools.Serialization.RH
 						file.chartName = reader.ReadShortPrefixedString();
 						break;
 					case RhcEntryType.Unknown1:
-						file.unknown1 = reader.ReadBytes(2);
+						file.unknown1 = reader.ReadUInt16(); // Always 0
 						break;
 					case RhcEntryType.Artists:
 						file.artists.Add(Artist.Deserialize(reader));

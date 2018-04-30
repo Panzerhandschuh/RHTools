@@ -10,11 +10,11 @@ namespace RHTools.Serialization.RH
 	public class CacheFile : IBinarySerializable
 	{
 		public byte version; // Uncertain, but most likely a version number
-		public OggCacheEntry[] oggEntries;
-		public PngCacheEntry[] pngEntries;
-		public RhsCacheEntry[] rhsEntries;
-		public RhcCacheEntry[] rhcEntries;
-		public RhgCacheEntry[] rhgEntries;
+		public List<OggCacheEntry> oggEntries;
+		public List<PngCacheEntry> pngEntries;
+		public List<RhsCacheEntry> rhsEntries;
+		public List<RhcCacheEntry> rhcEntries;
+		public List<RhgCacheEntry> rhgEntries;
 
 		public void Serialize(BinaryWriter writer)
 		{
@@ -32,11 +32,11 @@ namespace RHTools.Serialization.RH
 			CacheFile file = new CacheFile();
 
 			file.version = reader.ReadByte();
-			file.oggEntries = reader.ReadArray(OggCacheEntry.Deserialize);
-			file.pngEntries = reader.ReadArray(PngCacheEntry.Deserialize);
-			file.rhsEntries = reader.ReadArray(RhsCacheEntry.Deserialize);
-			file.rhcEntries = reader.ReadArray(RhcCacheEntry.Deserialize);
-			file.rhgEntries = reader.ReadArray(RhgCacheEntry.Deserialize);
+			file.oggEntries = reader.ReadList(OggCacheEntry.Deserialize);
+			file.pngEntries = reader.ReadList(PngCacheEntry.Deserialize);
+			file.rhsEntries = reader.ReadList(RhsCacheEntry.Deserialize);
+			file.rhcEntries = reader.ReadList(RhcCacheEntry.Deserialize);
+			file.rhgEntries = reader.ReadList(RhgCacheEntry.Deserialize);
 
 			return file;
 		}
