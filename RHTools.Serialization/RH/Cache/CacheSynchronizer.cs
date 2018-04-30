@@ -42,9 +42,9 @@ namespace RHTools.Serialization.RH
 			cacheEntry.rhsGuid = rhcFile.rhsGuid;
 			cacheEntry.internalGuid = rhcFile.internalGuid;
 			cacheEntry.chartName = rhcFile.chartName;
-			cacheEntry.unknown1 = rhcFile.unknown1;
+			//cacheEntry.unknown1 = rhcFile.unknown1;
 			cacheEntry.artists = rhcFile.artists;
-			cacheEntry.unknown2 = rhcFile.unknown1;
+			//cacheEntry.unknown2 = rhcFile.unknown1;
 			//cacheEntry.displayAuthor = ; // Missing
 		}
 
