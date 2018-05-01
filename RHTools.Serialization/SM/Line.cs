@@ -7,19 +7,9 @@ using System.Threading.Tasks;
 
 namespace RHTools.Serialization.SM
 {
-    public enum NoteType
-    {
-        None,
-        Regular,
-        Hold,
-        Tail,
-        Roll,
-        Mine
-    }
-
     public class Line : ITextSerializable
 	{
-        List<NoteType> notes;
+        public List<NoteType> notes;
 
         public Line()
         {

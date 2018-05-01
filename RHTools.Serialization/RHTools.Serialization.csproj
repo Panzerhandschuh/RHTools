@@ -74,6 +74,7 @@
     <Compile Include="RH\TimingData.cs" />
     <Compile Include="RH\TimingDataEntry.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="SM\NoteType.cs" />
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="SM\BackgroundChanges.cs" />
     <Compile Include="SM\Bpms.cs" />

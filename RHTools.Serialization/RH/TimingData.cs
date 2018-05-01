@@ -14,6 +14,11 @@ namespace RHTools.Serialization.RH
 		public int unknown2;
 		public List<TimingDataEntry> entries;
 
+		public TimingData()
+		{
+			entries = new List<TimingDataEntry>();
+		}
+
 		public void Serialize(BinaryWriter writer)
 		{
 			writer.Write((byte)0); // Unknown. Always 0?

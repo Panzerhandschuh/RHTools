@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Converter", "RHTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Mixer", "RHTools.Mixer\RHTools.Mixer.csproj", "{7C48B130-0ECF-4C68-A89A-7C7E0A81A206}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Converter.Test", "RHTools.Converter.Test\RHTools.Converter.Test.csproj", "{FE5A62CE-20B1-41A6-8B29-F570724017C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7C48B130-0ECF-4C68-A89A-7C7E0A81A206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C48B130-0ECF-4C68-A89A-7C7E0A81A206}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C48B130-0ECF-4C68-A89A-7C7E0A81A206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE5A62CE-20B1-41A6-8B29-F570724017C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE5A62CE-20B1-41A6-8B29-F570724017C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE5A62CE-20B1-41A6-8B29-F570724017C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE5A62CE-20B1-41A6-8B29-F570724017C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

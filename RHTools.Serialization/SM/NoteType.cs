@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Serialization.RH
+namespace RHTools.Serialization.SM
 {
 	public enum NoteType
 	{
-		None = -1,
-		Regular = 0,
-		Hold = 1,
-		Mine = 2
+		None,
+		Regular,
+		Hold,
+		Tail,
+		Roll,
+		Mine
 	}
 }

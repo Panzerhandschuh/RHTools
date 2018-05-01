@@ -41,7 +41,22 @@ namespace RHTools.Serialization.RH
 
 		public override string ToString()
 		{
-			return BitConverter.ToString(guid);
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < guid.Length; i++)
+			{
+				if (i == 4 || i == 6 || i == 8 || i == 10)
+					sb.Append('-');
+
+				sb.Append(guid[i].ToString("x2"));
+			}
+
+			return sb.ToString();
+		}
+
+		public static RhGuid NewGuid()
+		{
+			Guid guid = Guid.NewGuid();
+			return new RhGuid(guid.ToByteArray());
 		}
 	}
 }

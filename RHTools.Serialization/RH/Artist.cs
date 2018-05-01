@@ -12,6 +12,14 @@ namespace RHTools.Serialization.RH
 		public string artist;
 		public ArtistType type;
 
+		public Artist() { }
+
+		public Artist(string artist, ArtistType type)
+		{
+			this.artist = artist;
+			this.type = type;
+		}
+
 		public void Serialize(BinaryWriter writer)
 		{
 			writer.Write((byte)CacheEntryType.ArtistName);

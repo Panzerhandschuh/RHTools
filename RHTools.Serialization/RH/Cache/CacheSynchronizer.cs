@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace RHTools.Serialization.RH
 {
+	// TODO: Refactor this file so that each cache entry type has a different synchronizer (single responsibility)
+	// TODO: Might also be able to refactor Update/Create pattern into a shared base class
 	public class CacheSynchronizer
 	{
 		private CacheFile cacheFile;
@@ -13,6 +15,59 @@ namespace RHTools.Serialization.RH
 		public CacheSynchronizer(CacheFile cacheFile)
 		{
 			this.cacheFile = cacheFile;
+		}
+
+		public void SyncOggFile(RhGuid oggGuid)
+		{
+			OggCacheEntry existingEntry = cacheFile.oggEntries.FirstOrDefault(x => x.guid == oggGuid);
+			if (existingEntry != null)
+				UpdateOggCacheEntry(existingEntry, oggGuid);
+			else
+			{
+				OggCacheEntry newEntry = CreateOggCacheEntry(oggGuid);
+				cacheFile.oggEntries.Add(newEntry);
+			}
+		}
+
+		private OggCacheEntry CreateOggCacheEntry(RhGuid oggGuid)
+		{
+			OggCacheEntry cacheEntry = new OggCacheEntry();
+
+			UpdateOggCacheEntry(cacheEntry, oggGuid);
+
+			return cacheEntry;
+		}
+
+		private void UpdateOggCacheEntry(OggCacheEntry cacheEntry, RhGuid oggGuid)
+		{
+			cacheEntry.guid = oggGuid;
+			//cacheEntry.length = ;
+		}
+
+		public void SyncPngFile(RhGuid pngGuid)
+		{
+			PngCacheEntry existingEntry = cacheFile.pngEntries.FirstOrDefault(x => x.guid == pngGuid);
+			if (existingEntry != null)
+				UpdatePngCacheEntry(existingEntry, pngGuid);
+			else
+			{
+				PngCacheEntry newEntry = CreatePngCacheEntry(pngGuid);
+				cacheFile.pngEntries.Add(newEntry);
+			}
+		}
+
+		private PngCacheEntry CreatePngCacheEntry(RhGuid pngGuid)
+		{
+			PngCacheEntry cacheEntry = new PngCacheEntry();
+
+			UpdatePngCacheEntry(cacheEntry, pngGuid);
+
+			return cacheEntry;
+		}
+
+		private void UpdatePngCacheEntry(PngCacheEntry cacheEntry, RhGuid pngGuid)
+		{
+			cacheEntry.guid = pngGuid;
 		}
 
 		public void SyncRhcFile(RhcFile rhcFile)
@@ -104,7 +159,7 @@ namespace RHTools.Serialization.RH
 			cacheEntry.rhsGuid = rhsFile.rhsGuid;
 			cacheEntry.internalGuid = rhsFile.internalGuid;
 			cacheEntry.oggGuid = rhsFile.oggGuid;
-			//cacheEntry.pngGuid = ; // Missing
+			cacheEntry.pngGuid = rhsFile.pngGuid;
 			cacheEntry.songTitle = rhsFile.songTitle;
 			cacheEntry.timingData = rhsFile.timingData;
 			cacheEntry.previewStart = rhsFile.previewStart;

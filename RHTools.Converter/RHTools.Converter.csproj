@@ -40,7 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ChartExtensions.cs" />
+    <Compile Include="LayerConverter.cs" />
+    <Compile Include="LayersConverter.cs" />
+    <Compile Include="NoteConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RhcConverter.cs" />
+    <Compile Include="RhgConverter.cs" />
+    <Compile Include="RhsConverter.cs" />
+    <Compile Include="SmToRhConverter.cs" />
+    <Compile Include="TimingDataConverter.cs" />
+    <Compile Include="TimingDataEntryConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RHTools.Serialization\RHTools.Serialization.csproj">
+      <Project>{B98BFD20-36AC-4A37-957A-C80CB5DDE6B0}</Project>
+      <Name>RHTools.Serialization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

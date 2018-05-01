@@ -13,6 +13,18 @@ namespace RHTools.Serialization.RH
 		public int startBeat;
 		public int duration;
 
+		public Note() { }
+
+		public Note(NoteType type, int startBeat) :
+			this(type, startBeat, 0) { }
+
+		public Note(NoteType type, int startBeat, int duration)
+		{
+			this.type = type;
+			this.startBeat = startBeat;
+			this.duration = duration;
+		}
+
 		public void Serialize(BinaryWriter writer)
 		{
 			writer.Write((byte)type);
