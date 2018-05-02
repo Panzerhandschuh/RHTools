@@ -9,14 +9,14 @@ namespace RHTools.Converter
 {
 	public class RhgConverter
 	{
-		public RhgFile Convert(IEnumerable<RhcFile> rhcFiles)
+		public RhgFile Convert(RhGuid pngGuid, string packName, IEnumerable<RhcFile> rhcFiles)
 		{
 			RhgFile rhgFile = new RhgFile();
 
 			rhgFile.rhgGuid = RhGuid.NewGuid();
 			rhgFile.internalGuid = new RhGuid();
-			//rhgFile.pngGuid = ;
-			//rhgFile.packName = ;
+			rhgFile.pngGuid = pngGuid;
+			rhgFile.packName = packName;
 			foreach (RhcFile rhcFile in rhcFiles)
 				rhgFile.rhcGuids.Add(rhcFile.rhcGuid);
 
