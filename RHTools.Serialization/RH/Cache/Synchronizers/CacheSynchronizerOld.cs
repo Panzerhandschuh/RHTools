@@ -8,18 +8,18 @@ namespace RHTools.Serialization.RH
 {
 	// TODO: Refactor this file so that each cache entry type has a different synchronizer (single responsibility)
 	// TODO: Might also be able to refactor Update/Create pattern into a shared base class
-	public class CacheSynchronizer
+	public class CacheSynchronizerOld
 	{
 		private CacheFile cacheFile;
 
-		public CacheSynchronizer(CacheFile cacheFile)
+		public CacheSynchronizerOld(CacheFile cacheFile)
 		{
 			this.cacheFile = cacheFile;
 		}
 
 		public void SyncOggFile(RhGuid oggGuid)
 		{
-			OggCacheEntry existingEntry = cacheFile.oggEntries.FirstOrDefault(x => x.guid == oggGuid);
+			OggCacheEntry existingEntry = cacheFile.oggEntries.FirstOrDefault(x => x.oggGuid == oggGuid);
 			if (existingEntry != null)
 				UpdateOggCacheEntry(existingEntry, oggGuid);
 			else
@@ -40,13 +40,13 @@ namespace RHTools.Serialization.RH
 
 		private void UpdateOggCacheEntry(OggCacheEntry cacheEntry, RhGuid oggGuid)
 		{
-			cacheEntry.guid = oggGuid;
+			cacheEntry.oggGuid = oggGuid;
 			//cacheEntry.length = ;
 		}
 
 		public void SyncPngFile(RhGuid pngGuid)
 		{
-			PngCacheEntry existingEntry = cacheFile.pngEntries.FirstOrDefault(x => x.guid == pngGuid);
+			PngCacheEntry existingEntry = cacheFile.pngEntries.FirstOrDefault(x => x.pngGuid == pngGuid);
 			if (existingEntry != null)
 				UpdatePngCacheEntry(existingEntry, pngGuid);
 			else
@@ -67,7 +67,7 @@ namespace RHTools.Serialization.RH
 
 		private void UpdatePngCacheEntry(PngCacheEntry cacheEntry, RhGuid pngGuid)
 		{
-			cacheEntry.guid = pngGuid;
+			cacheEntry.pngGuid = pngGuid;
 		}
 
 		public void SyncRhcFile(RhcFile rhcFile)

@@ -21,31 +21,49 @@ namespace RHTools.Converter
 		// TODO: This method is too big
 		public void ConvertSmFile(string smFileDir, string rhDir, string packName = "Converted")
 		{
-			string smFilePath = Directory.GetFiles(smFileDir, "*.sm").Single();
-			SmFile smFile = ITextSerializableExtensions.Deserialize(smFilePath, SmFile.Deserialize);
-
-			RhGuid musicGuid = RhGuid.NewGuid();
-			string sourceMusicPath = Path.Combine(smFileDir, smFile.music);
-			string destMusicPath = Path.Combine(rhDir, musicGuid.ToString()) + ".ogg";
-			File.Copy(sourceMusicPath, destMusicPath);
-
-			RhGuid backgroundGuid = RhGuid.NewGuid();
-			string sourceBackgroundPath = Path.Combine(smFileDir, smFile.background);
-			string destBackgroundPath = Path.Combine(rhDir, backgroundGuid.ToString()) + ".png";
-			File.Copy(sourceBackgroundPath, destBackgroundPath);
-
-			RhsConverter rhsConverter = new RhsConverter();
-			RhsFile rhsFile = rhsConverter.Convert(smFile, musicGuid, backgroundGuid);
-			string rhsPath = Path.Combine(rhDir, rhsFile.rhsGuid.ToString()) + ".rhs";
-			rhsFile.SerializeToFile(rhsPath);
-
 			string cachePath = Path.Combine(rhDir, "cache");
 			CacheFile cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
 
-			CacheSynchronizer synchronizer = new CacheSynchronizer(cacheFile);
-			synchronizer.SyncOggFile(musicGuid);
-			synchronizer.SyncPngFile(backgroundGuid);
-			synchronizer.SyncRhsFile(rhsFile);
+			string smFilePath = Directory.GetFiles(smFileDir, "*.sm").Single();
+			SmFile smFile = ITextSerializableExtensions.Deserialize(smFilePath, SmFile.Deserialize);
+
+			RhGuid oggGuid = RhGuid.NewGuid();
+			string sourceOggPath = Path.Combine(smFileDir, smFile.music);
+			string destOggPath = Path.Combine(rhDir, oggGuid.ToString()) + ".ogg";
+			File.Copy(sourceOggPath, destOggPath);
+
+			OggSynchronizer oggSynchronizer = new OggSynchronizer(cacheFile, oggGuid, 0f);
+			oggSynchronizer.Sync();
+
+			RhGuid pngGuid = RhGuid.NewGuid();
+			string sourcePngPath = Path.Combine(smFileDir, smFile.background);
+			string destPngPath = Path.Combine(rhDir, pngGuid.ToString()) + ".png";
+			File.Copy(sourcePngPath, destPngPath);
+
+			PngSynchronizer pngSynchronizer = new PngSynchronizer(cacheFile, pngGuid);
+			pngSynchronizer.Sync();
+
+			//RhsConverter rhsConverter = new RhsConverter();
+			//RhsFile rhsFile = rhsConverter.Convert(smFile, musicGuid, backgroundGuid);
+			//string rhsPath = Path.Combine(rhDir, rhsFile.rhsGuid.ToString()) + ".rhs";
+			//rhsFile.SerializeToFile(rhsPath);
+
+			//RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, smFile.artist);
+			//rhsSynchronizer.Sync();
+
+			RhgConverter rhgConverter = new RhgConverter();
+			RhgFile rhgFile = rhgConverter.Convert(pngGuid, packName, new List<RhcFile>());
+			string rhgPath = Path.Combine(rhDir, rhgFile.rhgGuid.ToString()) + ".rhg";
+			rhgFile.SerializeToFile(rhgPath);
+
+			RhgSynchronizer rhgSynchronizer = new RhgSynchronizer(cacheFile, rhgFile);
+			rhgSynchronizer.Sync();
+
+			//CacheSynchronizerOld synchronizer = new CacheSynchronizerOld(cacheFile);
+			//synchronizer.SyncOggFile(oggGuid);
+			//synchronizer.SyncPngFile(pngGuid);
+			////synchronizer.SyncRhsFile(rhsFile);
+			//synchronizer.SyncRhgFile(rhgFile);
 
 			cacheFile.SerializeToFile(cachePath);
 		}
