@@ -71,13 +71,6 @@ namespace RHTools.Converter
 			rhgSynchronizer.Sync();
 
 			cacheFile.SerializeToFile(cachePath);
-
-			//string onlinePath = Path.Combine(rhDir, "online");
-			//OnlineFile onlineFile = IBinarySerializableExtensions.Deserialize(onlinePath, OnlineFile.Deserialize);
-			//onlineFile.fileGuids.Add(rhsFile.rhsGuid);
-			//onlineFile.fileGuids.AddRange(rhcFiles.Select(x => x.rhcGuid));
-			//onlineFile.fileGuids.Add(rhgFile.rhgGuid);
-			//onlineFile.SerializeToFile(onlinePath);
 		}
 	}
 }
