@@ -11,38 +11,66 @@ using System.Threading.Tasks;
 
 namespace RHTools.Converter
 {
-	public class SmToRhConverter
+	public class SmSongToRhConverter
 	{
-		public void ConvertSmPack(string smPackDir, string rhDir)
+		private string smSongDir;
+		private string rhDir;
+		private string packName;
+		private SmFile smFile;
+		private string cachePath;
+		private CacheFile cacheFile;
+
+		public SmSongToRhConverter(string smSongDir, string rhDir, string packName = "Converted")
 		{
-			throw new NotImplementedException();
+			this.smSongDir = smSongDir;
+			this.rhDir = rhDir;
+			this.packName = packName;
+
+			string smFilePath = Directory.GetFiles(smSongDir, "*.sm").Single();
+			smFile = ITextSerializableExtensions.Deserialize(smFilePath, SmFile.Deserialize);
+
+			cachePath = Path.Combine(rhDir, "cache");
+			cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
 		}
 
-		// TODO: This method is too big
-		public void ConvertSmFile(string smFileDir, string rhDir, string packName = "Converted")
+		// TODO: Consider making all converters override a Convert() method
+		public void Convert()
 		{
-			string cachePath = Path.Combine(rhDir, "cache");
-			CacheFile cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
+			RhGuid oggGuid = ConvertOgg();
+			RhGuid pngGuid = ConvertPng();
+			RhsFile rhsFile = ConvertRhs(oggGuid, pngGuid);
+			List<RhcFile> rhcFiles = ConvertRhc(rhsFile);
+			ConvertRhg(pngGuid, rhcFiles);
 
-			string smFilePath = Directory.GetFiles(smFileDir, "*.sm").Single();
-			SmFile smFile = ITextSerializableExtensions.Deserialize(smFilePath, SmFile.Deserialize);
+			cacheFile.SerializeToFile(cachePath);
+		}
 
+		private RhGuid ConvertOgg()
+		{
 			RhGuid oggGuid = RhGuid.NewGuid();
-			string sourceOggPath = Path.Combine(smFileDir, smFile.music);
+			string sourceOggPath = Path.Combine(smSongDir, smFile.music);
 			string destOggPath = Path.Combine(rhDir, oggGuid.ToString()) + ".ogg";
 			File.Copy(sourceOggPath, destOggPath);
 
 			OggSynchronizer oggSynchronizer = new OggSynchronizer(cacheFile, oggGuid, 0f);
 			oggSynchronizer.Sync();
+			return oggGuid;
+		}
 
+		private RhGuid ConvertPng()
+		{
 			RhGuid pngGuid = RhGuid.NewGuid();
-			string sourcePngPath = Path.Combine(smFileDir, smFile.background);
+			string sourcePngPath = Path.Combine(smSongDir, smFile.background);
 			string destPngPath = Path.Combine(rhDir, pngGuid.ToString()) + ".png";
 			File.Copy(sourcePngPath, destPngPath);
 
 			PngSynchronizer pngSynchronizer = new PngSynchronizer(cacheFile, pngGuid);
 			pngSynchronizer.Sync();
+			return pngGuid;
+		}
 
+		private RhsFile ConvertRhs(RhGuid oggGuid, RhGuid pngGuid)
+		{
 			RhsConverter rhsConverter = new RhsConverter();
 			RhsFile rhsFile = rhsConverter.Convert(smFile, oggGuid, pngGuid);
 			string rhsPath = Path.Combine(rhDir, rhsFile.rhsGuid.ToString()) + ".rhs";
@@ -50,7 +78,11 @@ namespace RHTools.Converter
 
 			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, smFile.artist);
 			rhsSynchronizer.Sync();
+			return rhsFile;
+		}
 
+		private List<RhcFile> ConvertRhc(RhsFile rhsFile)
+		{
 			RhcConverter rhcConverter = new RhcConverter();
 			List<RhcFile> rhcFiles = rhcConverter.Convert(smFile, rhsFile.rhsGuid, smFile.credit);
 			foreach (RhcFile rhcFile in rhcFiles)
@@ -62,6 +94,11 @@ namespace RHTools.Converter
 				rhcSynchronizer.Sync();
 			}
 
+			return rhcFiles;
+		}
+
+		private void ConvertRhg(RhGuid pngGuid, List<RhcFile> rhcFiles)
+		{
 			RhgConverter rhgConverter = new RhgConverter();
 			RhgFile rhgFile = rhgConverter.Convert(pngGuid, packName, rhcFiles);
 			string rhgPath = Path.Combine(rhDir, rhgFile.rhgGuid.ToString()) + ".rhg";
@@ -69,8 +106,6 @@ namespace RHTools.Converter
 
 			RhgSynchronizer rhgSynchronizer = new RhgSynchronizer(cacheFile, rhgFile);
 			rhgSynchronizer.Sync();
-
-			cacheFile.SerializeToFile(cachePath);
 		}
 	}
 }

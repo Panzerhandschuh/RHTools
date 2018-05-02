@@ -48,7 +48,8 @@
     <Compile Include="RhcConverter.cs" />
     <Compile Include="RhgConverter.cs" />
     <Compile Include="RhsConverter.cs" />
-    <Compile Include="SmToRhConverter.cs" />
+    <Compile Include="SmPackToRhConverter.cs" />
+    <Compile Include="SmSongToRhConverter.cs" />
     <Compile Include="TimingDataConverter.cs" />
     <Compile Include="TimingDataEntryConverter.cs" />
   </ItemGroup>
