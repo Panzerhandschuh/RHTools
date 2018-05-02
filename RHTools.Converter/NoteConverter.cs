@@ -84,7 +84,7 @@ namespace RHTools.Converter
 						holdStartBeat = beatNotes.beat;
 						break;
 					case SmNoteType.Tail:
-						notes.Add(new Note(RhNoteType.Hold, beat, beat - holdStartBeat));
+						notes.Add(new Note(RhNoteType.Hold, holdStartBeat, beat - holdStartBeat));
 						break;
 					case SmNoteType.Mine:
 						notes.Add(new Note(RhNoteType.Mine, beat));
