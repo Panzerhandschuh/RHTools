@@ -12,56 +12,32 @@ namespace RHTools.Converter
 {
 	public class NoteConverter
 	{
+		private class BeatNotes
+		{
+			public int beat;
+			public List<SmNoteType> notes;
+
+			public BeatNotes(int beat, List<SmNoteType> notes)
+			{
+				this.beat = beat;
+				this.notes = notes;
+			}
+		}
+
 		public Dictionary<NoteFlags, List<Note>> Convert(Chart chart)
 		{
 			Dictionary<NoteFlags, List<Note>> noteDict = new Dictionary<NoteFlags, List<Note>>();
 
 			int numPanels = chart.GetPanelCount();
+			List<BeatNotes> beatNotesList = GetBeatNotes(chart.noteData.measures);
 			for (int panel = 0; panel < numPanels; panel++)
 			{
 				NoteFlags rhNote = GetRhNote(panel);
-				List<Note> notes = GetNotesForPanel(chart.noteData, panel);
+				List<Note> notes = GetNotesForPanel(beatNotesList, panel);
 				noteDict.Add(rhNote, notes);
 			}
 
 			return noteDict;
-		}
-
-		private List<Note> GetNotesForPanel(NoteData noteData, int panel)
-		{
-			List<Note> notes = new List<Note>();
-			int beat = 0;
-			int holdStartBeat = 0;
-
-			// TODO: Simplify logic by converting NoteData into a temporary data structure (pair beat # with notes)
-			foreach (Measure measure in noteData.measures)
-			{
-				int beatIncrement = 4000 / measure.lines.Count;
-				foreach (Line line in measure.lines)
-				{
-					SmNoteType note = line.notes[panel];
-					switch (note)
-					{
-						case SmNoteType.Regular:
-							notes.Add(new Note(RhNoteType.Regular, beat));
-							break;
-						case SmNoteType.Hold:
-						case SmNoteType.Roll:
-							holdStartBeat = beat;
-							break;
-						case SmNoteType.Tail:
-							notes.Add(new Note(RhNoteType.Hold, beat, beat - holdStartBeat));
-							break;
-						case SmNoteType.Mine:
-							notes.Add(new Note(RhNoteType.Mine, beat));
-							break;
-					}
-
-					beat += beatIncrement;
-				}
-			}
-
-			return notes;
 		}
 
 		private NoteFlags GetRhNote(int smPanel)
@@ -87,6 +63,60 @@ namespace RHTools.Converter
 				default:
 					throw new ArgumentException();
 			}
+		}
+
+		private List<Note> GetNotesForPanel(List<BeatNotes> beatNotesList, int panel)
+		{
+			List<Note> notes = new List<Note>();
+			int holdStartBeat = 0;
+
+			foreach (BeatNotes beatNotes in beatNotesList)
+			{
+				int beat = beatNotes.beat;
+				SmNoteType note = beatNotes.notes[panel];
+				switch (note)
+				{
+					case SmNoteType.Regular:
+						notes.Add(new Note(RhNoteType.Regular, beat));
+						break;
+					case SmNoteType.Hold:
+					case SmNoteType.Roll:
+						holdStartBeat = beatNotes.beat;
+						break;
+					case SmNoteType.Tail:
+						notes.Add(new Note(RhNoteType.Hold, beat, beat - holdStartBeat));
+						break;
+					case SmNoteType.Mine:
+						notes.Add(new Note(RhNoteType.Mine, beat));
+						break;
+				}
+			}
+
+			return notes;
+		}
+
+		/// <summary>
+		/// Convert measures into an intermediate data structure so that it is easier to process
+		/// This structure pairs each line of notes with a beat
+		/// </summary>
+		private List<BeatNotes> GetBeatNotes(List<Measure> measures)
+		{
+			List<BeatNotes> beatNotesList = new List<BeatNotes>();
+
+			int beat = 0;
+			foreach (Measure measure in measures)
+			{
+				int beatIncrement = 4000 / measure.lines.Count;
+				foreach (Line line in measure.lines)
+				{
+					List<SmNoteType> notes = line.notes;
+					beatNotesList.Add(new BeatNotes(beat, notes));
+
+					beat += beatIncrement;
+				}
+			}
+
+			return beatNotesList;
 		}
 	}
 }
