@@ -61,6 +61,7 @@
     <Compile Include="RH\Cache\Synchronizers\RhcSynchronizer.cs" />
     <Compile Include="RH\Cache\Synchronizers\RhgSynchronizer.cs" />
     <Compile Include="RH\Cache\Synchronizers\RhsSynchronizer.cs" />
+    <Compile Include="RH\Online\OnlineFile.cs" />
     <Compile Include="RH\RHC\Layer.cs" />
     <Compile Include="RH\RHC\LayerEntryType.cs" />
     <Compile Include="RH\RHC\Note.cs" />
