@@ -51,8 +51,19 @@ namespace RHTools.Converter
 			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, smFile.artist);
 			rhsSynchronizer.Sync();
 
+			RhcConverter rhcConverter = new RhcConverter();
+			List<RhcFile> rhcFiles = rhcConverter.Convert(smFile, rhsFile.rhsGuid, smFile.credit);
+			foreach (RhcFile rhcFile in rhcFiles)
+			{
+				string rhcPath = Path.Combine(rhDir, rhcFile.rhcGuid.ToString()) + ".rhc";
+				rhcFile.SerializeToFile(rhcPath);
+
+				RhcSynchronizer rhcSynchronizer = new RhcSynchronizer(cacheFile, rhcFile, smFile.credit);
+				rhcSynchronizer.Sync();
+			}
+
 			RhgConverter rhgConverter = new RhgConverter();
-			RhgFile rhgFile = rhgConverter.Convert(pngGuid, packName, new List<RhcFile>());
+			RhgFile rhgFile = rhgConverter.Convert(pngGuid, packName, rhcFiles);
 			string rhgPath = Path.Combine(rhDir, rhgFile.rhgGuid.ToString()) + ".rhg";
 			rhgFile.SerializeToFile(rhgPath);
 
@@ -60,6 +71,13 @@ namespace RHTools.Converter
 			rhgSynchronizer.Sync();
 
 			cacheFile.SerializeToFile(cachePath);
+
+			//string onlinePath = Path.Combine(rhDir, "online");
+			//OnlineFile onlineFile = IBinarySerializableExtensions.Deserialize(onlinePath, OnlineFile.Deserialize);
+			//onlineFile.fileGuids.Add(rhsFile.rhsGuid);
+			//onlineFile.fileGuids.AddRange(rhcFiles.Select(x => x.rhcGuid));
+			//onlineFile.fileGuids.Add(rhgFile.rhgGuid);
+			//onlineFile.SerializeToFile(onlinePath);
 		}
 	}
 }

@@ -14,6 +14,7 @@ namespace RHTools.Serialization.RH
 		public RhcSynchronizer(CacheFile cacheFile, RhcFile rhcFile, string displayAuthor) : base(cacheFile)
 		{
 			this.rhcFile = rhcFile;
+			this.displayAuthor = displayAuthor;
 		}
 
 		protected override void AddEntry(RhcCacheEntry entry)
@@ -32,9 +33,9 @@ namespace RHTools.Serialization.RH
 			entry.rhsGuid = rhcFile.rhsGuid;
 			entry.internalGuid = rhcFile.internalGuid;
 			entry.chartName = rhcFile.chartName;
-			//entry.unknown1 = rhcFile.unknown1;
+			entry.unknown1 = new byte[] { 0, 0, 10, 254, 3, 0, 0 }; // Fake data
 			entry.artists = rhcFile.artists;
-			//entry.unknown2 = rhcFile.unknown1;
+			entry.unknown2 = new byte[] { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 8, 0, 0, 0, 0, 9, 0, 0, 0, 0, 10, 0, 0, 0, 0, 32, 0, 0, 0, 0, 33, 0, 0, 0, 0, 255 }; // Fake data
 			entry.displayAuthor = displayAuthor;
 		}
 	}

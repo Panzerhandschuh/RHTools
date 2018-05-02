@@ -13,7 +13,7 @@ namespace RHTools.Converter
 		public Layers Convert(Chart chart)
 		{
 			Layers layers = new Layers();
-			//layers.unknown1 = ;
+			layers.unknown1 = 0; // Fake data
 			layers.padConfig = chart.GetPadConfiguration();
 			layers.layers.Add(new LayerConverter().Convert(chart));
 
