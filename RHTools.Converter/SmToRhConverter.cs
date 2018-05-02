@@ -43,13 +43,13 @@ namespace RHTools.Converter
 			PngSynchronizer pngSynchronizer = new PngSynchronizer(cacheFile, pngGuid);
 			pngSynchronizer.Sync();
 
-			//RhsConverter rhsConverter = new RhsConverter();
-			//RhsFile rhsFile = rhsConverter.Convert(smFile, musicGuid, backgroundGuid);
-			//string rhsPath = Path.Combine(rhDir, rhsFile.rhsGuid.ToString()) + ".rhs";
-			//rhsFile.SerializeToFile(rhsPath);
+			RhsConverter rhsConverter = new RhsConverter();
+			RhsFile rhsFile = rhsConverter.Convert(smFile, oggGuid, pngGuid);
+			string rhsPath = Path.Combine(rhDir, rhsFile.rhsGuid.ToString()) + ".rhs";
+			rhsFile.SerializeToFile(rhsPath);
 
-			//RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, smFile.artist);
-			//rhsSynchronizer.Sync();
+			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, smFile.artist);
+			rhsSynchronizer.Sync();
 
 			RhgConverter rhgConverter = new RhgConverter();
 			RhgFile rhgFile = rhgConverter.Convert(pngGuid, packName, new List<RhcFile>());
@@ -58,12 +58,6 @@ namespace RHTools.Converter
 
 			RhgSynchronizer rhgSynchronizer = new RhgSynchronizer(cacheFile, rhgFile);
 			rhgSynchronizer.Sync();
-
-			//CacheSynchronizerOld synchronizer = new CacheSynchronizerOld(cacheFile);
-			//synchronizer.SyncOggFile(oggGuid);
-			//synchronizer.SyncPngFile(pngGuid);
-			////synchronizer.SyncRhsFile(rhsFile);
-			//synchronizer.SyncRhgFile(rhgFile);
 
 			cacheFile.SerializeToFile(cachePath);
 		}
