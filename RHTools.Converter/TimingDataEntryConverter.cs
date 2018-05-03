@@ -14,9 +14,9 @@ namespace RHTools.Converter
 		{
 			TimingDataEntry entry = new TimingDataEntry();
 
-			entry.beat = 1210974208; // Fake value
-			entry.startBpm = -1f; // Fake value
-			entry.endBpm = -1f; // Fake value
+			entry.beat = 1216151552; // Fake value
+			entry.startBpm = 253f; // Fake value
+			entry.endBpm = 253f; // Fake value
 
 			return entry;
 		}

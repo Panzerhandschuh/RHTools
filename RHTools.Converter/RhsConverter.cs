@@ -21,7 +21,7 @@ namespace RHTools.Converter
 			rhsFile.timingData = new TimingDataConverter().Convert(smFile);
 			rhsFile.previewStart = smFile.sampleStart;
 			rhsFile.previewLength = smFile.sampleLength;
-			rhsFile.displayBpm = smFile.displayBpm.minBpm; // Uncertain. Usually RH display BPM is -1
+			rhsFile.unknown1 = -1f; // Always set to -1 or 177 in existing game files
 			rhsFile.pngGuid = pngGuid;
 			rhsFile.artists.Add(new Artist(smFile.artist, ArtistType.Artist));
 

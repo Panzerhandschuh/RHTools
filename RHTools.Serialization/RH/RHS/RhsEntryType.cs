@@ -14,7 +14,7 @@ namespace RHTools.Serialization.RH
 		TimingData = 3,
 		PreviewStart = 4,
 		PreviewLength = 5,
-		DisplayBpm = 6, // Might be display BPM but usually (always?) deserializes to -1
+		Unknown1 = 6, // Might be display BPM but always deserializes to -1 or 177
 		Internal = 8, // Might be a guid for online file sharing
 		Artists = 32,
 		ArtistName = 33,
