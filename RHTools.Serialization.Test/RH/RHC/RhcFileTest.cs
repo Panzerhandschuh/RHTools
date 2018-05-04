@@ -17,7 +17,7 @@ namespace RHTools.Serialization.Test.RH
 		[TestMethod]
 		public void ReadRhcFile()
 		{
-			RhcFile file = ReadRhcFile(@"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\6ce1a5da-30b7-40a0-8eab-bdfa72a1ec0d.rhc");
+			RhcFile file = ReadRhcFile(@"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\833abd96-38d3-4b6e-bcf7-d19249e328c6.rhc");
 		}
 
 		[TestMethod]

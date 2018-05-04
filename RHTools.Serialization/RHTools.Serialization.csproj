@@ -76,6 +76,9 @@
     <Compile Include="RH\RHG\RhgEntryType.cs" />
     <Compile Include="RH\RHC\Layers.cs" />
     <Compile Include="RH\RHC\NoteFlags.cs" />
+    <Compile Include="RH\RHPROJ\RhprojRhcEntryType.cs" />
+    <Compile Include="RH\RHPROJ\RhprojFile.cs" />
+    <Compile Include="RH\RHPROJ\RhprojRhsEntryType.cs" />
     <Compile Include="RH\RHS\RhsEntryType.cs" />
     <Compile Include="RH\RHS\RhsFile.cs" />
     <Compile Include="RH\TimingData.cs" />

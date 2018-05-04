@@ -21,7 +21,7 @@ namespace RHTools.Converter
 			rhsFile.timingData = new TimingDataConverter().Convert(smFile);
 			rhsFile.previewStart = smFile.sampleStart;
 			rhsFile.previewLength = smFile.sampleLength;
-			rhsFile.unknown1 = -1f; // Always set to -1 or 177 in existing game files
+			rhsFile.songLengthOverride = -1f; // Always set to -1 or 177 in existing game files
 			rhsFile.pngGuid = pngGuid;
 			rhsFile.artists.Add(new Artist(smFile.artist, ArtistType.Artist));
 

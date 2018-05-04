@@ -164,7 +164,7 @@ namespace RHTools.Serialization.RH
 			cacheEntry.timingData = rhsFile.timingData;
 			cacheEntry.previewStart = rhsFile.previewStart;
 			cacheEntry.previewLength = rhsFile.previewLength;
-			cacheEntry.displayBpm = rhsFile.unknown1;
+			cacheEntry.displayBpm = rhsFile.songLengthOverride;
 			cacheEntry.artists = rhsFile.artists;
 			//cacheEntry.displayArtist = ; // Missing
 		}

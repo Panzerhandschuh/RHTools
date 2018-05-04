@@ -37,7 +37,7 @@ namespace RHTools.Serialization.RH
 			entry.timingData = rhsFile.timingData;
 			entry.previewStart = rhsFile.previewStart;
 			entry.previewLength = rhsFile.previewLength;
-			entry.displayBpm = rhsFile.unknown1;
+			//entry.displayBpm = rhsFile.songLengthOverride;
 			entry.artists = rhsFile.artists;
 			entry.displayArtist = displayArtist;
 		}

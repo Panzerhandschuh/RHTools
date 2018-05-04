@@ -6,20 +6,17 @@ using System.Threading.Tasks;
 
 namespace RHTools.Serialization.RH
 {
-	public enum RhsEntryType
+	public enum RhprojRhcEntryType
 	{
-		Rhs = 0,
-		Ogg = 1,
-		SongTitle = 2,
-		TimingData = 3,
-		PreviewStart = 4,
-		PreviewLength = 5,
-		SongLengthOverride = 6,
-		Internal = 8, // Might be a guid for online file sharing
+		Rhc = 0,
+		Rhs = 1,
+		Layers = 2,
+		SongTitle = 4,
+		Unknown1 = 5,
+		Internal = 8,
 		Artists = 32,
 		ArtistName = 33,
 		ArtistType = 35,
-		Png = 64,
 		EndOfEntry = 255
 	}
 }

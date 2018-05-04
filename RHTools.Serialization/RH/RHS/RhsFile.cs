@@ -17,7 +17,7 @@ namespace RHTools.Serialization.RH
 		public TimingData timingData;
 		public float previewStart;
 		public float previewLength;
-		public float unknown1; // Always set to -1 or 177 in existing game files. Might be related to display bpm?
+		public float songLengthOverride; // Uses ogg length if -1? Otherwise, overrides the song length
 		public RhGuid pngGuid;
 		public List<Artist> artists;
 
@@ -37,7 +37,7 @@ namespace RHTools.Serialization.RH
 			writer.WriteOptionalData((byte)RhsEntryType.TimingData, timingData, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)RhsEntryType.PreviewStart, previewStart, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)RhsEntryType.PreviewLength, previewLength, (x) => writer.Write(x));
-			writer.WriteOptionalData((byte)RhsEntryType.Unknown1, unknown1, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)RhsEntryType.SongLengthOverride, songLengthOverride, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)RhsEntryType.Png, pngGuid, (x) => writer.Write(x));
 			writer.WritePrefixedList((byte)RhsEntryType.Artists, artists, (x) => writer.Write(x));
 			writer.Write((byte)RhsEntryType.EndOfEntry);
@@ -75,8 +75,8 @@ namespace RHTools.Serialization.RH
 					case RhsEntryType.PreviewLength:
 						file.previewLength = reader.ReadSingle();
 						break;
-					case RhsEntryType.Unknown1:
-						file.unknown1 = reader.ReadSingle();
+					case RhsEntryType.SongLengthOverride:
+						file.songLengthOverride = reader.ReadSingle();
 						break;
 					case RhsEntryType.Png:
 						file.pngGuid = reader.ReadRhGuid();

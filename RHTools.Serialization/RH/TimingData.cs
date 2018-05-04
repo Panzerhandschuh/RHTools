@@ -10,8 +10,8 @@ namespace RHTools.Serialization.RH
 	public class TimingData : IBinarySerializable
 	{
 		//public long position;
-		public int unknown1;
-		public int unknown2;
+		public byte unknown1;
+		public long offsetMultiplier; // This value * some constant = offset. I'm not sure where the constant comes from. Maybe it comes from the song's sample rate. HeHeHe has a constant of ~0.0000226757.
 		public List<TimingDataEntry> entries;
 
 		public TimingData()
@@ -21,10 +21,9 @@ namespace RHTools.Serialization.RH
 
 		public void Serialize(BinaryWriter writer)
 		{
-			writer.Write((byte)0); // Unknown. Always 0?
+			writer.Write(unknown1); // Unknown. Always 0?
 			writer.Write(entries.Count);
-			writer.Write(unknown1);
-			writer.Write(unknown2);
+			writer.Write(offsetMultiplier);
 			writer.Write(entries, false);
 		}
 
@@ -32,11 +31,9 @@ namespace RHTools.Serialization.RH
 		{
 			TimingData data = new TimingData();
 
-			//data.position = reader.BaseStream.Position;
-			reader.ReadByte(); // Always 0?
+			data.unknown1 = reader.ReadByte(); // Always 0?
 			int numEntries = reader.ReadInt32();
-			data.unknown1 = reader.ReadInt32();
-			data.unknown2 = reader.ReadInt32();
+			data.offsetMultiplier = reader.ReadInt64();
 			data.entries = reader.ReadList(TimingDataEntry.Deserialize, numEntries);
 
 			return data;

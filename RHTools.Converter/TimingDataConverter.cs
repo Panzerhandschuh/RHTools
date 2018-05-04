@@ -15,7 +15,7 @@ namespace RHTools.Converter
 			TimingData data = new TimingData();
 
 			data.unknown1 = 0; // Fake value
-			data.unknown2 = 0; // Fake value
+			data.offsetMultiplier = 0; // Fake value
 			data.entries.Add(new TimingDataEntryConverter().Convert(smFile));
 
 			return data;

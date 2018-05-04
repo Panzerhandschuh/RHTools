@@ -52,7 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RH\RHC\RhcFileTest.cs" />
     <Compile Include="RH\RHG\RhgFileTest.cs" />
+    <Compile Include="RH\RHPROJ\RhprojFileTest.cs" />
     <Compile Include="RH\RHS\RhsFileTest.cs" />
+    <Compile Include="RH\RhTest.cs" />
     <Compile Include="SM\MsdFileTest.cs" />
     <Compile Include="SM\SmFileTest.cs" />
   </ItemGroup>
