@@ -17,34 +17,22 @@ namespace RHTools.Serialization.Test.RH
 		[TestMethod]
 		public void EditTimingData()
 		{
-			string cachePath = Path.Combine(rhPath, "cache");
-			CacheFile cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
-
-			string rhsPath = Path.Combine(rhPath, "24a33e2b-cc61-4df1-8f7c-d7fc844450b2.rhs");
+			string rhsPath = Path.Combine(rhPath, "0174eed2-8658-4b48-87e4-7e5f0753b79d.rhs");
 			RhsFile rhsFile = IBinarySerializableExtensions.Deserialize(rhsPath, RhsFile.Deserialize);
 
-			//rhsFile.internalGuid = new RhGuid();
-			//rhsFile.timingData.entries = new List<TimingDataEntry>();
-			//TimingData rhsTimingData = rhsFile.timingData;
-			//rhsTimingData.unknown1 = 5;
-			//rhsTimingData.unknown2 = 0;
-			//TimingDataEntry rhsTimingDataEntry = rhsFile.timingData.entries.Last();
-			//rhsTimingDataEntry.startBpm = -1;
-			//rhsTimingDataEntry.endBpm = 1f;
-			rhsFile.songLengthOverride = -1;
-			rhsFile.pngGuid = new RhGuid(new byte[] { 38, 202, 1, 86, 253, 228, 71, 86, 152, 232, 0, 213, 9, 179, 44, 201 });
+			rhsFile.internalGuid = new RhGuid();
+			rhsFile.timingData.offsetMultiplier = 0;
+			rhsFile.timingData.entries[0].startBpm /= 2;
+			//rhsFile.pngGuid = new RhGuid(new byte[] { 38, 202, 1, 86, 253, 228, 71, 86, 152, 232, 0, 213, 9, 179, 44, 201 });
 			rhsFile.SerializeToFile(rhsPath);
 
-			RhsCacheEntry cacheEntry = cacheFile.rhsEntries.Single(x => x.rhsGuid == rhsFile.rhsGuid);
-			//cacheEntry.internalGuid = new RhGuid();
-			//cacheEntry.timingData.entries = new List<TimingDataEntry>();
-			//TimingData cacheTimingData = cacheEntry.timingData;
-			//cacheTimingData.unknown1 = 5;
-			//cacheTimingData.unknown2 = 0;
-			//TimingDataEntry cacheTimingDataEntry = cacheEntry.timingData.entries.Last();
-			//cacheTimingDataEntry.startBpm = -1f;
-			//cacheTimingDataEntry.endBpm = 1f;
-			cacheEntry.pngGuid = new RhGuid(new byte[] { 38, 202, 1, 86, 253, 228, 71, 86, 152, 232, 0, 213, 9, 179, 44, 201 });
+			string cachePath = Path.Combine(rhPath, "cache");
+			RhGuid rhsGuid = new RhGuid(new byte[] { 0x01, 0x74, 0xee, 0xd2, 0x86, 0x58, 0x4b, 0x48, 0x87, 0xe4, 0x7e, 0x5f, 0x07, 0x53, 0xb7, 0x9d });
+			CacheFile cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
+
+			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, rhsFile.artists.First().artist);
+			rhsSynchronizer.Sync();
+			
 			cacheFile.SerializeToFile(cachePath);
 		}
 	}

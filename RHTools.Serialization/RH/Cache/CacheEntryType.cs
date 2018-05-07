@@ -16,7 +16,7 @@ namespace RHTools.Serialization.RH
 		Png = 5,
 		ChartName = 8, // Also applies to song titles and pack names
 		TimingData = 9,
-		DisplayBpm = 10, // Uncertain. The values are always -1.
+		SongLengthOverride = 10,
 		PreviewStart = 11, // This might have a different meaning for RHC entries
 		PreviewLength = 12, // This might have a different meaning for RHC entries
 		DisplayAuthor = 13, // For charts

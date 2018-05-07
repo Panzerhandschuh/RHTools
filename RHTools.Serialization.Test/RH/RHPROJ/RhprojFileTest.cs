@@ -13,12 +13,11 @@ namespace RHTools.Serialization.Test.RH
 	public class RhprojFileTest
 	{
 		const string backupDir = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Backup";
-		const string testFile = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Backup\6939cbd5-4e31-4ea6-809a-402af8f2ca8a.rhproj";
 
 		[TestMethod]
 		public void ReadRhprojFile()
 		{
-			RhprojFile file = ReadRhprojFile(testFile);
+			RhprojFile file = ReadRhprojFile(@"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Backup\6939cbd5-4e31-4ea6-809a-402af8f2ca8a.rhproj");
 		}
 
 		[TestMethod]
@@ -48,17 +47,19 @@ namespace RHTools.Serialization.Test.RH
 		[TestMethod]
 		public void EditRhprojData()
 		{
+			const string testFile = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Backup\01c19d82-d894-453c-9cbf-e65b70540926.rhproj";
+
 			RhprojFile file = ReadRhprojFile(testFile);
 
 			RhsFile rhsFile = file.rhsFile;
-			rhsFile.songTitle = "test";
-			rhsFile.songLengthOverride = -1f;
+			rhsFile.songTitle = "[Tech::Lo] Test";
+			rhsFile.songLengthOverride = 25f;
 
 			TimingData timingData = rhsFile.timingData;
-			timingData.unknown1 = 0;
-			timingData.offsetMultiplier = -256;
+			timingData.offsetMultiplier = 0;
 
 			List<TimingDataEntry> entries = timingData.entries;
+			entries[0].startBpm *= 2;
 
 			file.SerializeToFile(testFile);
 		}

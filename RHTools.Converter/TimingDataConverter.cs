@@ -17,6 +17,7 @@ namespace RHTools.Converter
 			data.unknown1 = 0; // Fake value
 			data.offsetMultiplier = 0; // Fake value
 			data.entries.Add(new TimingDataEntryConverter().Convert(smFile));
+			data.lastEntry = new LastTimingDataEntryConverter().Convert(smFile);
 
 			return data;
 		}

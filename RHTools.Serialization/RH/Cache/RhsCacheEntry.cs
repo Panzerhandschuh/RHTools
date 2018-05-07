@@ -16,7 +16,7 @@ namespace RHTools.Serialization.RH
 		public string songTitle;
 		public TimingData timingData;
 		public List<Artist> artists;
-		public float displayBpm; // Always -1. Uncertain if this is the actual meaning (maybe values other than -1 override the song BPM).
+		public float songLengthOverride;
 		public float previewStart;
 		public float previewLength;
 		public string displayArtist;
@@ -35,7 +35,7 @@ namespace RHTools.Serialization.RH
 			writer.WriteOptionalData((byte)CacheEntryType.ChartName, songTitle, (x) => writer.WriteShortPrefixedString(x));
 			writer.WriteOptionalData((byte)CacheEntryType.TimingData, timingData, (x) => writer.Write(x));
 			writer.WritePrefixedList((byte)CacheEntryType.Artists, artists, (x) => writer.Write(x));
-			writer.WriteOptionalData((byte)CacheEntryType.DisplayBpm, displayBpm, (x) => writer.Write(x));
+			writer.WriteOptionalData((byte)CacheEntryType.SongLengthOverride, songLengthOverride, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.PreviewStart, previewStart, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.PreviewLength, previewLength, (x) => writer.Write(x));
 			writer.WriteOptionalData((byte)CacheEntryType.DisplayArtist, displayArtist, (x) => writer.WriteShortPrefixedString(x));
@@ -73,8 +73,8 @@ namespace RHTools.Serialization.RH
 					case CacheEntryType.Artists:
 						entry.artists.Add(Artist.Deserialize(reader));
 						break;
-					case CacheEntryType.DisplayBpm:
-						entry.displayBpm = reader.ReadSingle(); // Always -1
+					case CacheEntryType.SongLengthOverride:
+						entry.songLengthOverride = reader.ReadSingle();
 						break;
 					case CacheEntryType.PreviewStart:
 						entry.previewStart = reader.ReadSingle();

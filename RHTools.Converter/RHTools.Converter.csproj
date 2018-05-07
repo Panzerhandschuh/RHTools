@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ChartExtensions.cs" />
+    <Compile Include="LastTimingDataEntryConverter.cs" />
     <Compile Include="LayerConverter.cs" />
     <Compile Include="LayersConverter.cs" />
     <Compile Include="NoteConverter.cs" />
