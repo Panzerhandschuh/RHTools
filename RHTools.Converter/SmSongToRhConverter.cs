@@ -33,16 +33,20 @@ namespace RHTools.Converter
 			cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
 		}
 
-		// TODO: Consider making all converters override a Convert() method
-		public void Convert()
+		// TODO: Consider making all converters override a Convert<T>() method
+		public RhAssets Convert()
 		{
-			RhGuid oggGuid = ConvertOgg();
-			RhGuid pngGuid = ConvertPng();
-			RhsFile rhsFile = ConvertRhs(oggGuid, pngGuid);
-			List<RhcFile> rhcFiles = ConvertRhc(rhsFile);
-			ConvertRhg(pngGuid, rhcFiles);
+			RhAssets assets = new RhAssets();
+
+			assets.oggGuid = ConvertOgg();
+			assets.pngGuid = ConvertPng();
+			assets.rhsFile = ConvertRhs(assets.oggGuid, assets.pngGuid);
+			assets.rhcFiles = ConvertRhc(assets.rhsFile.rhsGuid);
+			assets.rhgFile = ConvertRhg(assets.pngGuid, assets.rhcFiles);
 
 			cacheFile.SerializeToFile(cachePath);
+
+			return assets;
 		}
 
 		private RhGuid ConvertOgg()
@@ -54,6 +58,7 @@ namespace RHTools.Converter
 
 			OggSynchronizer oggSynchronizer = new OggSynchronizer(cacheFile, oggGuid, 0f);
 			oggSynchronizer.Sync();
+
 			return oggGuid;
 		}
 
@@ -66,6 +71,7 @@ namespace RHTools.Converter
 
 			PngSynchronizer pngSynchronizer = new PngSynchronizer(cacheFile, pngGuid);
 			pngSynchronizer.Sync();
+
 			return pngGuid;
 		}
 
@@ -78,13 +84,14 @@ namespace RHTools.Converter
 
 			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, smFile.artist);
 			rhsSynchronizer.Sync();
+
 			return rhsFile;
 		}
 
-		private List<RhcFile> ConvertRhc(RhsFile rhsFile)
+		private List<RhcFile> ConvertRhc(RhGuid rhsGuid)
 		{
 			RhcConverter rhcConverter = new RhcConverter();
-			List<RhcFile> rhcFiles = rhcConverter.Convert(smFile, rhsFile.rhsGuid, smFile.credit);
+			List<RhcFile> rhcFiles = rhcConverter.Convert(smFile, rhsGuid, smFile.credit);
 			foreach (RhcFile rhcFile in rhcFiles)
 			{
 				string rhcPath = Path.Combine(rhDir, rhcFile.rhcGuid.ToString()) + ".rhc";
@@ -97,7 +104,7 @@ namespace RHTools.Converter
 			return rhcFiles;
 		}
 
-		private void ConvertRhg(RhGuid pngGuid, List<RhcFile> rhcFiles)
+		private RhgFile ConvertRhg(RhGuid pngGuid, List<RhcFile> rhcFiles)
 		{
 			RhgConverter rhgConverter = new RhgConverter();
 			RhgFile rhgFile = rhgConverter.Convert(pngGuid, packName, rhcFiles);
@@ -106,6 +113,8 @@ namespace RHTools.Converter
 
 			RhgSynchronizer rhgSynchronizer = new RhgSynchronizer(cacheFile, rhgFile);
 			rhgSynchronizer.Sync();
+
+			return rhgFile;
 		}
 	}
 }

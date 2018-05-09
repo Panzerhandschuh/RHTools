@@ -82,6 +82,7 @@
     <Compile Include="RH\RHPROJ\RhprojRhsEntryType.cs" />
     <Compile Include="RH\RHS\RhsEntryType.cs" />
     <Compile Include="RH\RHS\RhsFile.cs" />
+    <Compile Include="RH\Tabs\TabsFile.cs" />
     <Compile Include="RH\TimingData.cs" />
     <Compile Include="RH\TimingDataEntry.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />

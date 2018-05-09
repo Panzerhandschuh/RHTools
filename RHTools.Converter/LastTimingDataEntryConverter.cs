@@ -10,13 +10,23 @@ namespace RHTools.Converter
 {
 	public class LastTimingDataEntryConverter
 	{
-		public LastTimingDataEntry Convert(SmFile smFile)
+		const int bpmConst = 1024;
+
+		public LastTimingDataEntry Convert(Bpm bpm, DisplayBpm displayBpm)
 		{
 			LastTimingDataEntry entry = new LastTimingDataEntry();
 
-			entry.bpmMultiplier = 142335.8f; // Fake value
-			entry.displayStartBpm = -1; // Fake value
-			entry.displayEndBpm = -1; // Fake value
+			entry.bpmMultiplier = bpm.bpm * bpmConst;
+			if (displayBpm != null)
+			{
+				entry.displayMinBpm = displayBpm.minBpm;
+				entry.displayMaxBpm = displayBpm.maxBpm;
+			}
+			else
+			{
+				entry.displayMinBpm = -1f;
+				entry.displayMaxBpm = -1f;
+			}
 
 			return entry;
 		}

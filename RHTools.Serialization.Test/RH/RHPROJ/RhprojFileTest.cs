@@ -12,7 +12,8 @@ namespace RHTools.Serialization.Test.RH
 	[TestClass]
 	public class RhprojFileTest
 	{
-		const string backupDir = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Backup";
+		const string gameDir = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
+		const string backupDir = gameDir + @"\Backup";
 
 		[TestMethod]
 		public void ReadRhprojFile()
@@ -47,19 +48,18 @@ namespace RHTools.Serialization.Test.RH
 		[TestMethod]
 		public void EditRhprojData()
 		{
-			const string testFile = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Backup\01c19d82-d894-453c-9cbf-e65b70540926.rhproj";
-
+			string testFile = Path.Combine(backupDir, "f6e66110-bac2-4bf8-ae13-65b40ea2bb3a.rhproj");
 			RhprojFile file = ReadRhprojFile(testFile);
 
-			RhsFile rhsFile = file.rhsFile;
-			rhsFile.songTitle = "[Tech::Lo] Test";
-			rhsFile.songLengthOverride = 25f;
+			string rhcPath = Path.Combine(gameDir, "df76ece8-b8f9-1a41-9651-01bbcb3308f0.rhc");
+			RhcFile rhcFile = IBinarySerializableExtensions.Deserialize(rhcPath, RhcFile.Deserialize);
 
-			TimingData timingData = rhsFile.timingData;
-			timingData.offsetMultiplier = 0;
+			file.rhcFile = rhcFile;
 
-			List<TimingDataEntry> entries = timingData.entries;
-			entries[0].startBpm *= 2;
+			string rhsPath = Path.Combine(gameDir, "e10133c1-a7eb-f749-9c03-95591ad0e5ae.rhs");
+			RhsFile rhsFile = IBinarySerializableExtensions.Deserialize(rhsPath, RhsFile.Deserialize);
+
+			file.rhsFile = rhsFile;
 
 			file.SerializeToFile(testFile);
 		}

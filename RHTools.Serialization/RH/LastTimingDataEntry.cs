@@ -10,14 +10,14 @@ namespace RHTools.Serialization.RH
 	public class LastTimingDataEntry : IBinarySerializable
 	{
 		public float bpmMultiplier; // This value / 1024 = actual bpm
-		public float displayStartBpm; // Setting this to -1 might hide the display bpm
-		public float displayEndBpm; // Setting this to -1 might hide the display bpm
+		public float displayMinBpm; // Setting this to -1 might hide the display bpm
+		public float displayMaxBpm; // Setting this to -1 might hide the display bpm
 
 		public void Serialize(BinaryWriter writer)
 		{
 			writer.Write(bpmMultiplier);
-			writer.Write(displayStartBpm);
-			writer.Write(displayEndBpm);
+			writer.Write(displayMinBpm);
+			writer.Write(displayMaxBpm);
 		}
 
 		public static LastTimingDataEntry Deserialize(BinaryReader reader)
@@ -25,8 +25,8 @@ namespace RHTools.Serialization.RH
 			LastTimingDataEntry entry = new LastTimingDataEntry();
 
 			entry.bpmMultiplier = reader.ReadSingle();
-			entry.displayStartBpm = reader.ReadSingle();
-			entry.displayEndBpm = reader.ReadSingle();
+			entry.displayMinBpm = reader.ReadSingle();
+			entry.displayMaxBpm = reader.ReadSingle();
 
 			return entry;
 		}

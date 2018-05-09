@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="SmSongToRhConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmSongToRhprojConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

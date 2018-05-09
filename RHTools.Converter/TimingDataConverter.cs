@@ -10,14 +10,18 @@ namespace RHTools.Converter
 {
 	public class TimingDataConverter
 	{
+		public float offsetConst = 44100f; // Uncertain if this is the exact value, but it matches a common music sampling rate
+
 		public TimingData Convert(SmFile smFile)
 		{
 			TimingData data = new TimingData();
 
 			data.unknown1 = 0; // Fake value
-			data.offsetMultiplier = 0; // Fake value
-			data.entries.Add(new TimingDataEntryConverter().Convert(smFile));
-			data.lastEntry = new LastTimingDataEntryConverter().Convert(smFile);
+			data.offsetMultiplier = (long)(-smFile.offset * offsetConst);
+			//data.entries.Add(new TimingDataEntryConverter().Convert(smFile));
+			Bpm bpm = smFile.bpms.bpms.First();
+			DisplayBpm displayBpm = smFile.displayBpm;
+			data.lastEntry = new LastTimingDataEntryConverter().Convert(bpm, displayBpm);
 
 			return data;
 		}
