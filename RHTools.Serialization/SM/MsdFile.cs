@@ -36,12 +36,11 @@ namespace RHTools.Serialization.SM
 		{
 			List<string> tags = new List<string>();
 
-			char[] data = text.ToCharArray();
+			string formattedText = FormatText(text);
+			char[] data = formattedText.ToCharArray();
+
 			for (int i = 0; i < data.Length; i++)
 			{
-				if (IsStartOfComment(data, i))
-					i = FindEndOfComment(data, i);
-
 				if (IsStartOfTag(data, i))
 					i = ReadTag(tags, data, i);
 			}
@@ -49,14 +48,28 @@ namespace RHTools.Serialization.SM
 			return tags;
 		}
 
-		private static bool IsStartOfComment(char[] data, int i)
+		/// <summary>
+		/// Removes comments, whitespace, and empty lines from the specified text
+		/// </summary>
+		private static string FormatText(string text)
 		{
-			return i + 1 < data.Length && data[i] == '/' && data[i + 1] == '/';
+			string[] lines = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+			List<string> validLines = new List<string>();
+			foreach (string line in lines)
+			{
+				string formattedLine = FormatLine(line);
+				if (!string.IsNullOrEmpty(formattedLine))
+					validLines.Add(formattedLine);
+			}
+
+			return string.Join(Environment.NewLine, validLines);
 		}
 
-		private static int FindEndOfComment(char[] data, int i)
+		private static string FormatLine(string line)
 		{
-			return FindChar(data, i, '\n');
+			int commentIndex = line.IndexOf("//");
+			string formattedLine = (commentIndex != -1) ? line.Substring(0, commentIndex) : line;
+			return formattedLine.Trim();
 		}
 
 		private static bool IsStartOfTag(char[] data, int i)
