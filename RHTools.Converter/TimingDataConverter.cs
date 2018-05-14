@@ -18,9 +18,13 @@ namespace RHTools.Converter
 
 			data.unknown1 = 0; // Fake value
 			data.offsetMultiplier = (long)(-smFile.offset * offsetConst);
-			//data.entries.Add(new TimingDataEntryConverter().Convert(smFile));
-			Bpm bpm = smFile.bpms.bpms.First();
+
+			Bpm bpm = smFile.bpms.bpms.SingleOrDefault();
+			if (bpm == null)
+				throw new NotSupportedException("Simfiles with multiple BPM changes are not currently supported.");
+
 			DisplayBpm displayBpm = smFile.displayBpm;
+			//data.entries.Add(new TimingDataEntryConverter().Convert(smFile));
 			data.lastEntry = new LastTimingDataEntryConverter().Convert(bpm, displayBpm);
 
 			return data;

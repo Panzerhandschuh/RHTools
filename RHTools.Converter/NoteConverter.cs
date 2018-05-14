@@ -103,16 +103,20 @@ namespace RHTools.Converter
 		{
 			List<BeatNotes> beatNotesList = new List<BeatNotes>();
 
-			int beat = 0;
-			foreach (Measure measure in measures)
+			for (int i = 0; i < measures.Count; i++)
 			{
-				int beatIncrement = 4000 / measure.lines.Count;
-				foreach (Line line in measure.lines)
+				Measure measure = measures[i];
+				int measureBeat = i * 4000;
+
+				List<Line> lines = measure.lines;
+				for (int j = 0; j < lines.Count; j++)
 				{
+					Line line = lines[j];
+					int lineBeat = (j * 4000) / lines.Count;
+					int beat = measureBeat + lineBeat;
+
 					List<SmNoteType> notes = line.notes;
 					beatNotesList.Add(new BeatNotes(beat, notes));
-
-					beat += beatIncrement;
 				}
 			}
 
