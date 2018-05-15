@@ -10,19 +10,19 @@ namespace RHTools.Serialization.SM
     // Full list of tags: https://github.com/stepmania/stepmania/blob/4df85929cc2e41ef8c24bddea17d90fe44fb2807/src/NotesLoaderSM.cpp#L217
     public class SmFile : ITextSerializable
 	{
-        public string title;
-        public string subtitle;
-        public string artist;
-        public string titleTranslit; // Translation
-        public string subtitleTranslit;
-        public string artistTranslit;
-        public string genre;
-        public string credit;
-        public string banner;
-        public string background;
-        public string lyricsPath;
-        public string cdTitle;
-        public string music;
+        public string title = "";
+        public string subtitle = "";
+        public string artist = "";
+        public string titleTranslit = ""; // Translation
+        public string subtitleTranslit = "";
+        public string artistTranslit = "";
+        public string genre = "";
+        public string credit = "";
+        public string banner = "";
+        public string background = "";
+        public string lyricsPath = "";
+        public string cdTitle = "";
+        public string music = "";
         public float offset;
         public Bpms bpms;
         public Stops stops;
