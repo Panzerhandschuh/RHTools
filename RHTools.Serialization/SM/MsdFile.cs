@@ -72,11 +72,6 @@ namespace RHTools.Serialization.SM
 			return formattedLine.Trim();
 		}
 
-		private static bool IsStartOfTag(char[] data, int i)
-		{
-			return data[i] == '#';
-		}
-
 		private static int ReadTag(List<string> tags, char[] data, int i)
 		{
 			i++;
@@ -93,16 +88,28 @@ namespace RHTools.Serialization.SM
 
 		private static int FindEndOfTag(char[] data, int i)
 		{
-			return FindChar(data, i, ';');
-		}
-
-		private static int FindChar(char[] data, int i, char c)
-		{
-			do
+			while (i < data.Length)
 			{
 				i++;
-			} while (i < data.Length && data[i] != c);
+
+				if (IsEndOfTag(data, i))
+					return i;
+
+				if (IsStartOfTag(data, i))
+					return i - 1;
+			}
+
 			return i;
+		}
+
+		private static bool IsStartOfTag(char[] data, int i)
+		{
+			return data[i] == '#';
+		}
+
+		private static bool IsEndOfTag(char[] data, int i)
+		{
+			return data[i] == ';';
 		}
 
 		private static List<MsdValue> ReadMsdValues(List<string> tags)
