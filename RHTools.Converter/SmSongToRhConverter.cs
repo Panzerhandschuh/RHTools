@@ -39,7 +39,8 @@ namespace RHTools.Converter
 			RhAssets assets = new RhAssets();
 
 			assets.oggGuid = ConvertOgg();
-			assets.pngGuid = ConvertPng();
+			// TODO: Force pngs to power of 2 dimensions
+			assets.pngGuid = new RhGuid();//ConvertPng();
 			assets.rhsFile = ConvertRhs(assets.oggGuid, assets.pngGuid);
 			assets.rhcFiles = ConvertRhc(assets.rhsFile.rhsGuid);
 			assets.rhgFile = ConvertRhg(assets.pngGuid, assets.rhcFiles);
