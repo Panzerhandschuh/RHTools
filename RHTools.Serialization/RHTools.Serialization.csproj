@@ -50,7 +50,6 @@
     <Compile Include="RH\Artist.cs" />
     <Compile Include="RH\ArtistType.cs" />
     <Compile Include="RH\Cache\Synchronizers\CacheSynchronizer.cs" />
-    <Compile Include="RH\Cache\Synchronizers\CacheSynchronizerOld.cs" />
     <Compile Include="RH\Cache\OggCacheEntry.cs" />
     <Compile Include="RH\Cache\CacheFile.cs" />
     <Compile Include="RH\Cache\CacheEntryType.cs" />

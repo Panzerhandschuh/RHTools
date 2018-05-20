@@ -12,12 +12,12 @@ namespace RHTools.Converter
 	{
 		public float offsetConst = 44100f; // Uncertain if this is the exact value, but it matches a common music sampling rate
 
-		public TimingData Convert(SmFile smFile)
+		public TimingData Convert(SmFile smFile, float songOffset)
 		{
 			TimingData data = new TimingData();
 
 			data.unknown1 = 0; // Fake value
-			data.offsetMultiplier = (long)(-smFile.offset * offsetConst);
+			data.offsetMultiplier = (long)(-(smFile.offset + songOffset) * offsetConst);
 
 			Bpm bpm = smFile.bpms.bpms.SingleOrDefault();
 			if (bpm == null)

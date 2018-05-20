@@ -1,4 +1,5 @@
-﻿using RHTools.Serialization;
+﻿using RHTools.Converter.Synchronizers;
+using RHTools.Serialization;
 using RHTools.Serialization.RH;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,17 @@ namespace RHTools.Converter
 		private string rhDir;
 		private SmSongToRhConverter converter;
 
-		public SmSongToRhprojConverter(string smSongDir, string rhDir, string packName = "Converted")
+		public SmSongToRhprojConverter(string smSongDir, string rhDir, float songOffset)
 		{
 			this.rhDir = rhDir;
 
-			converter = new SmSongToRhConverter(smSongDir, rhDir, packName);
+			converter = new SmSongToRhConverter(smSongDir, rhDir, songOffset);
 		}
 
 		public void Convert()
 		{
-			RhAssets assets = converter.Convert();
+			RhSongAssets assets = converter.Convert();
+			SyncSongAssetsToCache(rhDir, assets);
 
 			RhprojConverter rhprojConverter = new RhprojConverter();
 			List<RhprojFile> rhprojFiles = rhprojConverter.Convert(assets.rhsFile, assets.rhcFiles);
@@ -42,6 +44,17 @@ namespace RHTools.Converter
 			}
 
 			tabsFile.SerializeToFile(tabsPath);
+		}
+
+		private void SyncSongAssetsToCache(string rhDir, RhSongAssets assets)
+		{
+			string cachePath = Path.Combine(rhDir, "cache");
+			CacheFile cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
+
+			RhSongAssetsSynchronizer songSynchronizer = new RhSongAssetsSynchronizer(cacheFile, assets);
+			songSynchronizer.Sync();
+
+			cacheFile.SerializeToFile(cachePath);
 		}
 	}
 }

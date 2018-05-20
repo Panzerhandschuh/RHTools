@@ -46,14 +46,17 @@
     <Compile Include="LayersConverter.cs" />
     <Compile Include="NoteConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RhAssets.cs" />
+    <Compile Include="RhSongAssets.cs" />
     <Compile Include="RhcConverter.cs" />
     <Compile Include="RhgConverter.cs" />
+    <Compile Include="RhPackAssets.cs" />
     <Compile Include="RhprojConverter.cs" />
     <Compile Include="RhsConverter.cs" />
     <Compile Include="SmPackToRhConverter.cs" />
     <Compile Include="SmSongToRhConverter.cs" />
     <Compile Include="SmSongToRhprojConverter.cs" />
+    <Compile Include="Synchronizers\RhPackAssetsSynchronizer.cs" />
+    <Compile Include="Synchronizers\RhSongAssetsSynchronizer.cs" />
     <Compile Include="TimingDataConverter.cs" />
     <Compile Include="TimingDataEntryConverter.cs" />
   </ItemGroup>

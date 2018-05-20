@@ -10,13 +10,14 @@ namespace RHTools.Converter.Test
 	[TestClass]
 	public class SmSongToRhprojConverterTest
 	{
-		const string smPath = @"D:\Program Files (x86)\OpenITG\Songs\Tachyon Epsilon\Smiting Down the Weak - [Zeph + Zaia]";
+		const float songOffset = -0.009f;
+		const string smPath = @"D:\Program Files (x86)\OpenITG\Songs\Tachyon Epsilon\Fighting The Inhuman - [Mad Matt]";
 		const string rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
 
 		[TestMethod]
 		public void ConvertSmSongToRhproj()
 		{
-			SmSongToRhprojConverter converter = new SmSongToRhprojConverter(smPath, rhPath);
+			SmSongToRhprojConverter converter = new SmSongToRhprojConverter(smPath, rhPath, songOffset);
 			converter.Convert();
 		}
 	}

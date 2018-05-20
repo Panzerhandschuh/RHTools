@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace RHTools.Converter
 {
-	public class RhAssets
+	public class RhSongAssets
 	{
 		public RhGuid oggGuid;
 		public RhGuid pngGuid;
 		public RhsFile rhsFile;
 		public List<RhcFile> rhcFiles;
-		public RhgFile rhgFile;
 	}
 }

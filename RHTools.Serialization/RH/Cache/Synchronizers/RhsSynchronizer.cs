@@ -9,12 +9,10 @@ namespace RHTools.Serialization.RH
 	public class RhsSynchronizer : CacheSynchronizer<RhsCacheEntry>
 	{
 		private RhsFile rhsFile;
-		private string displayArtist;
 
-		public RhsSynchronizer(CacheFile cacheFile, RhsFile rhsFile, string displayArtist) : base(cacheFile)
+		public RhsSynchronizer(CacheFile cacheFile, RhsFile rhsFile) : base(cacheFile)
 		{
 			this.rhsFile = rhsFile;
-			this.displayArtist = displayArtist;
 		}
 
 		protected override void AddEntry(RhsCacheEntry entry)
@@ -39,7 +37,7 @@ namespace RHTools.Serialization.RH
 			entry.previewLength = rhsFile.previewLength;
 			entry.songLengthOverride = rhsFile.songLengthOverride;
 			entry.artists = rhsFile.artists;
-			entry.displayArtist = displayArtist;
+			entry.displayArtist = rhsFile.artists.FirstOrDefault()?.artist ?? "";
 		}
 	}
 }

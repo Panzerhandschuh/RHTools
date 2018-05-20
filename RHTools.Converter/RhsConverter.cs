@@ -10,7 +10,7 @@ namespace RHTools.Converter
 {
 	public class RhsConverter
 	{
-		public RhsFile Convert(SmFile smFile, RhGuid oggGuid, RhGuid pngGuid)
+		public RhsFile Convert(SmFile smFile, RhGuid oggGuid, RhGuid pngGuid, float songOffset)
 		{
 			RhsFile rhsFile = new RhsFile();
 
@@ -18,10 +18,10 @@ namespace RHTools.Converter
 			rhsFile.internalGuid = new RhGuid();
 			rhsFile.oggGuid = oggGuid;
 			rhsFile.songTitle = smFile.title;
-			rhsFile.timingData = new TimingDataConverter().Convert(smFile);
+			rhsFile.timingData = new TimingDataConverter().Convert(smFile, songOffset);
 			rhsFile.previewStart = smFile.sampleStart;
 			rhsFile.previewLength = smFile.sampleLength;
-			rhsFile.songLengthOverride = -1f; // Always set to -1 or 177 in existing game files
+			rhsFile.songLengthOverride = -1f; // TODO: Consider using the beat of the last note (+ some padding)
 			rhsFile.pngGuid = pngGuid;
 			rhsFile.artists.Add(new Artist(smFile.artist, ArtistType.Artist));
 
