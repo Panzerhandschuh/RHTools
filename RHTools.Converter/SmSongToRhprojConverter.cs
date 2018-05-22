@@ -40,7 +40,7 @@ namespace RHTools.Converter
 				string destPath = Path.Combine(rhDir, "Backup", filename);
 				rhprojFile.SerializeToFile(destPath);
 
-				tabsFile.rhprojFileGuids.Add(rhcGuid);
+				tabsFile.rhprojFileGuids.Insert(0, rhcGuid);
 			}
 
 			tabsFile.SerializeToFile(tabsPath);
