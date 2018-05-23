@@ -22,7 +22,7 @@ namespace RHTools.Serialization.Test.RH
 
 			rhsFile.internalGuid = new RhGuid();
 			rhsFile.timingData.offsetMultiplier = 0;
-			rhsFile.timingData.entries[0].startBpm /= 2;
+			//rhsFile.timingData.entries[0].startBpm /= 2;
 			//rhsFile.pngGuid = new RhGuid(new byte[] { 38, 202, 1, 86, 253, 228, 71, 86, 152, 232, 0, 213, 9, 179, 44, 201 });
 			rhsFile.SerializeToFile(rhsPath);
 
@@ -30,7 +30,7 @@ namespace RHTools.Serialization.Test.RH
 			RhGuid rhsGuid = new RhGuid(new byte[] { 0x01, 0x74, 0xee, 0xd2, 0x86, 0x58, 0x4b, 0x48, 0x87, 0xe4, 0x7e, 0x5f, 0x07, 0x53, 0xb7, 0x9d });
 			CacheFile cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
 
-			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile, rhsFile.artists.First().artist);
+			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, rhsFile);
 			rhsSynchronizer.Sync();
 			
 			cacheFile.SerializeToFile(cachePath);
