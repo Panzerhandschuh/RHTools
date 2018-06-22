@@ -36,7 +36,7 @@ namespace RHTools.Converter
 			}
 
 			packAssets.pngGuid = ConvertPng();
-			IEnumerable<RhGuid> rhcGuids = packAssets.songAssetList.SelectMany(x => x.rhcFiles).Select(x => x.rhcGuid);
+			IEnumerable<RhGuid> rhcGuids = packAssets.songAssetList.SelectMany(x => x.rhcFiles.Select(y => y.rhcGuid));
 			packAssets.rhgFile = ConvertRhg(packAssets.pngGuid, rhcGuids);
 
 			return packAssets;
