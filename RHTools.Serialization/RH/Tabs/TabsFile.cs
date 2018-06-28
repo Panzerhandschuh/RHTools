@@ -9,7 +9,7 @@ namespace RHTools.Serialization.RH
 {
 	public class TabsFile : IBinarySerializable
 	{
-		byte version;
+		private byte version;
 		public List<RhGuid> rhprojFileGuids;
 
 		public TabsFile()

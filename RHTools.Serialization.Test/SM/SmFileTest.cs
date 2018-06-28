@@ -13,8 +13,8 @@ namespace RHTools.Serialization.Test.SM
 	[TestClass]
 	public class SmFileTest
 	{
-		const string smFilePath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Butterfly.sm";
-		const string smPath = @"D:\Program Files (x86)\Stepmania 3.95\Songs";
+		private const string smFilePath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Butterfly.sm";
+		private const string smPath = @"D:\Program Files (x86)\Stepmania 3.95\Songs";
 
 		[TestMethod]
 		public void ReadSmFiles()

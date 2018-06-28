@@ -10,9 +10,9 @@ namespace RHTools.Converter.Test
 	[TestClass]
 	public class SmSongToRhprojConverterTest
 	{
-		const float songOffset = -0.009f;
-		const string smPath = @"D:\Program Files (x86)\Stepmania 3.95\Songs\Bearpocalypse\My Insomnias - [Arvin]";
-		const string rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
+		private const float songOffset = -0.009f;
+		private const string smPath = @"D:\Program Files (x86)\Stepmania 3.95\Songs\Bearpocalypse\My Insomnias - [Arvin]";
+		private const string rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
 
 		[TestMethod]
 		public void ConvertSmSongToRhproj()

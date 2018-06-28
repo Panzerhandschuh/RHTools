@@ -12,7 +12,7 @@ namespace RHTools.Serialization.Test.RH
 	[TestClass]
 	public class RhgFileTest
 	{
-		const string gameDir = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
+		private const string gameDir = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
 
 		[TestMethod]
 		public void ReadRhgFiles()

@@ -10,8 +10,8 @@ namespace RHTools.Converter
 {
 	public static class ChartExtensions
 	{
-		const NoteFlags Pad1 = NoteFlags.Pad1Left | NoteFlags.Pad1Down | NoteFlags.Pad1Up | NoteFlags.Pad1Right;
-		const NoteFlags Pad2 = NoteFlags.Pad2Left | NoteFlags.Pad2Down | NoteFlags.Pad2Up | NoteFlags.Pad2Right;
+		private const NoteFlags Pad1 = NoteFlags.Pad1Left | NoteFlags.Pad1Down | NoteFlags.Pad1Up | NoteFlags.Pad1Right;
+		private const NoteFlags Pad2 = NoteFlags.Pad2Left | NoteFlags.Pad2Down | NoteFlags.Pad2Up | NoteFlags.Pad2Right;
 
 		public static PadConfiguration GetPadConfiguration(this Chart chart)
 		{

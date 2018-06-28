@@ -9,7 +9,7 @@ namespace RHTools.Serialization.Test.RH
 	[TestClass]
 	public class CacheFileTest
 	{
-		const string cacheFilePath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\cache";
+		private const string cacheFilePath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\cache";
 
 		[TestMethod]
 		public void ReadCacheFile()

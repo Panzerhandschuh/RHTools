@@ -12,7 +12,7 @@ namespace RHTools.Serialization.Test.RH
 	[TestClass]
 	public class RhTest
 	{
-		const string rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
+		private const string rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
 
 		[TestMethod]
 		public void EditTimingData()

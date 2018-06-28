@@ -12,8 +12,8 @@ namespace RHTools.Serialization.Test.RH
 	[TestClass]
 	public class RhprojFileTest
 	{
-		const string gameDir = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
-		const string backupDir = gameDir + @"\Backup";
+		private const string gameDir = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
+		private const string backupDir = gameDir + @"\Backup";
 
 		[TestMethod]
 		public void ReadRhprojFile()

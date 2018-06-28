@@ -10,7 +10,7 @@ namespace RHTools.Converter
 {
 	public class LastTimingDataEntryConverter
 	{
-		const int bpmConst = 1024;
+		private const int bpmConst = 1024;
 
 		public LastTimingDataEntry Convert(Bpm bpm, DisplayBpm displayBpm)
 		{

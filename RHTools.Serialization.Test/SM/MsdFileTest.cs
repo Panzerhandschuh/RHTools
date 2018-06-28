@@ -12,7 +12,7 @@ namespace RHTools.Serialization.Test.SM
 	[TestClass]
 	public class MsdFileTest
 	{
-		const string msdFilePath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Butterfly.sm";
+		private const string msdFilePath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\Butterfly.sm";
 
 		[TestMethod]
 		public void ReadMsdFile()
