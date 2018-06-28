@@ -12,7 +12,7 @@ namespace RHTools.Converter
 	{
 		public RhsFile Convert(SmFile smFile, RhGuid oggGuid, RhGuid pngGuid, float songOffset)
 		{
-			RhsFile rhsFile = new RhsFile();
+			var rhsFile = new RhsFile();
 
 			rhsFile.rhsGuid = RhGuid.NewGuid();
 			rhsFile.internalGuid = new RhGuid();

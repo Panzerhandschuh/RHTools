@@ -12,7 +12,7 @@ namespace RHTools.Converter.Test
 		[TestMethod]
 		public void ConvertSmSongToRh()
 		{
-			SmSongToRhConverter converter = new SmSongToRhConverter(smPath, rhPath);
+			var converter = new SmSongToRhConverter(smPath, rhPath);
 			converter.Convert();
 		}
 	}

@@ -20,13 +20,13 @@ namespace RHTools.Converter.Synchronizers
 
 		public void Sync()
 		{
-			foreach (RhSongAssets songAssets in assets.songAssetList)
+			foreach (var songAssets in assets.songAssetList)
 			{
-				RhSongAssetsSynchronizer songSynchronizer = new RhSongAssetsSynchronizer(cacheFile, songAssets);
+				var songSynchronizer = new RhSongAssetsSynchronizer(cacheFile, songAssets);
 				songSynchronizer.Sync();
 			}
 
-			RhgSynchronizer rhgSynchronizer = new RhgSynchronizer(cacheFile, assets.rhgFile);
+			var rhgSynchronizer = new RhgSynchronizer(cacheFile, assets.rhgFile);
 			rhgSynchronizer.Sync();
 		}
 	}

@@ -25,12 +25,12 @@ namespace RHTools.Serialization.SM
 
         public static BackgroundChange Deserialize(string changeValue)
         {
-            BackgroundChange change = new BackgroundChange();
+            var change = new BackgroundChange();
 
-            string[] values = changeValue.Split('=').Select(x => x.Trim()).ToArray();
-            for (int i = 0; i < values.Length; i++)
+            var values = changeValue.Split('=').Select(x => x.Trim()).ToArray();
+            for (var i = 0; i < values.Length; i++)
             {
-                string value = values[i];
+                var value = values[i];
                 switch (i)
                 {
                     case 0:
@@ -89,10 +89,10 @@ namespace RHTools.Serialization.SM
 
         public static BackgroundChanges Deserialize(List<string> parameters)
         {
-            BackgroundChanges changes = new BackgroundChanges();
+            var changes = new BackgroundChanges();
 
-            string[] bgChangeValues = parameters[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string bgChangeValue in bgChangeValues)
+            var bgChangeValues = parameters[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var bgChangeValue in bgChangeValues)
                 changes.changes.Add(BackgroundChange.Deserialize(bgChangeValue));
 
             return changes;

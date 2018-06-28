@@ -53,7 +53,7 @@ namespace RHTools.Serialization.RH
 
 		public static Layer Deserialize(BinaryReader reader)
 		{
-			Layer layer = new Layer();
+			var layer = new Layer();
 
 			layer.unknown1 = reader.ReadBytes(2);
 			layer.layerName = reader.ReadShortPrefixedString();
@@ -89,7 +89,7 @@ namespace RHTools.Serialization.RH
 		{
 			if (layer.panelConfig.HasFlag(flags))
 			{
-				List<Note> notes = reader.ReadList(Note.Deserialize);
+				var notes = reader.ReadList(Note.Deserialize);
 				layer.notes.Add(flags, notes);
 			}
 		}

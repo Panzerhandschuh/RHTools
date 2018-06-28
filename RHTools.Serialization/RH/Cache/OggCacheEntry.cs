@@ -23,7 +23,7 @@ namespace RHTools.Serialization.RH
 
 		public static OggCacheEntry Deserialize(BinaryReader reader)
 		{
-			OggCacheEntry entry = new OggCacheEntry();
+			var entry = new OggCacheEntry();
 
 			reader.ReadByte(); // Always 4
 			entry.oggGuid = reader.ReadRhGuid();

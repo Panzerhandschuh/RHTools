@@ -11,9 +11,9 @@ namespace RHTools.Converter
 	{
 		public List<RhprojFile> Convert(RhsFile rhsFile, List<RhcFile> rhcFiles)
 		{
-			List<RhprojFile> rhprojFiles = new List<RhprojFile>();
+			var rhprojFiles = new List<RhprojFile>();
 
-			foreach (RhcFile rhcFile in rhcFiles)
+			foreach (var rhcFile in rhcFiles)
 				rhprojFiles.Add(ConvertRhprojFile(rhsFile, rhcFile));
 
 			return rhprojFiles;
@@ -21,7 +21,7 @@ namespace RHTools.Converter
 
 		private static RhprojFile ConvertRhprojFile(RhsFile rhsFile, RhcFile rhcFile)
 		{
-			RhprojFile rhprojFile = new RhprojFile();
+			var rhprojFile = new RhprojFile();
 
 			rhprojFile.unknown1 = 0;
 			rhprojFile.rhsFile = rhsFile;

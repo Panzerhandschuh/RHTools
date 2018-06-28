@@ -23,9 +23,9 @@ namespace RHTools.Serialization.SM
 
         public static Line Deserialize(string lineValue)
         {
-            Line line = new Line();
+            var line = new Line();
 
-            foreach (char noteValue in lineValue)
+            foreach (var noteValue in lineValue)
                 line.notes.Add(GetNoteType(noteValue));
 
             return line;

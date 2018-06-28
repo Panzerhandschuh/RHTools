@@ -45,7 +45,7 @@ namespace RHTools.Serialization.RH
 
 		public static RhsFile Deserialize(BinaryReader reader)
 		{
-			RhsFile file = new RhsFile();
+			var file = new RhsFile();
 
 			file.version = reader.ReadByte();
 

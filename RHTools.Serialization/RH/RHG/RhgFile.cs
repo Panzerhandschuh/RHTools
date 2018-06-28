@@ -35,7 +35,7 @@ namespace RHTools.Serialization.RH
 
 		public static RhgFile Deserialize(BinaryReader reader)
 		{
-			RhgFile file = new RhgFile();
+			var file = new RhgFile();
 
 			file.version = reader.ReadByte();
 

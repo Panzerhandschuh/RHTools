@@ -12,7 +12,7 @@ namespace RHTools.Serialization
 		public static void SerializeToFile(this IBinarySerializable obj, string path)
 		{
 			using (Stream stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Write))
-			using (BinaryWriter writer = new BinaryWriter(stream))
+			using (var writer = new BinaryWriter(stream))
 			{
 				obj.Serialize(writer);
 			}
@@ -20,8 +20,8 @@ namespace RHTools.Serialization
 
 		public static byte[] SerializeToBytes(this IBinarySerializable obj)
 		{
-			using (MemoryStream stream = new MemoryStream())
-			using (BinaryWriter writer = new BinaryWriter(stream))
+			using (var stream = new MemoryStream())
+			using (var writer = new BinaryWriter(stream))
 			{
 				obj.Serialize(writer);
 				return stream.ToArray();
@@ -31,7 +31,7 @@ namespace RHTools.Serialization
 		public static T Deserialize<T>(string path, Func<BinaryReader, T> deserializeFunc) where T : IBinarySerializable
 		{
 			using (Stream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
-			using (BinaryReader reader = new BinaryReader(stream))
+			using (var reader = new BinaryReader(stream))
 			{
 				return deserializeFunc(reader);
 			}

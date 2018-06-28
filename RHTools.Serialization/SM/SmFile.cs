@@ -46,13 +46,13 @@ namespace RHTools.Serialization.SM
 
         public static SmFile Deserialize(StreamReader reader)
         {
-            SmFile file = new SmFile();
+            var file = new SmFile();
 
-            MsdFile msdFile = MsdFile.Deserialize(reader);
-            foreach (MsdValue value in msdFile.values)
+            var msdFile = MsdFile.Deserialize(reader);
+            foreach (var value in msdFile.values)
             {
-                List<string> parameters = value.parameters;
-                string tag = parameters[0].ToUpper();
+                var parameters = value.parameters;
+                var tag = parameters[0].ToUpper();
                 switch (tag)
                 {
                     case "TITLE":

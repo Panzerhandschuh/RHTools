@@ -17,28 +17,28 @@ namespace RHTools.Serialization.Test.RH
 		[TestMethod]
 		public void ReadRhcFile()
 		{
-			RhcFile file = ReadRhcFile(@"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\833abd96-38d3-4b6e-bcf7-d19249e328c6.rhc");
+			var file = ReadRhcFile(@"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\833abd96-38d3-4b6e-bcf7-d19249e328c6.rhc");
 		}
 
 		[TestMethod]
 		public void ReadRhcFiles()
 		{
-			string[] files = Directory.GetFiles(gameDir, "*.rhc");
-			List<RhcFile> rhcFiles = new List<RhcFile>();
-			foreach (string file in files)
+			var files = Directory.GetFiles(gameDir, "*.rhc");
+			var rhcFiles = new List<RhcFile>();
+			foreach (var file in files)
 				rhcFiles.Add(ReadRhcFile(file));
 		}
 
 		[TestMethod]
 		public void WriteRhcFileBytesEqualsOriginalRhcFileBytes()
 		{
-			string[] files = Directory.GetFiles(gameDir, "*.rhc");
-			foreach (string file in files)
+			var files = Directory.GetFiles(gameDir, "*.rhc");
+			foreach (var file in files)
 			{
-				RhcFile rhcFile = ReadRhcFile(file);
+				var rhcFile = ReadRhcFile(file);
 
-				byte[] writeBytes = rhcFile.SerializeToBytes();
-				byte[] originalBytes = File.ReadAllBytes(file);
+				var writeBytes = rhcFile.SerializeToBytes();
+				var originalBytes = File.ReadAllBytes(file);
 
 				Assert.IsTrue(Enumerable.SequenceEqual(originalBytes, writeBytes));
 			}

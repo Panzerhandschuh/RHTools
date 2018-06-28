@@ -27,7 +27,7 @@ namespace RHTools.Serialization.RH
 
 		public static Layers Deserialize(BinaryReader reader)
 		{
-			Layers layers = new Layers();
+			var layers = new Layers();
 
 			layers.unknown1 = reader.ReadByte();
 			layers.padConfig = (PadConfiguration)reader.ReadByte();

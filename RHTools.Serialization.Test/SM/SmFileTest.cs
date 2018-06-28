@@ -19,16 +19,16 @@ namespace RHTools.Serialization.Test.SM
 		[TestMethod]
 		public void ReadSmFiles()
 		{
-			string[] files = Directory.GetFiles(smPath, "*.sm", SearchOption.AllDirectories);
-			List<SmFile> smFiles = new List<SmFile>();
-			foreach (string file in files)
+			var files = Directory.GetFiles(smPath, "*.sm", SearchOption.AllDirectories);
+			var smFiles = new List<SmFile>();
+			foreach (var file in files)
 				smFiles.Add(ReadSmFile(file));
 		}
 
 		[TestMethod]
 		public void ReadSmFile()
 		{
-			SmFile file = ReadSmFile(smFilePath);
+			var file = ReadSmFile(smFilePath);
 		}
 
 		private static SmFile ReadSmFile(string path)

@@ -24,20 +24,20 @@ namespace RHTools.Converter
 
 		public void Convert()
 		{
-			RhSongAssets assets = converter.Convert();
+			var assets = converter.Convert();
 			SyncSongAssetsToCache(rhDir, assets);
 
-			RhprojConverter rhprojConverter = new RhprojConverter();
-			List<RhprojFile> rhprojFiles = rhprojConverter.Convert(assets.rhsFile, assets.rhcFiles);
+			var rhprojConverter = new RhprojConverter();
+			var rhprojFiles = rhprojConverter.Convert(assets.rhsFile, assets.rhcFiles);
 
-			string tabsPath = Path.Combine(rhDir, "Backup", "tabs");
-			TabsFile tabsFile = IBinarySerializableExtensions.Deserialize(tabsPath, TabsFile.Deserialize);
+			var tabsPath = Path.Combine(rhDir, "Backup", "tabs");
+			var tabsFile = IBinarySerializableExtensions.Deserialize(tabsPath, TabsFile.Deserialize);
 
-			foreach (RhprojFile rhprojFile in rhprojFiles)
+			foreach (var rhprojFile in rhprojFiles)
 			{
-				RhGuid rhcGuid = rhprojFile.rhcFile.rhcGuid;
-				string filename = rhcGuid.ToString() + ".rhproj";
-				string destPath = Path.Combine(rhDir, "Backup", filename);
+				var rhcGuid = rhprojFile.rhcFile.rhcGuid;
+				var filename = rhcGuid.ToString() + ".rhproj";
+				var destPath = Path.Combine(rhDir, "Backup", filename);
 				rhprojFile.SerializeToFile(destPath);
 
 				tabsFile.rhprojFileGuids.Insert(0, rhcGuid);
@@ -48,10 +48,10 @@ namespace RHTools.Converter
 
 		private void SyncSongAssetsToCache(string rhDir, RhSongAssets assets)
 		{
-			string cachePath = Path.Combine(rhDir, "cache");
-			CacheFile cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
+			var cachePath = Path.Combine(rhDir, "cache");
+			var cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
 
-			RhSongAssetsSynchronizer songSynchronizer = new RhSongAssetsSynchronizer(cacheFile, assets);
+			var songSynchronizer = new RhSongAssetsSynchronizer(cacheFile, assets);
 			songSynchronizer.Sync();
 
 			cacheFile.SerializeToFile(cachePath);

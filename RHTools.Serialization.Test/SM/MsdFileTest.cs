@@ -18,9 +18,9 @@ namespace RHTools.Serialization.Test.SM
 		public void ReadMsdFile()
 		{
 			using (Stream stream = File.Open(msdFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-			using (StreamReader reader = new StreamReader(stream))
+			using (var reader = new StreamReader(stream))
 			{
-				MsdFile file = MsdFile.Deserialize(reader);
+				var file = MsdFile.Deserialize(reader);
 			}
 		}
 	}

@@ -20,13 +20,13 @@ namespace RHTools.Serialization.RH
 		public void Serialize(BinaryWriter writer)
 		{
 			writer.Write(version);
-			foreach (RhGuid fileGuid in fileGuids)
+			foreach (var fileGuid in fileGuids)
 				writer.Write(fileGuid);
 		}
 
 		public static OnlineFile Deserialize(BinaryReader reader)
 		{
-			OnlineFile file = new OnlineFile();
+			var file = new OnlineFile();
 
 			file.version = reader.ReadByte();
 			while (reader.BaseStream.Position != reader.BaseStream.Length)

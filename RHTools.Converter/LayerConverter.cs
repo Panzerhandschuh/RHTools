@@ -12,7 +12,7 @@ namespace RHTools.Converter
 	{
 		public Layer Convert(Chart chart)
 		{
-			Layer layer = new Layer();
+			var layer = new Layer();
 
 			layer.unknown1 = new byte[] { 0, 0 }; // Fake data
 			layer.layerName = "Layer 1";

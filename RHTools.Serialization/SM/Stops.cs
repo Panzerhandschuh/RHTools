@@ -19,9 +19,9 @@ namespace RHTools.Serialization.SM
 
         public static Stop Deserialize(string stopValue)
         {
-            Stop stop = new Stop();
+            var stop = new Stop();
 
-            string[] values = stopValue.Split('=').Select(x => x.Trim()).ToArray();
+            var values = stopValue.Split('=').Select(x => x.Trim()).ToArray();
 			float.TryParse(values[0], out stop.beat);
 			float.TryParse(values[1], out stop.seconds);
 
@@ -45,10 +45,10 @@ namespace RHTools.Serialization.SM
 
         public static Stops Deserialize(List<string> parameters)
         {
-            Stops stops = new Stops();
+            var stops = new Stops();
 
-            string[] stopValues = parameters[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string stopValue in stopValues)
+            var stopValues = parameters[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var stopValue in stopValues)
                 stops.stops.Add(Stop.Deserialize(stopValue));
 
             return stops;

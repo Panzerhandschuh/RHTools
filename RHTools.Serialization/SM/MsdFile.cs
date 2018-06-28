@@ -23,10 +23,10 @@ namespace RHTools.Serialization.SM
 
 		public static MsdFile Deserialize(StreamReader reader)
 		{
-			MsdFile file = new MsdFile();
+			var file = new MsdFile();
 
-			string text = reader.ReadToEnd();
-			List<string> tags = ReadTags(text);
+			var text = reader.ReadToEnd();
+			var tags = ReadTags(text);
 			file.values = ReadMsdValues(tags);
 
 			return file;
@@ -34,12 +34,12 @@ namespace RHTools.Serialization.SM
 
 		private static List<string> ReadTags(string text)
 		{
-			List<string> tags = new List<string>();
+			var tags = new List<string>();
 
-			string formattedText = FormatText(text);
-			char[] data = formattedText.ToCharArray();
+			var formattedText = FormatText(text);
+			var data = formattedText.ToCharArray();
 
-			for (int i = 0; i < data.Length; i++)
+			for (var i = 0; i < data.Length; i++)
 			{
 				if (IsStartOfTag(data, i))
 					i = ReadTag(tags, data, i);
@@ -53,11 +53,11 @@ namespace RHTools.Serialization.SM
 		/// </summary>
 		private static string FormatText(string text)
 		{
-			string[] lines = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-			List<string> validLines = new List<string>();
-			foreach (string line in lines)
+			var lines = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+			var validLines = new List<string>();
+			foreach (var line in lines)
 			{
-				string formattedLine = FormatLine(line);
+				var formattedLine = FormatLine(line);
 				if (!string.IsNullOrEmpty(formattedLine))
 					validLines.Add(formattedLine);
 			}
@@ -67,20 +67,20 @@ namespace RHTools.Serialization.SM
 
 		private static string FormatLine(string line)
 		{
-			int commentIndex = line.IndexOf("//");
-			string formattedLine = (commentIndex != -1) ? line.Substring(0, commentIndex) : line;
+			var commentIndex = line.IndexOf("//");
+			var formattedLine = (commentIndex != -1) ? line.Substring(0, commentIndex) : line;
 			return formattedLine.Trim();
 		}
 
 		private static int ReadTag(List<string> tags, char[] data, int i)
 		{
 			i++;
-			int start = i;
+			var start = i;
 
 			i = FindEndOfTag(data, i);
-			int end = i;
+			var end = i;
 
-			string tag = new string(data, start, end - start);
+			var tag = new string(data, start, end - start);
 			tags.Add(tag);
 
 			return i;
@@ -114,11 +114,11 @@ namespace RHTools.Serialization.SM
 
 		private static List<MsdValue> ReadMsdValues(List<string> tags)
 		{
-			List<MsdValue> values = new List<MsdValue>();
+			var values = new List<MsdValue>();
 
-			foreach (string tag in tags)
+			foreach (var tag in tags)
 			{
-				List<string> parameters = tag.Split(':').Select(x => x.Trim()).ToList();
+				var parameters = tag.Split(':').Select(x => x.Trim()).ToList();
 				values.Add(new MsdValue(parameters));
 			}
 

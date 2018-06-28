@@ -20,7 +20,7 @@ namespace RHTools.Serialization.RH
 
 		public static PngCacheEntry Deserialize(BinaryReader reader)
 		{
-			PngCacheEntry entry = new PngCacheEntry();
+			var entry = new PngCacheEntry();
 
 			reader.ReadByte(); // Always 5
 			entry.pngGuid = reader.ReadRhGuid();

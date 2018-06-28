@@ -32,7 +32,7 @@ namespace RHTools.Serialization.RH
 
 		public static RhgCacheEntry Deserialize(BinaryReader reader)
 		{
-			RhgCacheEntry entry = new RhgCacheEntry();
+			var entry = new RhgCacheEntry();
 
 			// TODO: Remove duplicate logic for parsing cache entry types
 			CacheEntryType type;

@@ -30,10 +30,10 @@ namespace RHTools.Serialization.RH
 
 		public static TimingData Deserialize(BinaryReader reader)
 		{
-			TimingData data = new TimingData();
+			var data = new TimingData();
 
 			data.unknown1 = reader.ReadByte(); // Always 0?
-			int numEntries = reader.ReadInt32();
+			var numEntries = reader.ReadInt32();
 			data.offsetMultiplier = reader.ReadInt64();
 			data.entries = reader.ReadList(TimingDataEntry.Deserialize, numEntries - 1);
 			data.lastEntry = LastTimingDataEntry.Deserialize(reader);

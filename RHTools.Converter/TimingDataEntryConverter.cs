@@ -12,7 +12,7 @@ namespace RHTools.Converter
 	{
 		public TimingDataEntry Convert(SmFile smFile)
 		{
-			TimingDataEntry entry = new TimingDataEntry();
+			var entry = new TimingDataEntry();
 
 			entry.beat = 4000; // Fake value
 			entry.time = 0; // Fake value

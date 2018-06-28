@@ -35,7 +35,7 @@ namespace RHTools.Serialization.RH
 
 		public static Note Deserialize(BinaryReader reader)
 		{
-			Note note = new Note();
+			var note = new Note();
 
 			note.type = (NoteType)reader.ReadByte();
 			note.startBeat = reader.ReadInt32();

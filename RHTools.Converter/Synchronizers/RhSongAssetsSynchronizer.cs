@@ -20,18 +20,18 @@ namespace RHTools.Converter.Synchronizers
 
 		public void Sync()
 		{
-			OggSynchronizer oggSynchronizer = new OggSynchronizer(cacheFile, assets.oggGuid, 0f);
+			var oggSynchronizer = new OggSynchronizer(cacheFile, assets.oggGuid, 0f);
 			oggSynchronizer.Sync();
 
-			PngSynchronizer pngSynchronizer = new PngSynchronizer(cacheFile, assets.pngGuid);
+			var pngSynchronizer = new PngSynchronizer(cacheFile, assets.pngGuid);
 			pngSynchronizer.Sync();
 
-			RhsSynchronizer rhsSynchronizer = new RhsSynchronizer(cacheFile, assets.rhsFile);
+			var rhsSynchronizer = new RhsSynchronizer(cacheFile, assets.rhsFile);
 			rhsSynchronizer.Sync();
 
-			foreach (RhcFile rhcFile in assets.rhcFiles)
+			foreach (var rhcFile in assets.rhcFiles)
 			{
-				RhcSynchronizer rhcSynchronizer = new RhcSynchronizer(cacheFile, rhcFile);
+				var rhcSynchronizer = new RhcSynchronizer(cacheFile, rhcFile);
 				rhcSynchronizer.Sync();
 			}
 		}

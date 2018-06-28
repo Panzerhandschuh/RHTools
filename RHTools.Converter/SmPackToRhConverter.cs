@@ -26,17 +26,17 @@ namespace RHTools.Converter
 
 		public RhPackAssets Convert()
 		{
-			RhPackAssets packAssets = new RhPackAssets();
+			var packAssets = new RhPackAssets();
 
-			string[] files = Directory.GetDirectories(smPackDir);
-			foreach (string file in files)
+			var files = Directory.GetDirectories(smPackDir);
+			foreach (var file in files)
 			{
-				RhSongAssets songAssets = ConvertSmSongToRh(file);
+				var songAssets = ConvertSmSongToRh(file);
 				packAssets.songAssetList.Add(songAssets);
 			}
 
 			packAssets.pngGuid = ConvertPng();
-			IEnumerable<RhGuid> rhcGuids = packAssets.songAssetList.SelectMany(x => x.rhcFiles.Select(y => y.rhcGuid));
+			var rhcGuids = packAssets.songAssetList.SelectMany(x => x.rhcFiles.Select(y => y.rhcGuid));
 			packAssets.rhgFile = ConvertRhg(packAssets.pngGuid, rhcGuids);
 
 			return packAssets;
@@ -44,18 +44,18 @@ namespace RHTools.Converter
 
 		private RhSongAssets ConvertSmSongToRh(string smSongDir)
 		{
-			SmSongToRhConverter converter = new SmSongToRhConverter(smSongDir, rhDir, songOffset);
+			var converter = new SmSongToRhConverter(smSongDir, rhDir, songOffset);
 			return converter.Convert();
 		}
 
 		private RhGuid ConvertPng()
 		{
-			string sourcePngPath = Directory.GetFiles(smPackDir, "*.png").FirstOrDefault();
+			var sourcePngPath = Directory.GetFiles(smPackDir, "*.png").FirstOrDefault();
 			if (sourcePngPath == null)
 				return new RhGuid();
 
-			RhGuid pngGuid = RhGuid.NewGuid();
-			string destPngPath = Path.Combine(rhDir, pngGuid.ToString()) + ".png";
+			var pngGuid = RhGuid.NewGuid();
+			var destPngPath = Path.Combine(rhDir, pngGuid.ToString()) + ".png";
 			File.Copy(sourcePngPath, destPngPath);
 
 			return pngGuid;
@@ -63,9 +63,9 @@ namespace RHTools.Converter
 
 		private RhgFile ConvertRhg(RhGuid pngGuid, IEnumerable<RhGuid> rhcGuids)
 		{
-			RhgConverter rhgConverter = new RhgConverter();
-			RhgFile rhgFile = rhgConverter.Convert(pngGuid, packName, rhcGuids);
-			string rhgPath = Path.Combine(rhDir, rhgFile.rhgGuid.ToString()) + ".rhg";
+			var rhgConverter = new RhgConverter();
+			var rhgFile = rhgConverter.Convert(pngGuid, packName, rhcGuids);
+			var rhgPath = Path.Combine(rhDir, rhgFile.rhgGuid.ToString()) + ".rhg";
 			rhgFile.SerializeToFile(rhgPath);
 
 			return rhgFile;

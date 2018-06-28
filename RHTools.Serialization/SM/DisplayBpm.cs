@@ -26,7 +26,7 @@ namespace RHTools.Serialization.SM
 
         public static DisplayBpm Deserialize(List<string> parameters)
         {
-            DisplayBpm displayBpm = new DisplayBpm();
+            var displayBpm = new DisplayBpm();
 
             if (parameters[0] == "*")
                 displayBpm.bpmType = DisplayBpmType.Random;

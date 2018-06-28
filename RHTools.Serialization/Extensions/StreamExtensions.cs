@@ -11,7 +11,7 @@ namespace RHTools.Serialization
 	{
 		public static byte[] ReadAllBytes(this Stream stream)
 		{
-			using (MemoryStream memoryStream = new MemoryStream())
+			using (var memoryStream = new MemoryStream())
 			{
 				stream.CopyTo(memoryStream);
 				return memoryStream.ToArray();

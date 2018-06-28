@@ -17,7 +17,7 @@ namespace RHTools.Converter.Test
 		[TestMethod]
 		public void ConvertSmSongToRhproj()
 		{
-			SmSongToRhprojConverter converter = new SmSongToRhprojConverter(smPath, rhPath, songOffset);
+			var converter = new SmSongToRhprojConverter(smPath, rhPath, songOffset);
 			converter.Convert();
 		}
 	}

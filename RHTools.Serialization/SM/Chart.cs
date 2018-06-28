@@ -23,7 +23,7 @@ namespace RHTools.Serialization.SM
 
         public static Chart Deserialize(List<string> parameters)
 		{
-			Chart notes = new Chart();
+			var notes = new Chart();
 
 			notes.chartType = parameters[1];
 			notes.description = parameters[2];
@@ -37,9 +37,9 @@ namespace RHTools.Serialization.SM
 
 		private static float[] GetGrooveRadarValues(string parameter)
 		{
-			string[] strValues = parameter.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-			float[] values = new float[strValues.Length];
-			for (int i = 0; i < strValues.Length; i++)
+			var strValues = parameter.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+			var values = new float[strValues.Length];
+			for (var i = 0; i < strValues.Length; i++)
 				float.TryParse(strValues[i], out values[i]);
 
 			return values;

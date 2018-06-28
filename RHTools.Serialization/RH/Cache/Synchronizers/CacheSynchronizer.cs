@@ -17,12 +17,12 @@ namespace RHTools.Serialization.RH
 
 		public void Sync()
 		{
-			T existingEntry = FindEntry();
+			var existingEntry = FindEntry();
 			if (existingEntry != null)
 				Update(existingEntry);
 			else
 			{
-				T newEntry = Create();
+				var newEntry = Create();
 				AddEntry(newEntry);
 			}
 		}
@@ -33,7 +33,7 @@ namespace RHTools.Serialization.RH
 
 		protected T Create()
 		{
-			T entry = new T();
+			var entry = new T();
 
 			Update(entry);
 

@@ -29,7 +29,7 @@ namespace RHTools.Serialization.RH
 
 		public static CacheFile Deserialize(BinaryReader reader)
 		{
-			CacheFile file = new CacheFile();
+			var file = new CacheFile();
 
 			file.version = reader.ReadByte();
 			file.oggEntries = reader.ReadList(OggCacheEntry.Deserialize);

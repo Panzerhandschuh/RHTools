@@ -26,14 +26,14 @@ namespace RHTools.Converter
 
 		public Dictionary<NoteFlags, List<Note>> Convert(Chart chart)
 		{
-			Dictionary<NoteFlags, List<Note>> noteDict = new Dictionary<NoteFlags, List<Note>>();
+			var noteDict = new Dictionary<NoteFlags, List<Note>>();
 
-			int numPanels = chart.GetPanelCount();
-			List<BeatNotes> beatNotesList = GetBeatNotes(chart.noteData.measures);
-			for (int panel = 0; panel < numPanels; panel++)
+			var numPanels = chart.GetPanelCount();
+			var beatNotesList = GetBeatNotes(chart.noteData.measures);
+			for (var panel = 0; panel < numPanels; panel++)
 			{
-				NoteFlags rhNote = GetRhNote(panel);
-				List<Note> notes = GetNotesForPanel(beatNotesList, panel);
+				var rhNote = GetRhNote(panel);
+				var notes = GetNotesForPanel(beatNotesList, panel);
 				noteDict.Add(rhNote, notes);
 			}
 
@@ -67,13 +67,13 @@ namespace RHTools.Converter
 
 		private List<Note> GetNotesForPanel(List<BeatNotes> beatNotesList, int panel)
 		{
-			List<Note> notes = new List<Note>();
-			int holdStartBeat = 0;
+			var notes = new List<Note>();
+			var holdStartBeat = 0;
 
-			foreach (BeatNotes beatNotes in beatNotesList)
+			foreach (var beatNotes in beatNotesList)
 			{
-				int beat = beatNotes.beat;
-				SmNoteType note = beatNotes.notes[panel];
+				var beat = beatNotes.beat;
+				var note = beatNotes.notes[panel];
 				switch (note)
 				{
 					case SmNoteType.Regular:
@@ -101,21 +101,21 @@ namespace RHTools.Converter
 		/// </summary>
 		private List<BeatNotes> GetBeatNotes(List<Measure> measures)
 		{
-			List<BeatNotes> beatNotesList = new List<BeatNotes>();
+			var beatNotesList = new List<BeatNotes>();
 
-			for (int i = 0; i < measures.Count; i++)
+			for (var i = 0; i < measures.Count; i++)
 			{
-				Measure measure = measures[i];
-				int measureBeat = i * 4000;
+				var measure = measures[i];
+				var measureBeat = i * 4000;
 
-				List<Line> lines = measure.lines;
-				for (int j = 0; j < lines.Count; j++)
+				var lines = measure.lines;
+				for (var j = 0; j < lines.Count; j++)
 				{
-					Line line = lines[j];
-					int lineBeat = (j * 4000) / lines.Count;
-					int beat = measureBeat + lineBeat;
+					var line = lines[j];
+					var lineBeat = (j * 4000) / lines.Count;
+					var beat = measureBeat + lineBeat;
 
-					List<SmNoteType> notes = line.notes;
+					var notes = line.notes;
 					beatNotesList.Add(new BeatNotes(beat, notes));
 				}
 			}

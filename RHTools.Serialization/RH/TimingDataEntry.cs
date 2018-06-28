@@ -20,7 +20,7 @@ namespace RHTools.Serialization.RH
 
 		public static TimingDataEntry Deserialize(BinaryReader reader)
 		{
-			TimingDataEntry entry = new TimingDataEntry();
+			var entry = new TimingDataEntry();
 
 			entry.beat = reader.ReadInt32();
             entry.time = reader.ReadInt64();

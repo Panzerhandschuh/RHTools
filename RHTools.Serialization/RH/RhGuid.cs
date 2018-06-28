@@ -32,7 +32,7 @@ namespace RHTools.Serialization.RH
 
 		public override bool Equals(object obj)
 		{
-			RhGuid otherGuid = obj as RhGuid;
+			var otherGuid = obj as RhGuid;
 			if (otherGuid == null)
 				return false;
 
@@ -41,8 +41,8 @@ namespace RHTools.Serialization.RH
 
 		public override string ToString()
 		{
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < guid.Length; i++)
+			var sb = new StringBuilder();
+			for (var i = 0; i < guid.Length; i++)
 			{
 				if (i == 4 || i == 6 || i == 8 || i == 10)
 					sb.Append('-');
@@ -55,7 +55,7 @@ namespace RHTools.Serialization.RH
 
 		public static RhGuid NewGuid()
 		{
-			Guid guid = Guid.NewGuid();
+			var guid = Guid.NewGuid();
 			return new RhGuid(guid.ToByteArray());
 		}
 	}

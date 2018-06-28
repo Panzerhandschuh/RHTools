@@ -38,7 +38,7 @@ namespace RHTools.Serialization.RH
 
 		public static RhcCacheEntry Deserialize(BinaryReader reader)
 		{
-			RhcCacheEntry entry = new RhcCacheEntry();
+			var entry = new RhcCacheEntry();
 
 			// TODO: Remove duplicate logic for parsing cache entry types
 			CacheEntryType type;

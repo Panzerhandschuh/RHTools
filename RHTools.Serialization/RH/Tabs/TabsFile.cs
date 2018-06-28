@@ -21,17 +21,17 @@ namespace RHTools.Serialization.RH
 		{
 			writer.Write(version);
 			writer.Write((byte)rhprojFileGuids.Count);
-			foreach (RhGuid rhprojFileGuid in rhprojFileGuids)
+			foreach (var rhprojFileGuid in rhprojFileGuids)
 				writer.Write(rhprojFileGuid);
 		}
 
 		public static TabsFile Deserialize(BinaryReader reader)
 		{
-			TabsFile file = new TabsFile();
+			var file = new TabsFile();
 
 			file.version = reader.ReadByte();
-			byte numTabs = reader.ReadByte();
-			for (int i = 0; i < numTabs; i++)
+			var numTabs = reader.ReadByte();
+			for (var i = 0; i < numTabs; i++)
 				file.rhprojFileGuids.Add(reader.ReadRhGuid());
 
 			return file;

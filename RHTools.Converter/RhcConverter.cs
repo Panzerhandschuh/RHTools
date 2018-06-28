@@ -12,9 +12,9 @@ namespace RHTools.Converter
 	{
 		public List<RhcFile> Convert(SmFile smFile, RhGuid rhsGuid, string artist)
 		{
-			List<RhcFile> rhcFiles = new List<RhcFile>();
+			var rhcFiles = new List<RhcFile>();
 
-			foreach (Chart chart in smFile.charts)
+			foreach (var chart in smFile.charts)
 				rhcFiles.Add(ConvertRhcFile(chart, rhsGuid, artist));
 
 			return rhcFiles;
@@ -22,7 +22,7 @@ namespace RHTools.Converter
 
 		private RhcFile ConvertRhcFile(Chart chart, RhGuid rhsGuid, string artist)
 		{
-			RhcFile rhcFile = new RhcFile();
+			var rhcFile = new RhcFile();
 
 			rhcFile.rhcGuid = RhGuid.NewGuid();
 			rhcFile.internalGuid = new RhGuid();

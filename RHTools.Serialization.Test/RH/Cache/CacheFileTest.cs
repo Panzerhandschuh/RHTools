@@ -14,16 +14,16 @@ namespace RHTools.Serialization.Test.RH
 		[TestMethod]
 		public void ReadCacheFile()
 		{
-			CacheFile file = ReadCacheFile(cacheFilePath);
+			var file = ReadCacheFile(cacheFilePath);
 		}
 
 		[TestMethod]
 		public void WriteCacheFileBytesEqualsOriginalCacheFileBytes()
 		{
-			CacheFile file = ReadCacheFile(cacheFilePath);
+			var file = ReadCacheFile(cacheFilePath);
 
-			byte[] writeBytes = file.SerializeToBytes();
-			byte[] originalBytes = File.ReadAllBytes(cacheFilePath);
+			var writeBytes = file.SerializeToBytes();
+			var originalBytes = File.ReadAllBytes(cacheFilePath);
 
 			Assert.IsTrue(Enumerable.SequenceEqual(originalBytes, writeBytes));
 		}

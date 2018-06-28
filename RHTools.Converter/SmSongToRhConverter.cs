@@ -24,14 +24,14 @@ namespace RHTools.Converter
 			this.rhDir = rhDir;
 			this.songOffset = songOffset;
 
-			string smFilePath = Directory.GetFiles(smSongDir, "*.sm").Single();
+			var smFilePath = Directory.GetFiles(smSongDir, "*.sm").Single();
 			smFile = ITextSerializableExtensions.Deserialize(smFilePath, SmFile.Deserialize);
 		}
 
 		// TODO: Consider making all converters override a Convert<T>() method
 		public RhSongAssets Convert()
 		{
-			RhSongAssets assets = new RhSongAssets();
+			var assets = new RhSongAssets();
 
 			assets.oggGuid = ConvertOgg();
 			// TODO: Force pngs to power of 2 dimensions
@@ -44,9 +44,9 @@ namespace RHTools.Converter
 
 		private RhGuid ConvertOgg()
 		{
-			RhGuid oggGuid = RhGuid.NewGuid();
-			string sourceOggPath = Path.Combine(smSongDir, smFile.music);
-			string destOggPath = Path.Combine(rhDir, oggGuid.ToString()) + ".ogg";
+			var oggGuid = RhGuid.NewGuid();
+			var sourceOggPath = Path.Combine(smSongDir, smFile.music);
+			var destOggPath = Path.Combine(rhDir, oggGuid.ToString()) + ".ogg";
 			File.Copy(sourceOggPath, destOggPath);
 
 			return oggGuid;
@@ -54,10 +54,10 @@ namespace RHTools.Converter
 
 		private RhGuid ConvertPng()
 		{
-			string sourcePngPath = Path.Combine(smSongDir, smFile.background);
+			var sourcePngPath = Path.Combine(smSongDir, smFile.background);
 
-			RhGuid pngGuid = RhGuid.NewGuid();
-			string destPngPath = Path.Combine(rhDir, pngGuid.ToString()) + ".png";
+			var pngGuid = RhGuid.NewGuid();
+			var destPngPath = Path.Combine(rhDir, pngGuid.ToString()) + ".png";
 			File.Copy(sourcePngPath, destPngPath);
 
 			return pngGuid;
@@ -65,9 +65,9 @@ namespace RHTools.Converter
 
 		private RhsFile ConvertRhs(RhGuid oggGuid, RhGuid pngGuid)
 		{
-			RhsConverter rhsConverter = new RhsConverter();
-			RhsFile rhsFile = rhsConverter.Convert(smFile, oggGuid, pngGuid, songOffset);
-			string rhsPath = Path.Combine(rhDir, rhsFile.rhsGuid.ToString()) + ".rhs";
+			var rhsConverter = new RhsConverter();
+			var rhsFile = rhsConverter.Convert(smFile, oggGuid, pngGuid, songOffset);
+			var rhsPath = Path.Combine(rhDir, rhsFile.rhsGuid.ToString()) + ".rhs";
 			rhsFile.SerializeToFile(rhsPath);
 
 			return rhsFile;
@@ -75,11 +75,11 @@ namespace RHTools.Converter
 
 		private List<RhcFile> ConvertRhc(RhGuid rhsGuid)
 		{
-			RhcConverter rhcConverter = new RhcConverter();
-			List<RhcFile> rhcFiles = rhcConverter.Convert(smFile, rhsGuid, smFile.credit);
-			foreach (RhcFile rhcFile in rhcFiles)
+			var rhcConverter = new RhcConverter();
+			var rhcFiles = rhcConverter.Convert(smFile, rhsGuid, smFile.credit);
+			foreach (var rhcFile in rhcFiles)
 			{
-				string rhcPath = Path.Combine(rhDir, rhcFile.rhcGuid.ToString()) + ".rhc";
+				var rhcPath = Path.Combine(rhDir, rhcFile.rhcGuid.ToString()) + ".rhc";
 				rhcFile.SerializeToFile(rhcPath);
 			}
 

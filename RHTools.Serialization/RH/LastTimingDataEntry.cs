@@ -22,7 +22,7 @@ namespace RHTools.Serialization.RH
 
 		public static LastTimingDataEntry Deserialize(BinaryReader reader)
 		{
-			LastTimingDataEntry entry = new LastTimingDataEntry();
+			var entry = new LastTimingDataEntry();
 
 			entry.bpmMultiplier = reader.ReadSingle();
 			entry.displayMinBpm = reader.ReadSingle();

@@ -17,22 +17,22 @@ namespace RHTools.Serialization.Test.RH
 		[TestMethod]
 		public void ReadRhgFiles()
 		{
-			string[] files = Directory.GetFiles(gameDir, "*.rhg");
-			List<RhgFile> rhgFiles = new List<RhgFile>();
-			foreach (string file in files)
+			var files = Directory.GetFiles(gameDir, "*.rhg");
+			var rhgFiles = new List<RhgFile>();
+			foreach (var file in files)
 				rhgFiles.Add(ReadRhgFile(file));
 		}
 
 		[TestMethod]
 		public void WriteRhgFileBytesEqualsOriginalRhgFileBytes()
 		{
-			string[] files = Directory.GetFiles(gameDir, "*.rhg");
-			foreach (string file in files)
+			var files = Directory.GetFiles(gameDir, "*.rhg");
+			foreach (var file in files)
 			{
-				RhgFile rhgFile = ReadRhgFile(file);
+				var rhgFile = ReadRhgFile(file);
 
-				byte[] writeBytes = rhgFile.SerializeToBytes();
-				byte[] originalBytes = File.ReadAllBytes(file);
+				var writeBytes = rhgFile.SerializeToBytes();
+				var originalBytes = File.ReadAllBytes(file);
 
 				Assert.IsTrue(Enumerable.SequenceEqual(originalBytes, writeBytes));
 			}

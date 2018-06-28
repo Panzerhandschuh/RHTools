@@ -11,13 +11,13 @@ namespace RHTools.Converter
 	{
 		public RhgFile Convert(RhGuid pngGuid, string packName, IEnumerable<RhGuid> rhcGuids)
 		{
-			RhgFile rhgFile = new RhgFile();
+			var rhgFile = new RhgFile();
 
 			rhgFile.rhgGuid = RhGuid.NewGuid();
 			rhgFile.internalGuid = new RhGuid();
 			rhgFile.pngGuid = pngGuid;
 			rhgFile.packName = packName;
-			foreach (RhGuid rhcFile in rhcGuids)
+			foreach (var rhcFile in rhcGuids)
 				rhgFile.rhcGuids.Add(rhcFile);
 
 			return rhgFile;

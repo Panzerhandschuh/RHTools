@@ -23,10 +23,10 @@ namespace RHTools.Serialization.SM
 
         public static NoteData Deserialize(string parameter)
         {
-            NoteData data = new NoteData();
+            var data = new NoteData();
 
-            string[] measureValues = parameter.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string measureValue in measureValues)
+            var measureValues = parameter.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var measureValue in measureValues)
                 data.measures.Add(Measure.Deserialize(measureValue));
 
             return data;

@@ -30,7 +30,7 @@ namespace RHTools.Serialization.RH
 
 		public static RhprojFile Deserialize(BinaryReader reader)
 		{
-			RhprojFile file = new RhprojFile();
+			var file = new RhprojFile();
 
 			file.version = reader.ReadByte();
 			file.unknown1 = reader.ReadByte(); // Always 0?

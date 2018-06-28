@@ -31,7 +31,7 @@ namespace RHTools.Serialization.RH
 
 		public static Artist Deserialize(BinaryReader reader)
 		{
-			Artist artist = new Artist();
+			var artist = new Artist();
 
 			reader.ReadByte(); // ALways 0x21? Probably is an artist name indicator
 			artist.artist = reader.ReadShortPrefixedString();

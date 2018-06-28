@@ -31,7 +31,7 @@ namespace RHTools.Serialization
 			if (isLengthPrefixed)
 				writer.Write(objs.Count());
 
-			foreach (IBinarySerializable obj in objs)
+			foreach (var obj in objs)
 				obj.Serialize(writer);
 		}
 
@@ -39,7 +39,7 @@ namespace RHTools.Serialization
 		{
 			writer.Write((byte)objs.Count());
 
-			foreach (IBinarySerializable obj in objs)
+			foreach (var obj in objs)
 				obj.Serialize(writer);
 		}
 
@@ -65,7 +65,7 @@ namespace RHTools.Serialization
 		/// </summary>
 		public static void WritePrefixedList<T>(this BinaryWriter writer, byte prefix, IEnumerable<T> objs, Action<T> writeAction)
 		{
-			foreach (T obj in objs)
+			foreach (var obj in objs)
 			{
 				writer.Write(prefix);
 				writeAction(obj);

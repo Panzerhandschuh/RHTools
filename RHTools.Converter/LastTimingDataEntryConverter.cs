@@ -14,7 +14,7 @@ namespace RHTools.Converter
 
 		public LastTimingDataEntry Convert(Bpm bpm, DisplayBpm displayBpm)
 		{
-			LastTimingDataEntry entry = new LastTimingDataEntry();
+			var entry = new LastTimingDataEntry();
 
 			entry.bpmMultiplier = bpm.bpm * bpmConst;
 			if (displayBpm != null)
