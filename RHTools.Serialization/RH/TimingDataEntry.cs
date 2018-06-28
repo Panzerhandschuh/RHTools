@@ -9,15 +9,13 @@ namespace RHTools.Serialization.RH
 {
 	public class TimingDataEntry : IBinarySerializable
 	{
-		public int beat;
-		public float startBpm;
-		public float endBpm;
+		public int beat; // This value / 1000 = beat
+        public long time; // This value / 44100 = time
 
 		public void Serialize(BinaryWriter writer)
 		{
 			writer.Write(beat);
-			writer.Write(startBpm);
-			writer.Write(endBpm);
+			writer.Write(time);
 		}
 
 		public static TimingDataEntry Deserialize(BinaryReader reader)
@@ -25,8 +23,7 @@ namespace RHTools.Serialization.RH
 			TimingDataEntry entry = new TimingDataEntry();
 
 			entry.beat = reader.ReadInt32();
-			entry.startBpm = reader.ReadSingle();
-			entry.endBpm = reader.ReadSingle();
+            entry.time = reader.ReadInt64();
 
 			return entry;
 		}
