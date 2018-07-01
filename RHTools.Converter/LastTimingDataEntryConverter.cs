@@ -12,11 +12,11 @@ namespace RHTools.Converter
 	{
 		private const int bpmConst = 1024;
 
-		public LastTimingDataEntry Convert(Bpm bpm, DisplayBpm displayBpm)
+		public LastTimingDataEntry Convert(float bpm, DisplayBpm displayBpm)
 		{
 			var entry = new LastTimingDataEntry();
 
-			entry.bpmMultiplier = bpm.bpm * bpmConst;
+			entry.bpmMultiplier = bpm * bpmConst;
 			if (displayBpm != null)
 			{
 				entry.displayMinBpm = displayBpm.minBpm;

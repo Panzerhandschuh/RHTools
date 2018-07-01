@@ -10,12 +10,15 @@ namespace RHTools.Converter
 {
 	public class TimingDataEntryConverter
 	{
-		public TimingDataEntry Convert(SmFile smFile)
+		private const int beatMulti = 1000;
+		private const int timeMulti = 44100;
+
+		public TimingDataEntry Convert(float beat, float time)
 		{
 			var entry = new TimingDataEntry();
 
-			entry.beat = 4000; // Fake value
-			entry.time = 0; // Fake value
+			entry.beat = (int)(beat * beatMulti);
+			entry.time = (long)(time * timeMulti);
 
 			return entry;
 		}

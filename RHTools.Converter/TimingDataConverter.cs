@@ -17,19 +17,42 @@ namespace RHTools.Converter
 			var data = new TimingData();
 
 			data.unknown1 = 0; // Fake value
-			data.offsetMultiplier = (long)(-(smFile.offset + songOffset) * offsetConst);
+			var offset = -(smFile.offset + songOffset); // Might need to negate this
+			data.offsetMultiplier = (long)(offset * offsetConst);
 
-            for (var i = 0; i < smFile.bpms.bpms.Count - 1; i++)
-            {
-                var bpm = smFile.bpms.bpms[i];
-                data.entries.Add(new TimingDataEntryConverter().Convert(smFile)); // TODO: Add real conversion
-            }
-
-            var lastBpm = smFile.bpms.bpms.LastOrDefault();
-			var displayBpm = smFile.displayBpm;
-            data.lastEntry = new LastTimingDataEntryConverter().Convert(lastBpm, displayBpm);
+			data.entries = ConvertBpms(smFile, offset);
+			data.lastEntry = ConvertLastBpm(smFile);
 
 			return data;
+		}
+
+		/// <summary>
+		/// Converts all BPMs except for the last BPM
+		/// </summary>
+		private static List<TimingDataEntry> ConvertBpms(SmFile smFile, float offset)
+		{
+			var entries = new List<TimingDataEntry>();
+
+			var prevTime = offset;
+			for (var i = 1; i < smFile.bpms.bpms.Count; i++)
+			{
+				var prevBpm = smFile.bpms.bpms[i - 1];
+				var curBpm = smFile.bpms.bpms[i];
+
+				var curTime = 60 * ((curBpm.beat - prevBpm.beat) / prevBpm.bpm) + prevTime;
+				entries.Add(new TimingDataEntryConverter().Convert(curBpm.beat, curTime));
+
+				prevTime = curTime;
+			}
+
+			return entries;
+		}
+
+		private static LastTimingDataEntry ConvertLastBpm(SmFile smFile)
+		{
+			var lastBpm = smFile.bpms.bpms.LastOrDefault();
+			var displayBpm = smFile.displayBpm;
+			return new LastTimingDataEntryConverter().Convert(lastBpm.bpm, displayBpm);
 		}
 	}
 }
