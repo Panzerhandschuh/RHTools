@@ -11,7 +11,7 @@ namespace RHTools.Converter.Test
 	public class SmSongToRhprojConverterTest
 	{
 		private const float songOffset = -0.009f;
-		private const string smPath = @"D:\Program Files (x86)\Stepmania 3.95\Songs\Bearpocalypse\My Insomnias - [Arvin]";
+		private const string smPath = @"D:\Program Files (x86)\OpenITG\Songs\Tachyon Epsilon\++ - [TheBoxX]";
 		private const string rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData";
 
 		[TestMethod]
