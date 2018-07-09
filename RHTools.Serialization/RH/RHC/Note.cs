@@ -10,25 +10,25 @@ namespace RHTools.Serialization.RH
 	public class Note : IBinarySerializable
 	{
 		public NoteType type;
-		public int startBeat;
+		public int beat;
 		public int duration;
 
 		public Note() { }
 
-		public Note(NoteType type, int startBeat) :
-			this(type, startBeat, 0) { }
+		public Note(NoteType type, int beat) :
+			this(type, beat, 0) { }
 
-		public Note(NoteType type, int startBeat, int duration)
+		public Note(NoteType type, int beat, int duration)
 		{
 			this.type = type;
-			this.startBeat = startBeat;
+			this.beat = beat;
 			this.duration = duration;
 		}
 
 		public void Serialize(BinaryWriter writer)
 		{
 			writer.Write((byte)type);
-			writer.Write(startBeat);
+			writer.Write(beat);
 			if (type == NoteType.Hold)
 				writer.Write(duration);
 		}
@@ -38,7 +38,7 @@ namespace RHTools.Serialization.RH
 			var note = new Note();
 
 			note.type = (NoteType)reader.ReadByte();
-			note.startBeat = reader.ReadInt32();
+			note.beat = reader.ReadInt32();
 			if (note.type == NoteType.Hold)
 				note.duration = reader.ReadInt32();
 

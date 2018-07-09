@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Mixer", "RHTools.Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Converter.Test", "RHTools.Converter.Test\RHTools.Converter.Test.csproj", "{FE5A62CE-20B1-41A6-8B29-F570724017C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Mixer.Test", "RHTools.Mixer.Test\RHTools.Mixer.Test.csproj", "{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FE5A62CE-20B1-41A6-8B29-F570724017C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE5A62CE-20B1-41A6-8B29-F570724017C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE5A62CE-20B1-41A6-8B29-F570724017C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
