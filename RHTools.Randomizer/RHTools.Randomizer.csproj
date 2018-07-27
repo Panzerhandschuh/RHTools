@@ -7,8 +7,8 @@
     <ProjectGuid>{7C48B130-0ECF-4C68-A89A-7C7E0A81A206}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RHTools.Mixer</RootNamespace>
-    <AssemblyName>RHTools.Mixer</AssemblyName>
+    <RootNamespace>RHTools.Randomizer</RootNamespace>
+    <AssemblyName>RHTools.Randomizer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

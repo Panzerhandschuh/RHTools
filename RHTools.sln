@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Serialization.Test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Converter", "RHTools.Converter\RHTools.Converter.csproj", "{262733E0-38E0-4E18-BBA4-702C2456AF89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Randomizer", "RHTools.Mixer\RHTools.Randomizer.csproj", "{7C48B130-0ECF-4C68-A89A-7C7E0A81A206}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Randomizer", "RHTools.Randomizer\RHTools.Randomizer.csproj", "{7C48B130-0ECF-4C68-A89A-7C7E0A81A206}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Converter.Test", "RHTools.Converter.Test\RHTools.Converter.Test.csproj", "{FE5A62CE-20B1-41A6-8B29-F570724017C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Randomizer.Test", "RHTools.Mixer.Test\RHTools.Randomizer.Test.csproj", "{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTools.Randomizer.Test", "RHTools.Randomizer.Test\RHTools.Randomizer.Test.csproj", "{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

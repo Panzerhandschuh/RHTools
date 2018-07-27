@@ -7,8 +7,8 @@
     <ProjectGuid>{2CC4BB5C-DA0E-455D-B802-7C3E29B2A61C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RHTools.Mixer.Test</RootNamespace>
-    <AssemblyName>RHTools.Mixer.Test</AssemblyName>
+    <RootNamespace>RHTools.Randomizer.Test</RootNamespace>
+    <AssemblyName>RHTools.Randomizer.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -51,13 +51,13 @@
     <Compile Include="BeatRandomizerTest.cs" />
     <Compile Include="RandomizerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\MixerTestUtil.cs" />
+    <Compile Include="Utils\RandomizerTestUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RHTools.Mixer\RHTools.Randomizer.csproj">
+    <ProjectReference Include="..\RHTools.Randomizer\RHTools.Randomizer.csproj">
       <Project>{7c48b130-0ecf-4c68-a89a-7c7e0a81a206}</Project>
       <Name>RHTools.Randomizer</Name>
     </ProjectReference>
