@@ -1,5 +1,5 @@
-﻿using RHTools.Mixer.Rules;
-using RHTools.Mixer.Utils;
+﻿using RHTools.Randomizer.Rules;
+using RHTools.Randomizer.Utils;
 using RHTools.Serialization;
 using RHTools.Serialization.RH;
 using System;
@@ -9,34 +9,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer
+namespace RHTools.Randomizer
 {
-	public class Mixer
+	public class Randomizer
 	{
 		private string rhcPath;
 		private RhcFile rhcFile;
 
-		public Mixer(string rhcPath)
+		public Randomizer(string rhcPath)
 		{
 			this.rhcPath = rhcPath;
 			rhcFile = IBinarySerializableExtensions.Deserialize(rhcPath, RhcFile.Deserialize);
 		}
 
-		public void Mix(bool[,] panelConfig)
+		public void Randomize(bool[,] panelConfig)
 		{
 			var layer = rhcFile.layers.layers.First();
 			var beatNotesList = NoteConverter.ConvertToBeatNotes(layer.notes);
 
-			var mixedNotes = MixBeatNotes(beatNotesList, panelConfig);
+			var randomizedNotes = RandomizeBeatNotes(beatNotesList, panelConfig);
 
-			var rhNotes = NoteConverter.ConvertToRhNotes(mixedNotes);
+			var rhNotes = NoteConverter.ConvertToRhNotes(randomizedNotes);
 			layer.notes = rhNotes;
 
 			UpdatePanelConfig(layer, rhNotes);
 
 			var rhDir = Path.GetDirectoryName(rhcPath);
-			SaveMixedRhc(rhDir);
-			SyncMixedRhcToCache(rhDir);
+			SaveRandomizedRhc(rhDir);
+			SyncRandomizedRhcToCache(rhDir);
 		}
 
 		private void UpdatePanelConfig(Layer layer, Dictionary<NoteFlags, List<Note>> rhNotes)
@@ -46,9 +46,9 @@ namespace RHTools.Mixer
 				layer.panelConfig |= noteFlags;
 		}
 
-		private void SaveMixedRhc(string rhDir)
+		private void SaveRandomizedRhc(string rhDir)
 		{
-			rhcFile.chartName = "Mixed";
+			rhcFile.chartName = "Randomizer";
 
 			var newGuid = RhGuid.NewGuid();
 			rhcFile.rhcGuid = newGuid;
@@ -56,7 +56,7 @@ namespace RHTools.Mixer
 			rhcFile.SerializeToFile(newPath);
 		}
 
-		private void SyncMixedRhcToCache(string rhDir)
+		private void SyncRandomizedRhcToCache(string rhDir)
 		{
 			var cachePath = Path.Combine(rhDir, "cache");
 			var cacheFile = IBinarySerializableExtensions.Deserialize(cachePath, CacheFile.Deserialize);
@@ -67,14 +67,14 @@ namespace RHTools.Mixer
 			cacheFile.SerializeToFile(cachePath);
 		}
 
-		public List<List<PanelNote>> MixBeatNotes(List<BeatNotes> beatNotesList, bool[,] panelConfig)
+		public List<List<PanelNote>> RandomizeBeatNotes(List<BeatNotes> beatNotesList, bool[,] panelConfig)
 		{
 			var panelNotesList = new List<List<PanelNote>>();
 
-			var beatMixer = new BeatMixer(panelConfig);
+			var beatRandomizer = new BeatRandomizer(panelConfig);
 			foreach (var beatNotes in beatNotesList)
 			{
-				var panelNotes = beatMixer.MixBeat(beatNotes.notes, new List<Rule>());
+				var panelNotes = beatRandomizer.RandomizeBeat(beatNotes.notes, new List<Rule>());
 				panelNotesList.Add(panelNotes);
 			}
 

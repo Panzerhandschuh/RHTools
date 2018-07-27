@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer
+namespace RHTools.Randomizer
 {
     public class NoteCounter
     {

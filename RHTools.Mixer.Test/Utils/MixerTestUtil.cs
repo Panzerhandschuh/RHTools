@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer.Test.Utils
+namespace RHTools.Randomizer.Test.Utils
 {
-    public static class MixerTestUtil
+    public static class RandomizerTestUtil
     {
         /// <summary>
         /// Center panel only

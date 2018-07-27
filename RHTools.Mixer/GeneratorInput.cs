@@ -1,11 +1,11 @@
-﻿using RHTools.Mixer.Rules;
+﻿using RHTools.Randomizer.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer
+namespace RHTools.Randomizer
 {
     public class GeneratorInput
     {

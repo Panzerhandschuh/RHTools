@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer
+namespace RHTools.Randomizer
 {
-	public static class MixerSettings
+	public static class RandomizerSettings
 	{
 		public static bool[,] panelConfig;
 		public static Random random;
 
-		static MixerSettings()
+		static RandomizerSettings()
 		{
 			random = new Random();
 		}

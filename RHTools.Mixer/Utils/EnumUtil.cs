@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer.Utils
+namespace RHTools.Randomizer.Utils
 {
     public class EnumUtil
     {

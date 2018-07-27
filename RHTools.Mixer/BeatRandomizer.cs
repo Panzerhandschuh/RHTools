@@ -1,6 +1,6 @@
-﻿using RHTools.Mixer.Generators;
-using RHTools.Mixer.Rules;
-using RHTools.Mixer.Utils;
+﻿using RHTools.Randomizer.Generators;
+using RHTools.Randomizer.Rules;
+using RHTools.Randomizer.Utils;
 using RHTools.Serialization.RH;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer
+namespace RHTools.Randomizer
 {
-	public class BeatMixer
+	public class BeatRandomizer
 	{
 		private StepGenerator stepGenerator;
 		private MineGenerator mineGenerator;
@@ -18,7 +18,7 @@ namespace RHTools.Mixer
 		private readonly bool[,] panelConfig;
 		private GeneratorState generatorState;
 
-		public BeatMixer(bool[,] panelConfig)
+		public BeatRandomizer(bool[,] panelConfig)
 		{
 			stepGenerator = new StepGenerator();
 			mineGenerator = new MineGenerator();
@@ -30,9 +30,9 @@ namespace RHTools.Mixer
 		/// <summary>
 		/// Generates notes for a single beat
 		/// </summary>
-		/// <param name="originalNotes">Used by the mixer to distinguish between regular notes, holds, and mines</param>
+		/// <param name="originalNotes">Used by the randomizer to distinguish between regular notes, holds, and mines</param>
 		/// <returns>Randomized notes for a beat</returns>
-		public List<PanelNote> MixBeat(List<Note> originalNotes, List<Rule> rules)
+		public List<PanelNote> RandomizeBeat(List<Note> originalNotes, List<Rule> rules)
 		{
 			var panelNotes = new List<PanelNote>();
 			var counter = new NoteCounter(panelConfig);

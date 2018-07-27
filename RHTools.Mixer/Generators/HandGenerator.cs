@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer.Generators
+namespace RHTools.Randomizer.Generators
 {
     public class HandGenerator : PanelGenerator
     {

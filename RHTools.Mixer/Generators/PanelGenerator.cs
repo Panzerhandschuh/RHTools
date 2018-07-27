@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer.Generators
+namespace RHTools.Randomizer.Generators
 {
     public abstract class PanelGenerator
     {
@@ -17,7 +17,7 @@ namespace RHTools.Mixer.Generators
                 return false;
             }
 
-            var randPanelIndex = MixerSettings.random.Next(0, availablePanels.Count);
+            var randPanelIndex = RandomizerSettings.random.Next(0, availablePanels.Count);
 
             generatedPanelIndices = availablePanels[randPanelIndex];
             return true;

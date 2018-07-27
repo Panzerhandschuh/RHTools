@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RHTools.Mixer.Rules
+namespace RHTools.Randomizer.Rules
 {
     public abstract class Rule
     {

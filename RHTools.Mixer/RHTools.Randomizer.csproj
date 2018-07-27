@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BeatMixer.cs" />
+    <Compile Include="BeatRandomizer.cs" />
     <Compile Include="BeatNotes.cs" />
     <Compile Include="Foot.cs" />
     <Compile Include="GeneratorInput.cs" />
@@ -50,8 +50,8 @@
     <Compile Include="Generators\PanelGenerator.cs" />
     <Compile Include="Generators\StepGenerator.cs" />
     <Compile Include="HoldFlags.cs" />
-    <Compile Include="Mixer.cs" />
-    <Compile Include="MixerSettings.cs" />
+    <Compile Include="Randomizer.cs" />
+    <Compile Include="RandomizerSettings.cs" />
     <Compile Include="NoteCounter.cs" />
     <Compile Include="PanelNote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
