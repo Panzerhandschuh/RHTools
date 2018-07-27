@@ -9,7 +9,7 @@ namespace RHTools.Mixer.Generators
 {
     public class HandGenerator : PanelGenerator
     {
-        public override bool TryGeneratePanel(GeneratorInput generatorInput, out int[] generatedPanelIndices)
+        public bool TryGeneratePanel(GeneratorInput generatorInput, out int[] generatedPanelIndices)
         {
             throw new NotImplementedException();
         }

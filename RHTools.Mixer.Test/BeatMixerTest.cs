@@ -2,82 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RHTools.Mixer.Rules;
 using RHTools.Mixer.Test.Utils;
 using RHTools.Serialization.RH;
 
 namespace RHTools.Mixer.Test
 {
-    [TestClass]
-    public class BeatMixerTest
-    {
-        [TestMethod]
-        public void TestBeatMixer()
-        {
-            var mixer = new BeatMixer(MixerTestUtil.config9Panel);
-            var notes = GenerateNotes(4);
-            var mixedNotes = mixer.MixBeat(notes);
-        }
+	[TestClass]
+	public class BeatMixerTest
+	{
+		[TestMethod]
+		public void TestBeatMixer()
+		{
+			var mixer = new BeatMixer(MixerTestUtil.config9Panel);
+			var notes = GenerateNotes(4);
+			var mixedNotes = mixer.MixBeat(notes, new List<Rule>());
+		}
 
-        [TestMethod]
-        public void CannotGenerateDuplicateNotes()
-        {
-            var mixer = new BeatMixer(MixerTestUtil.config9Panel);
-            var notes = GenerateNotes(4);
-            var mixedNotes = mixer.MixBeat(notes);
-            var distinctNotes = mixedNotes.Select(x => x.panel).Distinct();
+		[TestMethod]
+		public void CannotGenerateDuplicateNotes()
+		{
+			var mixer = new BeatMixer(MixerTestUtil.config9Panel);
+			var notes = GenerateNotes(4);
+			var mixedNotes = mixer.MixBeat(notes, new List<Rule>());
+			var distinctNotes = mixedNotes.Select(x => x.panel).Distinct();
 
-            Assert.AreEqual(mixedNotes.Count, distinctNotes.Count());
-        }
+			Assert.AreEqual(mixedNotes.Count, distinctNotes.Count());
+		}
 
-        [TestMethod]
-        public void CannotGenerateMoreThan2Notes()
-        {
-            var mixer = new BeatMixer(MixerTestUtil.config9Panel);
-            var notes = GenerateNotes(3);
-            var mixedNotes = mixer.MixBeat(notes);
+		[TestMethod]
+		public void CannotGenerateMoreThan2Notes()
+		{
+			var mixer = new BeatMixer(MixerTestUtil.config9Panel);
+			var notes = GenerateNotes(3);
+			var mixedNotes = mixer.MixBeat(notes, new List<Rule>());
 
-            Assert.IsTrue(mixedNotes.Count <= 2);
-        }
+			Assert.IsTrue(mixedNotes.Count <= 2);
+		}
 
-        [TestMethod]
-        public void CannotGenerateMoreNotesThanAvailableInPanelConfig()
-        {
-            var mixer = new BeatMixer(MixerTestUtil.config1Panel);
-            var notes = GenerateNotes(2);
-            var mixedNotes = mixer.MixBeat(notes);
+		[TestMethod]
+		public void CannotGenerateMoreNotesThanAvailableInPanelConfig()
+		{
+			var mixer = new BeatMixer(MixerTestUtil.config1Panel);
+			var notes = GenerateNotes(2);
+			var mixedNotes = mixer.MixBeat(notes, new List<Rule>());
 
-            Assert.IsTrue(mixedNotes.Count <= 1);
-        }
+			Assert.IsTrue(mixedNotes.Count <= 1);
+		}
 
-        /// <summary>
-        /// Generates notes at beat 0
-        /// </summary>
-        public static List<Note> GenerateNotes(int numNotes)
-        {
-            var notes = new List<Note>();
+		/// <summary>
+		/// Generates notes at beat 0
+		/// </summary>
+		public static List<Note> GenerateNotes(int numNotes)
+		{
+			var notes = new List<Note>();
 
-            for (int i = 0; i < numNotes; i++)
-                notes.Add(new Note(NoteType.Regular, 0));
+			for (int i = 0; i < numNotes; i++)
+				notes.Add(new Note(NoteType.Regular, 0));
 
-            return notes;
-        }
+			return notes;
+		}
 
-        [TestMethod]
-        public void CannotGenerateNoteWhenAllAvailableNotesAreHeld()
-        {
-            var mixer = new BeatMixer(MixerTestUtil.config2Panel);
-            HoldNote(mixer, 0, 1000);
+		[TestMethod]
+		public void CannotGenerateNoteWhenAllAvailableNotesAreHeld()
+		{
+			var mixer = new BeatMixer(MixerTestUtil.config2Panel);
+			HoldNote(mixer, 0, 1000);
 			HoldNote(mixer, 0, 1000);
 
 			var mixedNotes = new List<PanelNote>();
 			mixedNotes.AddRange(PressNote(mixer, 500));
 			mixedNotes.AddRange(PressNote(mixer, 1000)); // Previous notes should still be held, even on the beat at the end of the hold's duration
 			Assert.AreEqual(0, mixedNotes.Count);
-        }
+		}
 
-        [TestMethod]
-        public void CanReleaseHeldNotes()
-        {
+		[TestMethod]
+		public void CanReleaseHeldNotes()
+		{
 			var mixer = new BeatMixer(MixerTestUtil.config2Panel);
 			HoldNote(mixer, 0, 1000);
 			HoldNote(mixer, 0, 1000);
@@ -98,7 +99,7 @@ namespace RHTools.Mixer.Test
 			{
 				new Note(NoteType.Hold, beat, duration)
 			};
-			return mixer.MixBeat(notes);
+			return mixer.MixBeat(notes, new List<Rule>());
 		}
 
 		private static List<PanelNote> PressNote(BeatMixer mixer, int beat)
@@ -107,7 +108,7 @@ namespace RHTools.Mixer.Test
 			{
 				new Note(NoteType.Regular, beat)
 			};
-			return mixer.MixBeat(notes);
+			return mixer.MixBeat(notes, new List<Rule>());
 		}
 	}
 }

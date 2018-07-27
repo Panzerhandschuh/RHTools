@@ -1,4 +1,5 @@
 ﻿using RHTools.Mixer.Generators;
+using RHTools.Mixer.Rules;
 using RHTools.Mixer.Utils;
 using RHTools.Serialization.RH;
 using System;
@@ -31,16 +32,16 @@ namespace RHTools.Mixer
 		/// </summary>
 		/// <param name="originalNotes">Used by the mixer to distinguish between regular notes, holds, and mines</param>
 		/// <returns>Randomized notes for a beat</returns>
-		public List<PanelNote> MixBeat(List<Note> originalNotes)
+		public List<PanelNote> MixBeat(List<Note> originalNotes, List<Rule> rules)
 		{
-			var beatNotes = new List<PanelNote>();
+			var panelNotes = new List<PanelNote>();
 			var counter = new NoteCounter(panelConfig);
 
 			var beat = originalNotes.First().beat;
 			generatorState.UpdateHeldNoteStates(beat);
 			var availablePanels = generatorState.GetPanelConfigWithHeldNotesDisabled(panelConfig);
 
-			var generatorInput = new GeneratorInput(generatorState, availablePanels);
+			var generatorInput = new GeneratorInput(generatorState, rules, availablePanels);
 
 			foreach (Note originalNote in originalNotes)
 			{
@@ -49,22 +50,22 @@ namespace RHTools.Mixer
 				{
 					case NoteType.Regular:
 						if (TryGenerateNote(counter, generatorInput, originalNote, false, out panelNote))
-							beatNotes.Add(panelNote);
+							panelNotes.Add(panelNote);
 						break;
 					case NoteType.Hold:
 						if (TryGenerateNote(counter, generatorInput, originalNote, true, out panelNote))
-							beatNotes.Add(panelNote);
+							panelNotes.Add(panelNote);
 						break;
 					case NoteType.Mine:
-						if (TryGenerateMine(generatorInput, originalNote, out panelNote))
-							beatNotes.Add(panelNote);
+						if (TryGenerateMine(generatorInput.availablePanels, originalNote, out panelNote))
+							panelNotes.Add(panelNote);
 						break;
 					default:
 						throw new InvalidOperationException();
 				}
 			}
 
-			return beatNotes;
+			return panelNotes;
 		}
 
 		private bool TryGenerateNote(NoteCounter counter, GeneratorInput generatorInput, Note originalNote, bool holdNote, out PanelNote panelNote)
@@ -96,17 +97,17 @@ namespace RHTools.Mixer
 			return true;
 		}
 
-		private bool TryGenerateMine(GeneratorInput generatorInput, Note originalNote, out PanelNote panelNote)
+		private bool TryGenerateMine(bool[,] availablePanels, Note originalNote, out PanelNote panelNote)
 		{
 			int[] generatedPanelIndices;
-			if (!mineGenerator.TryGeneratePanel(generatorInput, out generatedPanelIndices))
+			if (!mineGenerator.TryGeneratePanel(availablePanels, out generatedPanelIndices))
 			{
 				panelNote = null;
 				return false;
 			}
 
 			panelNote = RemovePanelFromAvailablePanelsAndGetPanelNote(
-				generatorInput.availablePanels, generatedPanelIndices, originalNote);
+				availablePanels, generatedPanelIndices, originalNote);
 
 			return true;
 		}

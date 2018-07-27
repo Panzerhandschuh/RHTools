@@ -15,10 +15,10 @@ namespace RHTools.Mixer.Utils
         /// </summary>
         public static List<BeatNotes> ConvertToBeatNotes(Dictionary<NoteFlags, List<Note>> rhNotes)
         {
-            List<BeatNotes> beatNotesList = new List<BeatNotes>();
+            var beatNotesList = new List<BeatNotes>();
 
-            Dictionary<int, List<Note>> beatDictionary = ConvertToBeatDictionary(rhNotes);
-            foreach (KeyValuePair<int, List<Note>> kvs in beatDictionary)
+			var beatDictionary = ConvertToBeatDictionary(rhNotes);
+            foreach (var kvs in beatDictionary)
                 beatNotesList.Add(new BeatNotes(kvs.Key, kvs.Value));
 
             return beatNotesList.OrderBy(x => x.beat).ToList();
@@ -30,26 +30,39 @@ namespace RHTools.Mixer.Utils
         /// </summary>
         private static Dictionary<int, List<Note>> ConvertToBeatDictionary(Dictionary<NoteFlags, List<Note>> rhNotes)
         {
-            Dictionary<int, List<Note>> beatDictionary = new Dictionary<int, List<Note>>();
+            var beatDictionary = new Dictionary<int, List<Note>>();
 
-            foreach (List<Note> notes in rhNotes.Values)
+            foreach (var notes in rhNotes.Values)
             {
-                foreach (Note note in notes)
+                foreach (var note in notes)
                 {
-                    List<Note> value;
-                    if (beatDictionary.TryGetValue(note.beat, out value))
-                        value.Add(note);
-                    else
-                        beatDictionary.Add(note.beat, new List<Note>());
+					var beat = note.beat;
+					if (!beatDictionary.ContainsKey(beat))
+						beatDictionary.Add(beat, new List<Note>());
+
+					beatDictionary[beat].Add(note);
                 }
             }
 
             return beatDictionary;
         }
 
-        public static Dictionary<NoteFlags, List<Note>> ConvertToRhNotes(List<BeatNotes> beatNotes)
+        public static Dictionary<NoteFlags, List<Note>> ConvertToRhNotes(List<List<PanelNote>> panelNotesList)
         {
-            throw new NotImplementedException();
+			var rhNotes = new Dictionary<NoteFlags, List<Note>>();
+
+            foreach (var panelNotes in panelNotesList)
+			{
+				foreach (var panelNote in panelNotes)
+				{
+					if (!rhNotes.ContainsKey(panelNote.panel))
+						rhNotes.Add(panelNote.panel, new List<Note>());
+
+					rhNotes[panelNote.panel].Add(panelNote.note);
+				}
+			}
+
+			return rhNotes;
         }
     }
 }

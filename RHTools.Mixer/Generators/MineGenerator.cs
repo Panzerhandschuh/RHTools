@@ -9,9 +9,9 @@ namespace RHTools.Mixer.Generators
 {
     public class MineGenerator : PanelGenerator
     {
-        public override bool TryGeneratePanel(GeneratorInput generatorInput, out int[] generatedPanelIndices)
+        public bool TryGeneratePanel(bool[,] availablePanels, out int[] generatedPanelIndices)
         {
-            return TryGetRandomPanel(generatorInput.availablePanels, out generatedPanelIndices);
+            return TryGetRandomPanel(availablePanels, out generatedPanelIndices);
         }
     }
 }

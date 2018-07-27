@@ -51,6 +51,7 @@
     <Compile Include="Generators\StepGenerator.cs" />
     <Compile Include="HoldFlags.cs" />
     <Compile Include="Mixer.cs" />
+    <Compile Include="MixerSettings.cs" />
     <Compile Include="NoteCounter.cs" />
     <Compile Include="PanelNote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,8 +8,6 @@ namespace RHTools.Mixer.Generators
 {
     public abstract class PanelGenerator
     {
-        public abstract bool TryGeneratePanel(GeneratorInput generatorInput, out int[] generatedPanelIndices);
-
         protected bool TryGetRandomPanel(bool[,] panelConfig, out int[] generatedPanelIndices)
         {
             var availablePanels = FindAvailablePanels(panelConfig);
@@ -19,8 +17,7 @@ namespace RHTools.Mixer.Generators
                 return false;
             }
 
-            var rand = new Random();
-            var randPanelIndex = rand.Next(0, availablePanels.Count);
+            var randPanelIndex = MixerSettings.random.Next(0, availablePanels.Count);
 
             generatedPanelIndices = availablePanels[randPanelIndex];
             return true;
