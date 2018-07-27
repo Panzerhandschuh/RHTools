@@ -7,5 +7,5 @@ Provides functionality for reading/writing files from StepMania and Rhythm Horiz
 ## Converter
 Converts StepMania files to Rhythm Horizon files
 
-## Mixer
+## Randomizer
 Randomizes the arrows on Rhythm Horizon charts
