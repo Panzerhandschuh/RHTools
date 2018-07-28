@@ -14,17 +14,19 @@ namespace RHTools.Randomizer.Test
 		[TestMethod]
 		public void TestBeatRandomizer()
 		{
-			var randomizer = new BeatRandomizer(RandomizerTestUtil.config9Panel);
+			var settings = GetRandomizerSettings(RandomizerTestUtil.config9Panel);
+			var randomizer = new BeatRandomizer(settings);
 			var notes = GenerateNotes(4);
-			var randomizedNotes = randomizer.RandomizeBeat(notes, new List<Rule>());
+			var randomizedNotes = randomizer.RandomizeBeat(notes);
 		}
 
 		[TestMethod]
 		public void CannotGenerateDuplicateNotes()
 		{
-			var randomizer = new BeatRandomizer(RandomizerTestUtil.config9Panel);
+			var settings = GetRandomizerSettings(RandomizerTestUtil.config9Panel);
+			var randomizer = new BeatRandomizer(settings);
 			var notes = GenerateNotes(4);
-			var randomizedNotes = randomizer.RandomizeBeat(notes, new List<Rule>());
+			var randomizedNotes = randomizer.RandomizeBeat(notes);
 			var distinctNotes = randomizedNotes.Select(x => x.panel).Distinct();
 
 			Assert.AreEqual(randomizedNotes.Count, distinctNotes.Count());
@@ -33,9 +35,10 @@ namespace RHTools.Randomizer.Test
 		[TestMethod]
 		public void CannotGenerateMoreThan2Notes()
 		{
-			var randomizer = new BeatRandomizer(RandomizerTestUtil.config9Panel);
+			var settings = GetRandomizerSettings(RandomizerTestUtil.config9Panel);
+			var randomizer = new BeatRandomizer(settings);
 			var notes = GenerateNotes(3);
-			var randomizedNotes = randomizer.RandomizeBeat(notes, new List<Rule>());
+			var randomizedNotes = randomizer.RandomizeBeat(notes);
 
 			Assert.IsTrue(randomizedNotes.Count <= 2);
 		}
@@ -43,9 +46,10 @@ namespace RHTools.Randomizer.Test
 		[TestMethod]
 		public void CannotGenerateMoreNotesThanAvailableInPanelConfig()
 		{
-			var randomizer = new BeatRandomizer(RandomizerTestUtil.config1Panel);
+			var settings = GetRandomizerSettings(RandomizerTestUtil.config1Panel);
+			var randomizer = new BeatRandomizer(settings);
 			var notes = GenerateNotes(2);
-			var randomizedNotes = randomizer.RandomizeBeat(notes, new List<Rule>());
+			var randomizedNotes = randomizer.RandomizeBeat(notes);
 
 			Assert.IsTrue(randomizedNotes.Count <= 1);
 		}
@@ -66,7 +70,8 @@ namespace RHTools.Randomizer.Test
 		[TestMethod]
 		public void CannotGenerateNoteWhenAllAvailableNotesAreHeld()
 		{
-			var randomizer = new BeatRandomizer(RandomizerTestUtil.config2Panel);
+			var settings = GetRandomizerSettings(RandomizerTestUtil.config2Panel);
+			var randomizer = new BeatRandomizer(settings);
 			HoldNote(randomizer, 0, 1000);
 			HoldNote(randomizer, 0, 1000);
 
@@ -79,7 +84,8 @@ namespace RHTools.Randomizer.Test
 		[TestMethod]
 		public void CanReleaseHeldNotes()
 		{
-			var randomizer = new BeatRandomizer(RandomizerTestUtil.config2Panel);
+			var settings = GetRandomizerSettings(RandomizerTestUtil.config2Panel);
+			var randomizer = new BeatRandomizer(settings);
 			HoldNote(randomizer, 0, 1000);
 			HoldNote(randomizer, 0, 1000);
 
@@ -93,13 +99,24 @@ namespace RHTools.Randomizer.Test
 			throw new NotImplementedException();
 		}
 
+		private BeatRandomizerSettings GetRandomizerSettings(bool[,] panelConfig)
+		{
+			var settings = new BeatRandomizerSettings();
+
+			settings.panelConfig = panelConfig;
+			settings.random = new Random();
+			settings.rules = new List<Rule>();
+
+			return settings;
+		}
+
 		private List<PanelNote> HoldNote(BeatRandomizer randomizer, int beat, int duration)
 		{
 			var notes = new List<Note>()
 			{
 				new Note(NoteType.Hold, beat, duration)
 			};
-			return randomizer.RandomizeBeat(notes, new List<Rule>());
+			return randomizer.RandomizeBeat(notes);
 		}
 
 		private static List<PanelNote> PressNote(BeatRandomizer randomizer, int beat)
@@ -108,7 +125,7 @@ namespace RHTools.Randomizer.Test
 			{
 				new Note(NoteType.Regular, beat)
 			};
-			return randomizer.RandomizeBeat(notes, new List<Rule>());
+			return randomizer.RandomizeBeat(notes);
 		}
 	}
 }

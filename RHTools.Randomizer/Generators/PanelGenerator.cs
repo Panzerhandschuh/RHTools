@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.Randomizer.Rules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace RHTools.Randomizer.Generators
 {
     public abstract class PanelGenerator
     {
-        protected bool TryGetRandomPanel(bool[,] panelConfig, out int[] generatedPanelIndices)
+		public abstract bool TryGeneratePanel(GeneratorInput generatorInput, List<Rule> rules, out int[] generatedPanelIndices);
+
+		protected bool TryGetRandomPanel(bool[,] panelConfig, Random random, out int[] generatedPanelIndices)
         {
             var availablePanels = FindAvailablePanels(panelConfig);
             if (availablePanels.Count == 0)
@@ -17,7 +20,7 @@ namespace RHTools.Randomizer.Generators
                 return false;
             }
 
-            var randPanelIndex = RandomizerSettings.random.Next(0, availablePanels.Count);
+            var randPanelIndex = random.Next(0, availablePanels.Count);
 
             generatedPanelIndices = availablePanels[randPanelIndex];
             return true;

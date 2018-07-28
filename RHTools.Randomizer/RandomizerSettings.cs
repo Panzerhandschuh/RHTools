@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.Randomizer.Rules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,22 @@ using System.Threading.Tasks;
 
 namespace RHTools.Randomizer
 {
-	public static class RandomizerSettings
+	/// <summary>
+	/// Encapsulates the inputs used to generate randomized charts
+	/// </summary>
+	public class RandomizerSettings : BeatRandomizerSettings
 	{
-		public static bool[,] panelConfig;
-		public static Random random;
+		/// <summary>
+		/// RHC, RHS, or RHG file
+		/// </summary>
+		public string rhPath;
+		//public static RhFileType fileType;
 
-		static RandomizerSettings()
+		public RandomizerSettings() { }
+
+		public RandomizerSettings(string rhPath, bool[,] panelConfig, Random random, List<Rule> rules) : base(panelConfig, random, rules)
 		{
-			random = new Random();
+			this.rhPath = rhPath;
 		}
 	}
 }

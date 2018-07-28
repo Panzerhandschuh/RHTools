@@ -1,4 +1,5 @@
-﻿using RHTools.Serialization.RH;
+﻿using RHTools.Randomizer.Rules;
+using RHTools.Serialization.RH;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace RHTools.Randomizer.Generators
 {
     public class MineGenerator : PanelGenerator
     {
-        public bool TryGeneratePanel(bool[,] availablePanels, out int[] generatedPanelIndices)
+        public override bool TryGeneratePanel(GeneratorInput generatorInput, List<Rule> rules, out int[] generatedPanelIndices)
         {
-            return TryGetRandomPanel(availablePanels, out generatedPanelIndices);
+            return TryGetRandomPanel(generatorInput.availablePanels, generatorInput.random, out generatedPanelIndices);
         }
     }
 }

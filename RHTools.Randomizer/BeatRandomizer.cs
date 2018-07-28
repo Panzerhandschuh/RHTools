@@ -14,17 +14,17 @@ namespace RHTools.Randomizer
 	{
 		private StepGenerator stepGenerator;
 		private MineGenerator mineGenerator;
-
-		private readonly bool[,] panelConfig;
 		private GeneratorState generatorState;
 
-		public BeatRandomizer(bool[,] panelConfig)
+		private readonly BeatRandomizerSettings settings;
+
+		public BeatRandomizer(BeatRandomizerSettings settings)
 		{
 			stepGenerator = new StepGenerator();
 			mineGenerator = new MineGenerator();
-
-			this.panelConfig = panelConfig;
 			generatorState = new GeneratorState();
+
+			this.settings = settings;
 		}
 
 		/// <summary>
@@ -32,16 +32,16 @@ namespace RHTools.Randomizer
 		/// </summary>
 		/// <param name="originalNotes">Used by the randomizer to distinguish between regular notes, holds, and mines</param>
 		/// <returns>Randomized notes for a beat</returns>
-		public List<PanelNote> RandomizeBeat(List<Note> originalNotes, List<Rule> rules)
+		public List<PanelNote> RandomizeBeat(List<Note> originalNotes)
 		{
 			var panelNotes = new List<PanelNote>();
-			var counter = new NoteCounter(panelConfig);
+			var counter = new NoteCounter(settings.panelConfig);
 
 			var beat = originalNotes.First().beat;
 			generatorState.UpdateHeldNoteStates(beat);
-			var availablePanels = generatorState.GetPanelConfigWithHeldNotesDisabled(panelConfig);
+			var availablePanels = generatorState.GetPanelConfigWithHeldNotesDisabled(settings.panelConfig);
 
-			var generatorInput = new GeneratorInput(generatorState, rules, availablePanels);
+			var generatorInput = new GeneratorInput(generatorState, availablePanels, settings.random);
 
 			foreach (Note originalNote in originalNotes)
 			{
@@ -49,15 +49,15 @@ namespace RHTools.Randomizer
 				switch (originalNote.type)
 				{
 					case NoteType.Regular:
-						if (TryGenerateNote(counter, generatorInput, originalNote, false, out panelNote))
+						if (TryGenerateNote(generatorInput, originalNote, counter, false, out panelNote))
 							panelNotes.Add(panelNote);
 						break;
 					case NoteType.Hold:
-						if (TryGenerateNote(counter, generatorInput, originalNote, true, out panelNote))
+						if (TryGenerateNote(generatorInput, originalNote, counter, true, out panelNote))
 							panelNotes.Add(panelNote);
 						break;
 					case NoteType.Mine:
-						if (TryGenerateMine(generatorInput.availablePanels, originalNote, out panelNote))
+						if (TryGenerateMine(generatorInput, originalNote, out panelNote))
 							panelNotes.Add(panelNote);
 						break;
 					default:
@@ -68,7 +68,7 @@ namespace RHTools.Randomizer
 			return panelNotes;
 		}
 
-		private bool TryGenerateNote(NoteCounter counter, GeneratorInput generatorInput, Note originalNote, bool holdNote, out PanelNote panelNote)
+		private bool TryGenerateNote(GeneratorInput generatorInput, Note originalNote, NoteCounter counter, bool holdNote, out PanelNote panelNote)
 		{
 			if (counter.IsAtMaxNotes())
 			{
@@ -76,14 +76,13 @@ namespace RHTools.Randomizer
 				return false;
 			}
 
-			if (!stepGenerator.TryGeneratePanel(generatorInput, out var generatedPanelIndices))
+			if (!stepGenerator.TryGeneratePanel(generatorInput, settings.rules, out var generatedPanelIndices))
 			{
 				panelNote = null;
 				return false;
 			}
 
-			panelNote = RemovePanelFromAvailablePanelsAndGetPanelNote(
-				generatorInput.availablePanels, generatedPanelIndices, originalNote);
+			panelNote = RemovePanelFromAvailablePanelsAndGetPanelNote(generatorInput.availablePanels, generatedPanelIndices, originalNote);
 
 			counter.IncrementCounter();
 
@@ -97,17 +96,17 @@ namespace RHTools.Randomizer
 			return true;
 		}
 
-		private bool TryGenerateMine(bool[,] availablePanels, Note originalNote, out PanelNote panelNote)
+		private bool TryGenerateMine(GeneratorInput generatorInput, Note originalNote, out PanelNote panelNote)
 		{
 			int[] generatedPanelIndices;
-			if (!mineGenerator.TryGeneratePanel(availablePanels, out generatedPanelIndices))
+			var rules = new List<Rule>(); // Mines currently have no rules
+			if (!mineGenerator.TryGeneratePanel(generatorInput, rules, out generatedPanelIndices))
 			{
 				panelNote = null;
 				return false;
 			}
 
-			panelNote = RemovePanelFromAvailablePanelsAndGetPanelNote(
-				availablePanels, generatedPanelIndices, originalNote);
+			panelNote = RemovePanelFromAvailablePanelsAndGetPanelNote(generatorInput.availablePanels, generatedPanelIndices, originalNote);
 
 			return true;
 		}

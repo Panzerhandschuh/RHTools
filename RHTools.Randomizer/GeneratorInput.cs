@@ -10,14 +10,14 @@ namespace RHTools.Randomizer
     public class GeneratorInput
     {
         public GeneratorState generatorState;
-		public List<Rule> rules;
         public bool[,] availablePanels;
+		public Random random;
 
-        public GeneratorInput(GeneratorState generatorState, List<Rule> rules, bool[,] availablePanels)
+        public GeneratorInput(GeneratorState generatorState, bool[,] availablePanels, Random random)
         {
             this.generatorState = generatorState;
-			this.rules = rules;
             this.availablePanels = availablePanels;
+			this.random = random;
         }
     }
 }

@@ -11,30 +11,33 @@ using System.Threading.Tasks;
 
 namespace RHTools.Randomizer
 {
-	public class Randomizer
+	/// <summary>
+	/// Randomizes a chart (RHC)
+	/// </summary>
+	public class RhcRandomizer
 	{
-		private string rhcPath;
+		private readonly RandomizerSettings settings;
 		private RhcFile rhcFile;
 
-		public Randomizer(string rhcPath)
+		public RhcRandomizer(RandomizerSettings settings)
 		{
-			this.rhcPath = rhcPath;
-			rhcFile = IBinarySerializableExtensions.Deserialize(rhcPath, RhcFile.Deserialize);
+			this.settings = settings;
+			rhcFile = IBinarySerializableExtensions.Deserialize(settings.rhPath, RhcFile.Deserialize);
 		}
 
-		public void Randomize(bool[,] panelConfig)
+		public void Randomize()
 		{
 			var layer = rhcFile.layers.layers.First();
 			var beatNotesList = NoteConverter.ConvertToBeatNotes(layer.notes);
 
-			var randomizedNotes = RandomizeBeatNotes(beatNotesList, panelConfig);
+			var randomizedNotes = RandomizeBeatNotes(beatNotesList);
 
 			var rhNotes = NoteConverter.ConvertToRhNotes(randomizedNotes);
 			layer.notes = rhNotes;
 
 			UpdatePanelConfig(layer, rhNotes);
 
-			var rhDir = Path.GetDirectoryName(rhcPath);
+			var rhDir = Path.GetDirectoryName(settings.rhPath);
 			SaveRandomizedRhc(rhDir);
 			SyncRandomizedRhcToCache(rhDir);
 		}
@@ -67,14 +70,14 @@ namespace RHTools.Randomizer
 			cacheFile.SerializeToFile(cachePath);
 		}
 
-		public List<List<PanelNote>> RandomizeBeatNotes(List<BeatNotes> beatNotesList, bool[,] panelConfig)
+		public List<List<PanelNote>> RandomizeBeatNotes(List<BeatNotes> beatNotesList)
 		{
 			var panelNotesList = new List<List<PanelNote>>();
 
-			var beatRandomizer = new BeatRandomizer(panelConfig);
+			var beatRandomizer = new BeatRandomizer(settings);
 			foreach (var beatNotes in beatNotesList)
 			{
-				var panelNotes = beatRandomizer.RandomizeBeat(beatNotes.notes, new List<Rule>());
+				var panelNotes = beatRandomizer.RandomizeBeat(beatNotes.notes);
 				panelNotesList.Add(panelNotes);
 			}
 
