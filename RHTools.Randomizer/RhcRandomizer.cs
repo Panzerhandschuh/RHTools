@@ -42,6 +42,20 @@ namespace RHTools.Randomizer
 			SyncRandomizedRhcToCache(rhDir);
 		}
 
+		private List<List<PanelNote>> RandomizeBeatNotes(List<BeatNotes> beatNotesList)
+		{
+			var panelNotesList = new List<List<PanelNote>>();
+
+			var beatRandomizer = new BeatRandomizer(settings);
+			foreach (var beatNotes in beatNotesList)
+			{
+				var panelNotes = beatRandomizer.RandomizeBeat(beatNotes.notes);
+				panelNotesList.Add(panelNotes);
+			}
+
+			return panelNotesList;
+		}
+
 		private void UpdatePanelConfig(Layer layer, Dictionary<NoteFlags, List<Note>> rhNotes)
 		{
 			layer.panelConfig = 0;
@@ -68,20 +82,6 @@ namespace RHTools.Randomizer
 			sync.Sync();
 
 			cacheFile.SerializeToFile(cachePath);
-		}
-
-		public List<List<PanelNote>> RandomizeBeatNotes(List<BeatNotes> beatNotesList)
-		{
-			var panelNotesList = new List<List<PanelNote>>();
-
-			var beatRandomizer = new BeatRandomizer(settings);
-			foreach (var beatNotes in beatNotesList)
-			{
-				var panelNotes = beatRandomizer.RandomizeBeat(beatNotes.notes);
-				panelNotesList.Add(panelNotes);
-			}
-
-			return panelNotesList;
 		}
 	}
 }

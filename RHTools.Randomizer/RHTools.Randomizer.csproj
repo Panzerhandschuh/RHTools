@@ -43,6 +43,7 @@
     <Compile Include="BeatRandomizer.cs" />
     <Compile Include="BeatNotes.cs" />
     <Compile Include="BeatRandomizerSettings.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Foot.cs" />
     <Compile Include="GeneratorInput.cs" />
     <Compile Include="GeneratorState.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Generators\PanelGenerator.cs" />
     <Compile Include="Generators\StepGenerator.cs" />
     <Compile Include="HoldFlags.cs" />
+    <Compile Include="NoteHolder.cs" />
     <Compile Include="RhcRandomizer.cs" />
     <Compile Include="RandomizerSettings.cs" />
     <Compile Include="NoteCounter.cs" />
@@ -59,9 +61,13 @@
     <Compile Include="RhFileType.cs" />
     <Compile Include="RhgRandomizer.cs" />
     <Compile Include="RhsRandomizer.cs" />
-    <Compile Include="Rules\DisableHeldPanelsRule.cs" />
+    <Compile Include="Rules\DisableCenterPanelOverlapRule.cs" />
+    <Compile Include="Rules\DisableColumnForFootRule.cs" />
+    <Compile Include="Rules\MaxCrossoverDistanceRule.cs" />
+    <Compile Include="Rules\MaxRepetitionsEveryPressRule.cs" />
+    <Compile Include="Rules\MaxReptitionsEveryOtherPressRule.cs" />
+    <Compile Include="Rules\MaxStretchDistanceRule.cs" />
     <Compile Include="Rules\Rule.cs" />
-    <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="Utils\NoteConverter.cs" />
     <Compile Include="Utils\PanelConfigUtil.cs" />
   </ItemGroup>

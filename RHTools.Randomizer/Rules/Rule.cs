@@ -8,6 +8,6 @@ namespace RHTools.Randomizer.Rules
 {
     public abstract class Rule
     {
-        public abstract bool[,] Filter(bool[,] panelConfig);
+        public abstract void Filter(bool[,] panelConfig, GeneratorState state);
     }
 }

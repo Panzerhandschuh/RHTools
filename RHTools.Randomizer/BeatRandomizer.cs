@@ -22,7 +22,7 @@ namespace RHTools.Randomizer
 		{
 			stepGenerator = new StepGenerator();
 			mineGenerator = new MineGenerator();
-			generatorState = new GeneratorState();
+			generatorState = new GeneratorState(settings.random);
 
 			this.settings = settings;
 		}

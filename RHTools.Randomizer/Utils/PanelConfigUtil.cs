@@ -9,6 +9,9 @@ namespace RHTools.Randomizer.Utils
 {
     public static class PanelConfigUtil
     {
+		public const int maxRows = 3;
+		public const int maxColumns = 6; // 2 pads, 3 columns each
+
         private static readonly NoteFlags[,] panelIndicesToNoteArray =
         {
             { NoteFlags.Pad1UpLeft, NoteFlags.Pad1Up, NoteFlags.Pad1UpRight, NoteFlags.Pad2UpLeft, NoteFlags.Pad2Up, NoteFlags.Pad2UpRight },

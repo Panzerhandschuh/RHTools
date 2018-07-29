@@ -51,6 +51,10 @@
     <Compile Include="BeatRandomizerTest.cs" />
     <Compile Include="RandomizerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\MaxStretchDistanceRuleTest.cs" />
+    <Compile Include="Rules\MaxRepetitionsEveryPressRuleTest.cs" />
+    <Compile Include="Rules\MaxReptitionsEveryOtherPressRuleTest.cs" />
+    <Compile Include="Rules\RuleTest.cs" />
     <Compile Include="Utils\RandomizerTestUtil.cs" />
   </ItemGroup>
   <ItemGroup>
