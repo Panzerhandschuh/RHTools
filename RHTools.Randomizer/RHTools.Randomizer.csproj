@@ -52,7 +52,6 @@
     <Compile Include="Generators\PanelGenerator.cs" />
     <Compile Include="Generators\StepGenerator.cs" />
     <Compile Include="HoldFlags.cs" />
-    <Compile Include="NoteHolder.cs" />
     <Compile Include="RhcRandomizer.cs" />
     <Compile Include="RandomizerSettings.cs" />
     <Compile Include="NoteCounter.cs" />
