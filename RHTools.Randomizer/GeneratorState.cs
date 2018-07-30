@@ -84,7 +84,7 @@ namespace RHTools.Randomizer
 				return;
 
 			var note = panelNote.note;
-            if (beat > note.beat + note.duration)
+            if (beat >= note.beat + note.duration)
 				heldPanelNotes[foot] = null;
         }
 
