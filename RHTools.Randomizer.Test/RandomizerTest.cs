@@ -30,8 +30,7 @@ namespace RHTools.Randomizer.Test
 				new MaxRepetitionsEveryXNotesRule(1, 2),
 				new DisableColumnForFootRule(Foot.Left, 2),
 				new DisableColumnForFootRule(Foot.Right, 0),
-				new MaxStretchDistanceRule(2),
-				new MaxCrossoverDistanceRule(0),
+				new MaxSpanRule(2, 0),
 				new DisableCenterPanelOverlapRule()
 			};
 
@@ -44,7 +43,7 @@ namespace RHTools.Randomizer.Test
 		{
 			var settings = new RandomizerSettings();
 
-			settings.rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\af75efa4-11b7-4be0-a194-fd98b0f7cece.rhc";
+			settings.rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\733990c7-17c2-41b7-bdad-3b67cb319bd2.rhc";
 			settings.panelConfig = RandomizerTestUtil.config9Panel;
 			settings.random = new Random();
 			settings.rules = rules;

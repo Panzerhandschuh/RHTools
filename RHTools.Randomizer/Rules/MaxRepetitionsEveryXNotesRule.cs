@@ -13,8 +13,9 @@ namespace RHTools.Randomizer.Rules
 
 		/// <summary>
 		/// Limits the amount of times a particular panel can be repeated every x notes.
-		/// Example: maxRepetitions = 0, numSteps = 1, prevents double taps (right, [anything besides right]).
-		/// Example: maxRepetitions = 1, numSteps = 2, prevents repetitive patterns (right, left, right, left, [anything besides right]).
+		/// Example: maxRepetitions = 0, numSteps = 1 - prevents double taps (left, [anything besides left]).
+		/// Example: maxRepetitions = 1, numSteps = 1 - allows double taps but not triple taps (left, left, [anything besides left]).
+		/// Example: maxRepetitions = 1, numSteps = 2 - prevents repetitive patterns (left, right, left, right [anything besides left]).
 		/// </summary>
 		public MaxRepetitionsEveryXNotesRule(int maxRepetitions, int numSteps)
 		{

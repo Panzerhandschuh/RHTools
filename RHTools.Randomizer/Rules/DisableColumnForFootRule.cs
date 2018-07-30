@@ -12,6 +12,10 @@ namespace RHTools.Randomizer.Rules
 		private readonly Foot foot;
 		private readonly int column;
 
+		/// <summary>
+		/// Disables a column for a foot
+		/// This can be used to prevent the left foot from crossing over to the rightmost panels and vice versa
+		/// </summary>
 		public DisableColumnForFootRule(Foot foot, int column)
 		{
 			this.foot = foot;

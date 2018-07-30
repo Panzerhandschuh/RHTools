@@ -50,7 +50,8 @@ namespace RHTools.Randomizer
 			foreach (var beatNotes in beatNotesList)
 			{
 				var panelNotes = beatRandomizer.RandomizeBeat(beatNotes.notes);
-				panelNotesList.Add(panelNotes);
+				if (panelNotes.Any())
+					panelNotesList.Add(panelNotes);
 			}
 
 			return panelNotesList;
