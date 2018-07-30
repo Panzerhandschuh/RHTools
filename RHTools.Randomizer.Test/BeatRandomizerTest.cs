@@ -77,7 +77,7 @@ namespace RHTools.Randomizer.Test
 
 			var randomizedNotes = new List<PanelNote>();
 			randomizedNotes.AddRange(PressNote(randomizer, 500));
-			randomizedNotes.AddRange(PressNote(randomizer, 1000)); // Previous notes should still be held, even on the beat at the end of the hold's duration
+			randomizedNotes.AddRange(PressNote(randomizer, 999)); // 999 should be the last beat before the note is no longer held
 			Assert.AreEqual(0, randomizedNotes.Count);
 		}
 

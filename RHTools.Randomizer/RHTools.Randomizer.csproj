@@ -63,8 +63,7 @@
     <Compile Include="Rules\DisableCenterPanelOverlapRule.cs" />
     <Compile Include="Rules\DisableColumnForFootRule.cs" />
     <Compile Include="Rules\MaxCrossoverDistanceRule.cs" />
-    <Compile Include="Rules\MaxRepetitionsEveryPressRule.cs" />
-    <Compile Include="Rules\MaxReptitionsEveryOtherPressRule.cs" />
+    <Compile Include="Rules\MaxRepetitionsEveryXNotesRule.cs" />
     <Compile Include="Rules\MaxStretchDistanceRule.cs" />
     <Compile Include="Rules\Rule.cs" />
     <Compile Include="Utils\NoteConverter.cs" />

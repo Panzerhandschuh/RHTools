@@ -26,9 +26,9 @@ namespace RHTools.Randomizer.Test
 		{
 			var rules = new List<Rule>()
 			{
-				new MaxRepetitionsEveryPressRule(0),
-				new MaxReptitionsEveryOtherPressRule(1),
-				new DisableColumnForFootRule(Foot.Left, 2), // TODO: Need a better rule for automatically detecting the rightmost column in the panel config
+				new MaxRepetitionsEveryXNotesRule(0, 1),
+				new MaxRepetitionsEveryXNotesRule(1, 2),
+				new DisableColumnForFootRule(Foot.Left, 2),
 				new DisableColumnForFootRule(Foot.Right, 0),
 				new MaxStretchDistanceRule(2),
 				new MaxCrossoverDistanceRule(0),
@@ -44,7 +44,7 @@ namespace RHTools.Randomizer.Test
 		{
 			var settings = new RandomizerSettings();
 
-			settings.rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\a8a73cea-8fe5-4807-b242-41ac35db97ce.rhc";
+			settings.rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\af75efa4-11b7-4be0-a194-fd98b0f7cece.rhc";
 			settings.panelConfig = RandomizerTestUtil.config9Panel;
 			settings.random = new Random();
 			settings.rules = rules;

@@ -29,7 +29,21 @@ namespace RHTools.Randomizer.Test.Utils
             { false, false, false, false, false, false }
         };
 
-        public static readonly bool[,] config9Panel = new bool[,]
+		public static readonly bool[,] config4Panel = new bool[,]
+		{
+			{ false, true, false, false, false, false },
+			{ true, false, true, false, false, false },
+			{ false, true, false, false, false, false }
+		};
+
+		public static readonly bool[,] config5Panel = new bool[,]
+		{
+			{ true, false, true, false, false, false },
+			{ false, true, false, false, false, false },
+			{ true, false, true, false, false, false }
+		};
+
+		public static readonly bool[,] config9Panel = new bool[,]
         {
             { true, true, true, false, false, false },
             { true, true, true, false, false, false },
