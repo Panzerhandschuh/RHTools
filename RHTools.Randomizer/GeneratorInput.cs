@@ -13,10 +13,10 @@ namespace RHTools.Randomizer
         public bool[,] availablePanels;
 		public Random random;
 
-        public GeneratorInput(GeneratorState generatorState, bool[,] availablePanels, Random random)
+        public GeneratorInput(GeneratorState generatorState, bool[,] panelConfig, Random random)
         {
             this.generatorState = generatorState;
-            this.availablePanels = availablePanels;
+            availablePanels = (bool[,])panelConfig.Clone();
 			this.random = random;
         }
     }

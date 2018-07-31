@@ -36,12 +36,8 @@ namespace RHTools.Randomizer
 		{
 			var panelNotes = new List<PanelNote>();
 			var counter = new NoteCounter(settings.panelConfig);
-
+			var generatorInput = new GeneratorInput(generatorState, settings.panelConfig, settings.random);
 			var beat = originalNotes.First().beat;
-			generatorState.UpdateHeldNoteStates(beat);
-			var availablePanels = generatorState.GetPanelConfigWithHeldNotesDisabled(settings.panelConfig);
-
-			var generatorInput = new GeneratorInput(generatorState, availablePanels, settings.random);
 
 			foreach (Note originalNote in originalNotes)
 			{
@@ -49,15 +45,12 @@ namespace RHTools.Randomizer
 				switch (originalNote.type)
 				{
 					case NoteType.Regular:
-						if (TryGenerateNote(generatorInput, originalNote, counter, false, out panelNote))
-							panelNotes.Add(panelNote);
-						break;
 					case NoteType.Hold:
-						if (TryGenerateNote(generatorInput, originalNote, counter, true, out panelNote))
+						if (TryGenerateNote(generatorInput, beat, counter, out panelNote))
 							panelNotes.Add(panelNote);
 						break;
 					case NoteType.Mine:
-						if (TryGenerateMine(generatorInput, originalNote, out panelNote))
+						if (TryGenerateMine(generatorInput, beat, out panelNote))
 							panelNotes.Add(panelNote);
 						break;
 					default:
@@ -68,7 +61,7 @@ namespace RHTools.Randomizer
 			return panelNotes;
 		}
 
-		private bool TryGenerateNote(GeneratorInput generatorInput, Note originalNote, NoteCounter counter, bool holdNote, out PanelNote panelNote)
+		private bool TryGenerateNote(GeneratorInput generatorInput, int beat, NoteCounter counter, out PanelNote panelNote)
 		{
 			if (counter.IsAtMaxNotes())
 			{
@@ -82,21 +75,17 @@ namespace RHTools.Randomizer
 				return false;
 			}
 
-			panelNote = RemovePanelFromAvailablePanelsAndGetPanelNote(generatorInput.availablePanels, generatedPanelIndices, originalNote);
+			RemovePanelFromAvailablePanels(generatorInput.availablePanels, generatedPanelIndices);
+			panelNote = GetPanelNote(NoteType.Regular, beat, generatedPanelIndices); // Note: Currently ignoring hold notes due to rules that prevent arrows from getting generated in some cases (ex: right foot is holding up, left foot can only alternate between left and down for 4 notes in the default ruleset)
 
 			counter.IncrementCounter();
-
-			if (holdNote)
-				generatorState.HoldNoteWithCurrentFoot(panelNote);
-			else
-				generatorState.AlternateFoot();
-
+			generatorState.AlternateFoot();
 			generatorState.AddPanelToHistory(generatedPanelIndices);
 
 			return true;
 		}
 
-		private bool TryGenerateMine(GeneratorInput generatorInput, Note originalNote, out PanelNote panelNote)
+		private bool TryGenerateMine(GeneratorInput generatorInput, int beat, out PanelNote panelNote)
 		{
 			int[] generatedPanelIndices;
 			var rules = new List<Rule>(); // Mines currently have no rules
@@ -106,15 +95,10 @@ namespace RHTools.Randomizer
 				return false;
 			}
 
-			panelNote = RemovePanelFromAvailablePanelsAndGetPanelNote(generatorInput.availablePanels, generatedPanelIndices, originalNote);
+			RemovePanelFromAvailablePanels(generatorInput.availablePanels, generatedPanelIndices);
+			panelNote = GetPanelNote(NoteType.Mine, beat, generatedPanelIndices);
 
 			return true;
-		}
-
-		private PanelNote RemovePanelFromAvailablePanelsAndGetPanelNote(bool[,] availablePanels, int[] panelIndices, Note note)
-		{
-			RemovePanelFromAvailablePanels(availablePanels, panelIndices);
-			return GetPanelNote(panelIndices, note);
 		}
 
 		private void RemovePanelFromAvailablePanels(bool[,] availablePanels, int[] panelIndices)
@@ -122,11 +106,11 @@ namespace RHTools.Randomizer
 			availablePanels.SetValue(false, panelIndices);
 		}
 
-		private static PanelNote GetPanelNote(int[] panelIndices, Note note)
+		private PanelNote GetPanelNote(NoteType noteType, int beat, int[] generatedPanelIndices)
 		{
-			var panel = PanelConfigUtil.GetNote(panelIndices);
-			var panelNote = new PanelNote(panel, note);
-			return panelNote;
+			var panel = PanelConfigUtil.GetNote(generatedPanelIndices);
+			var note = new Note(NoteType.Regular, beat);
+			return new PanelNote(panel, note);
 		}
 	}
 }
