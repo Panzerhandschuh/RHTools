@@ -35,7 +35,8 @@ namespace RHTools.Randomizer
 		public List<PanelNote> RandomizeBeat(List<Note> originalNotes)
 		{
 			var panelNotes = new List<PanelNote>();
-			var counter = new NoteCounter(settings.panelConfig);
+			var maxNotesPerBeat = (settings.disableJumps) ? 1 : 2;
+			var counter = new NoteCounter(settings.panelConfig, maxNotesPerBeat);
 			var generatorInput = new GeneratorInput(generatorState, settings.panelConfig, settings.random);
 			var beat = originalNotes.First().beat;
 
@@ -107,7 +108,7 @@ namespace RHTools.Randomizer
 		private PanelNote GetPanelNote(NoteType noteType, int beat, int[] generatedPanelIndices)
 		{
 			var panel = PanelConfigUtil.GetNote(generatedPanelIndices);
-			var note = new Note(NoteType.Regular, beat);
+			var note = new Note(noteType, beat);
 			return new PanelNote(panel, note);
 		}
 	}

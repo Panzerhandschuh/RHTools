@@ -9,10 +9,9 @@ namespace RHTools.Randomizer
     public class NoteCounter
     {
         private int counter;
-        private const int maxNotesPerBeat = 2; // Limited by the number of feet
         private int maxNotesForPanelConfig;
 
-        public NoteCounter(bool[,] panelConfig)
+        public NoteCounter(bool[,] panelConfig, int maxNotesPerBeat)
         {
             var numPanelsAvailable = panelConfig.Cast<bool>().Count(x => x);
             maxNotesForPanelConfig = Math.Min(maxNotesPerBeat, numPanelsAvailable);
