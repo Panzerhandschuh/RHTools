@@ -39,6 +39,11 @@ namespace RHTools.Serialization.RH
 			return (this == otherGuid);
 		}
 
+		public override int GetHashCode()
+		{
+			return -1324198676 + EqualityComparer<byte[]>.Default.GetHashCode(guid);
+		}
+
 		public override string ToString()
 		{
 			var sb = new StringBuilder();
