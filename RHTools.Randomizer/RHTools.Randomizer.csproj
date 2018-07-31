@@ -65,7 +65,9 @@
     <Compile Include="Rules\DisableLastXNotesRule.cs" />
     <Compile Include="Rules\MaxRepetitionsEveryXNotesRule.cs" />
     <Compile Include="Rules\MaxSpanRule.cs" />
+    <Compile Include="Rules\MaxDistancePerStepRule.cs" />
     <Compile Include="Rules\Rule.cs" />
+    <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\NoteConverter.cs" />
     <Compile Include="Utils\PanelConfigUtil.cs" />
   </ItemGroup>

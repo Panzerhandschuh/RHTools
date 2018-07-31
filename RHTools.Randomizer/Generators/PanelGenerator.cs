@@ -30,9 +30,9 @@ namespace RHTools.Randomizer.Generators
         {
             var availableNotes = new List<int[]>();
 
-            for (int i = 0; i < panelConfig.GetLength(0); i++)
+            for (var i = 0; i < panelConfig.GetLength(0); i++)
             {
-                for (int j = 0; j < panelConfig.GetLength(1); j++)
+                for (var j = 0; j < panelConfig.GetLength(1); j++)
                 {
                     if ((bool)panelConfig.GetValue(i, j))
                         availableNotes.Add(new int[] { i, j });

@@ -19,7 +19,7 @@ namespace RHTools.Randomizer.Rules
 		public DisableColumnForFootRule(Foot foot, int column)
 		{
 			this.foot = foot;
-			this.column = Math.Min(Math.Max(column, 0), PanelConfigUtil.maxColumns - 1);
+			this.column = MathUtil.Clamp(column, 0, PanelConfigUtil.maxColumns - 1);;
 		}
 
 		public override void Filter(bool[,] panelConfig, GeneratorState state)
@@ -27,7 +27,7 @@ namespace RHTools.Randomizer.Rules
 			if (foot != state.CurrentFoot)
 				return;
 
-			for (int row = 0; row < PanelConfigUtil.maxRows; row++)
+			for (var row = 0; row < PanelConfigUtil.maxRows; row++)
 				panelConfig[row, column] = false;
 		}
 	}

@@ -61,7 +61,7 @@ namespace RHTools.Randomizer.Test
 		{
 			var notes = new List<Note>();
 
-			for (int i = 0; i < numNotes; i++)
+			for (var i = 0; i < numNotes; i++)
 				notes.Add(new Note(NoteType.Regular, 0));
 
 			return notes;

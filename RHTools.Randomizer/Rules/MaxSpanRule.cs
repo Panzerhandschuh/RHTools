@@ -48,9 +48,9 @@ namespace RHTools.Randomizer.Rules
 
 		private void FilterLeftOfStartColumn(bool[,] panelConfig, int startCol, int maxDistance)
 		{
-			for (int col = 0; col < startCol - maxDistance; col++)
+			for (var col = 0; col < startCol - maxDistance; col++)
 			{
-				for (int row = 0; row < PanelConfigUtil.maxRows; row++)
+				for (var row = 0; row < PanelConfigUtil.maxRows; row++)
 				{
 					panelConfig[row, col] = false;
 				}
@@ -59,9 +59,9 @@ namespace RHTools.Randomizer.Rules
 
 		private void FilterRightOfStartColumn(bool[,] panelConfig, int startCol, int maxDistance)
 		{
-			for (int col = startCol + maxDistance + 1; col < PanelConfigUtil.maxColumns; col++)
+			for (var col = startCol + maxDistance + 1; col < PanelConfigUtil.maxColumns; col++)
 			{
-				for (int row = 0; row < PanelConfigUtil.maxRows; row++)
+				for (var row = 0; row < PanelConfigUtil.maxRows; row++)
 				{
 					panelConfig[row, col] = false;
 				}

@@ -26,9 +26,9 @@ namespace RHTools.Randomizer.Utils
 
 		public static int[] GetPanelIndices(NoteFlags noteFlags)
 		{
-			for (int i = 0; i < panelIndicesToNoteArray.GetLength(0); i++)
+			for (var i = 0; i < panelIndicesToNoteArray.GetLength(0); i++)
 			{
-				for (int j = 0; j < panelIndicesToNoteArray.GetLength(1); j++)
+				for (var j = 0; j < panelIndicesToNoteArray.GetLength(1); j++)
 				{
 					if (panelIndicesToNoteArray[i, j] == noteFlags)
 						return new int[] { i, j };
