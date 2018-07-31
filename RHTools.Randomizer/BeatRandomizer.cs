@@ -69,7 +69,7 @@ namespace RHTools.Randomizer
 				return false;
 			}
 
-			if (!stepGenerator.TryGeneratePanel(generatorInput, settings.rules, out var generatedPanelIndices))
+			if (!stepGenerator.TryGeneratePanel(generatorInput, settings.noteRules, out var generatedPanelIndices))
 			{
 				panelNote = null;
 				return false;
@@ -87,9 +87,7 @@ namespace RHTools.Randomizer
 
 		private bool TryGenerateMine(GeneratorInput generatorInput, int beat, out PanelNote panelNote)
 		{
-			int[] generatedPanelIndices;
-			var rules = new List<Rule>(); // Mines currently have no rules
-			if (!mineGenerator.TryGeneratePanel(generatorInput, rules, out generatedPanelIndices))
+			if (!mineGenerator.TryGeneratePanel(generatorInput, settings.mineRules, out var generatedPanelIndices))
 			{
 				panelNote = null;
 				return false;

@@ -20,7 +20,7 @@ namespace RHTools.Randomizer
 
 		public RandomizerSettings() { }
 
-		public RandomizerSettings(string rhPath, bool[,] panelConfig, Random random, List<Rule> rules) : base(panelConfig, random, rules)
+		public RandomizerSettings(string rhPath, bool[,] panelConfig, Random random, List<Rule> noteRules, List<Rule> mineRules) : base(panelConfig, random, noteRules, mineRules)
 		{
 			this.rhPath = rhPath;
 		}

@@ -49,5 +49,12 @@ namespace RHTools.Randomizer.Test.Utils
             { true, true, true, false, false, false },
             { true, true, true, false, false, false }
         };
-    }
+
+		public static readonly bool[,] config18Panel = new bool[,]
+		{
+			{ true, true, true, true, true, true },
+			{ true, true, true, true, true, true },
+			{ true, true, true, true, true, true }
+		};
+	}
 }

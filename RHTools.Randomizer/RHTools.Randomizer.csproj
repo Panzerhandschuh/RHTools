@@ -62,6 +62,7 @@
     <Compile Include="RhsRandomizer.cs" />
     <Compile Include="Rules\DisableCenterPanelOverlapRule.cs" />
     <Compile Include="Rules\DisableColumnForFootRule.cs" />
+    <Compile Include="Rules\DisableLastXNotesRule.cs" />
     <Compile Include="Rules\MaxRepetitionsEveryXNotesRule.cs" />
     <Compile Include="Rules\MaxSpanRule.cs" />
     <Compile Include="Rules\Rule.cs" />

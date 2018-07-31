@@ -105,7 +105,7 @@ namespace RHTools.Randomizer.Test
 
 			settings.panelConfig = panelConfig;
 			settings.random = new Random();
-			settings.rules = new List<Rule>();
+			settings.noteRules = new List<Rule>();
 
 			return settings;
 		}

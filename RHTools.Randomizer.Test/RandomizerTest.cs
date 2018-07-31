@@ -14,9 +14,9 @@ namespace RHTools.Randomizer.Test
 	public class RandomizerTest
 	{
 		[TestMethod]
-		public void RandomizeRhc()
+		public void RandomizeWithNoRules()
 		{
-			var settings = GetSettings(new List<Rule>());
+			var settings = GetSettings(new List<Rule>(), new List<Rule>());
 			var randomizer = new RhcRandomizer(settings);
 			randomizer.Randomize();
 		}
@@ -24,7 +24,7 @@ namespace RHTools.Randomizer.Test
 		[TestMethod]
 		public void RandomizeWithRules()
 		{
-			var rules = new List<Rule>()
+			var noteRules = new List<Rule>()
 			{
 				new MaxRepetitionsEveryXNotesRule(0, 1),
 				new MaxRepetitionsEveryXNotesRule(1, 2),
@@ -34,19 +34,25 @@ namespace RHTools.Randomizer.Test
 				new DisableCenterPanelOverlapRule()
 			};
 
-			var settings = GetSettings(rules);
+			var mineRules = new List<Rule>()
+			{
+				new DisableLastXNotesRule(1)
+			};
+
+			var settings = GetSettings(noteRules, mineRules);
 			var randomizer = new RhcRandomizer(settings);
 			randomizer.Randomize();
 		}
 
-		private RandomizerSettings GetSettings(List<Rule> rules)
+		private RandomizerSettings GetSettings(List<Rule> noteRules, List<Rule> mineRules)
 		{
 			var settings = new RandomizerSettings();
 
-			settings.rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\733990c7-17c2-41b7-bdad-3b67cb319bd2.rhc";
+			settings.rhPath = @"C:\Users\Tyler\AppData\Roaming\Rhythm Horizon\GameData\d1344d30-4b50-457e-b28d-c813eb78bf0a.rhc";
 			settings.panelConfig = RandomizerTestUtil.config9Panel;
 			settings.random = new Random();
-			settings.rules = rules;
+			settings.noteRules = noteRules;
+			settings.mineRules = mineRules;
 
 			return settings;
 		}

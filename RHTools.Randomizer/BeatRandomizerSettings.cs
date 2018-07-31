@@ -11,15 +11,17 @@ namespace RHTools.Randomizer
 	{
 		public bool[,] panelConfig;
 		public Random random;
-		public List<Rule> rules;
+		public List<Rule> noteRules;
+		public List<Rule> mineRules;
 
 		public BeatRandomizerSettings() { }
 
-		public BeatRandomizerSettings(bool[,] panelConfig, Random random, List<Rule> rules)
+		public BeatRandomizerSettings(bool[,] panelConfig, Random random, List<Rule> noteRules, List<Rule> mineRules)
 		{
 			this.panelConfig = panelConfig;
 			this.random = random;
-			this.rules = rules;
+			this.noteRules = noteRules;
+			this.mineRules = mineRules;
 		}
 	}
 }
