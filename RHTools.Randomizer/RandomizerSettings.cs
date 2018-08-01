@@ -17,12 +17,5 @@ namespace RHTools.Randomizer
 		/// </summary>
 		public string rhPath;
 		//public static RhFileType fileType;
-
-		public RandomizerSettings() { }
-
-		public RandomizerSettings(string rhPath, bool[,] panelConfig, Random random, List<Rule> noteRules, List<Rule> mineRules, bool disableJumps) : base(panelConfig, random, noteRules, mineRules, disableJumps)
-		{
-			this.rhPath = rhPath;
-		}
 	}
 }

@@ -88,6 +88,12 @@ namespace RHTools.Randomizer
 
 		private bool TryGenerateMine(GeneratorInput generatorInput, int beat, out PanelNote panelNote)
 		{
+			if (settings.disableMines)
+			{
+				panelNote = null;
+				return false;
+			}
+
 			if (!mineGenerator.TryGeneratePanel(generatorInput, settings.mineRules, out var generatedPanelIndices))
 			{
 				panelNote = null;
