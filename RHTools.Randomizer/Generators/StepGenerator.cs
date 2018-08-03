@@ -11,12 +11,10 @@ namespace RHTools.Randomizer.Generators
     public class StepGenerator : PanelGenerator
     {
         public override bool TryGeneratePanel(GeneratorInput generatorInput, List<Rule> rules, out int[] generatedPanelIndices)
-        {
-			var filteredPanelConfig = (bool[,])generatorInput.availablePanels.Clone();
-			foreach (var rule in rules)
-				rule.Filter(filteredPanelConfig, generatorInput.generatorState);
+		{
+			var filteredPanelConfig = ApplyRules(rules, generatorInput);
 
-            return TryGetRandomPanel(filteredPanelConfig, generatorInput.random, out generatedPanelIndices);
-        }
-    }
+			return TryGetRandomPanel(filteredPanelConfig, generatorInput.random, out generatedPanelIndices);
+		}
+	}
 }

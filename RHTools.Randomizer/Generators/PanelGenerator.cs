@@ -11,6 +11,15 @@ namespace RHTools.Randomizer.Generators
     {
 		public abstract bool TryGeneratePanel(GeneratorInput generatorInput, List<Rule> rules, out int[] generatedPanelIndices);
 
+		protected bool[,] ApplyRules(List<Rule> rules, GeneratorInput generatorInput)
+		{
+			var filteredPanelConfig = (bool[,])generatorInput.availablePanels.Clone();
+			foreach (var rule in rules)
+				rule.Filter(filteredPanelConfig, generatorInput.generatorState);
+
+			return filteredPanelConfig;
+		}
+
 		protected bool TryGetRandomPanel(bool[,] panelConfig, Random random, out int[] generatedPanelIndices)
         {
             var availablePanels = FindAvailablePanels(panelConfig);

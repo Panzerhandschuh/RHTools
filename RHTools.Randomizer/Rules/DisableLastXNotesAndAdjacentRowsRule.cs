@@ -47,7 +47,7 @@ namespace RHTools.Randomizer.Rules
 		private static void DisableAboveRow(bool[,] panelConfig, int row, int col)
 		{
 			var above = row - 1;
-			if (above > 0)
+			if (above >= 0)
 				panelConfig[above, col] = false;
 		}
 

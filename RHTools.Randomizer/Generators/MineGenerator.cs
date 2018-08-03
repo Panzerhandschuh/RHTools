@@ -12,7 +12,9 @@ namespace RHTools.Randomizer.Generators
     {
         public override bool TryGeneratePanel(GeneratorInput generatorInput, List<Rule> rules, out int[] generatedPanelIndices)
         {
-            return TryGetRandomPanel(generatorInput.availablePanels, generatorInput.random, out generatedPanelIndices);
+			var filteredPanelConfig = ApplyRules(rules, generatorInput);
+
+			return TryGetRandomPanel(filteredPanelConfig, generatorInput.random, out generatedPanelIndices);
         }
     }
 }
