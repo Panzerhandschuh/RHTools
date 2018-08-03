@@ -35,15 +35,17 @@ namespace RHTools.Randomizer
 		public List<PanelNote> RandomizeBeat(List<Note> originalNotes)
 		{
 			var panelNotes = new List<PanelNote>();
+
+			var sortedNotes = originalNotes.OrderBy(x => x.type);
 			var maxNotesPerBeat = (settings.disableJumps) ? 1 : 2;
 			var counter = new NoteCounter(settings.panelConfig, maxNotesPerBeat);
 			var generatorInput = new GeneratorInput(generatorState, settings.panelConfig, settings.random);
-			var beat = originalNotes.First().beat;
+			var beat = sortedNotes.First().beat;
 
-			foreach (Note originalNote in originalNotes)
+			foreach (Note note in sortedNotes)
 			{
 				PanelNote panelNote;
-				switch (originalNote.type)
+				switch (note.type)
 				{
 					case NoteType.Regular:
 					case NoteType.Hold:

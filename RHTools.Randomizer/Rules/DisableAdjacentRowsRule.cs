@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace RHTools.Randomizer.Rules
 {
-	public class DisableCenterPanelOverlapRule : Rule
+	public class DisableAdjacentRowsRule : Rule
 	{
 		/// <summary>
 		/// Prevents patterns where your left and right feet might overlap when one foot is currently on the center panel (ex: center, down, center)
 		/// </summary>
-		public DisableCenterPanelOverlapRule() { }
+		public DisableAdjacentRowsRule() { }
 
 		public override void Filter(bool[,] panelConfig, GeneratorState state)
 		{

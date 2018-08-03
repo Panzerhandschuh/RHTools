@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RHTools.Randomizer.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RHTools.Randomizer.Rules
 {
-	public class DisableLastXNotesRule : Rule
+	public class DisableLastXNotesAndAdjacentRowsRule : Rule
 	{
 		private readonly int numNotes;
 
@@ -16,7 +17,7 @@ namespace RHTools.Randomizer.Rules
 		/// Example: numNotes = 1 - left, [mine cannot be left].
 		/// Example: numNotes = 2 - left, right, [mine cannot be left or right].
 		/// </summary>
-		public DisableLastXNotesRule(int numNotes)
+		public DisableLastXNotesAndAdjacentRowsRule(int numNotes)
 		{
 			this.numNotes = numNotes;
 		}
@@ -29,11 +30,32 @@ namespace RHTools.Randomizer.Rules
 			while (historyIndex >= 0 && noteCounter < numNotes)
 			{
 				var panel = history[historyIndex];
-				panelConfig[panel[0], panel[1]] = false;
+				var row = panel[0];
+				var col = panel[1];
+
+				panelConfig[row, col] = false;
+
+				// TODO: Consolidate logic between this class and DisableAdjacentRowsRule
+				DisableAboveRow(panelConfig, row, col);
+				DisableBelowRow(panelConfig, row, col);
 
 				historyIndex--;
 				noteCounter++;
 			}
+		}
+
+		private static void DisableAboveRow(bool[,] panelConfig, int row, int col)
+		{
+			var above = row - 1;
+			if (above > 0)
+				panelConfig[above, col] = false;
+		}
+
+		private static void DisableBelowRow(bool[,] panelConfig, int row, int col)
+		{
+			var below = row + 1;
+			if (below < PanelConfigUtil.maxRows)
+				panelConfig[below, col] = false;
 		}
 	}
 }
