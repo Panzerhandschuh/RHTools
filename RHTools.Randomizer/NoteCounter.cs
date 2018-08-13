@@ -11,10 +11,11 @@ namespace RHTools.Randomizer
         private int counter;
         private int maxNotesForPanelConfig;
 
-        public NoteCounter(bool[,] panelConfig, int maxNotesPerBeat)
+        public NoteCounter(bool[,] panelConfig, int maxNotesPerBeat, int numHeldNotes)
         {
             var numPanelsAvailable = panelConfig.Cast<bool>().Count(x => x);
             maxNotesForPanelConfig = Math.Min(maxNotesPerBeat, numPanelsAvailable);
+			counter = numHeldNotes;
         }
 
         public void IncrementCounter()

@@ -15,5 +15,6 @@ namespace RHTools.Randomizer
 		public List<Rule> mineRules;
 		public bool disableJumps;
 		public bool disableMines;
+		public bool disableHolds;
 	}
 }
