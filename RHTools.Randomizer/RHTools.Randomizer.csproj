@@ -43,6 +43,9 @@
     <Compile Include="BeatRandomizer.cs" />
     <Compile Include="BeatNotes.cs" />
     <Compile Include="BeatRandomizerSettings.cs" />
+    <Compile Include="Conditions\ChanceCondition.cs" />
+    <Compile Include="Conditions\Condition.cs" />
+    <Compile Include="Conditions\MaxNpsCondition.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Foot.cs" />
     <Compile Include="GeneratorInput.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="RhFileType.cs" />
     <Compile Include="RhgRandomizer.cs" />
     <Compile Include="RhsRandomizer.cs" />
+    <Compile Include="RuleGroup.cs" />
     <Compile Include="Rules\DisableAdjacentRowsRule.cs" />
     <Compile Include="Rules\DisableColumnForFootRule.cs" />
     <Compile Include="Rules\DisableLastXNotesAndAdjacentRowsRule.cs" />
