@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace RHTools.Randomizer.Rules
 {
-	public class DisableLastXNotesAndAdjacentRowsRule : Rule
+	public class DisableNotesAndAdjacentRowsForLastXFeetRule : DisableAdjacentRowsRuleBase
 	{
 		private readonly int numNotes;
 
 		/// <summary>
 		/// Disables the last x notes from available panel options.
 		/// This is useful for mines which generally shouldn't be placed right after another note.
+		/// This rule applies to foot history rather than note history, which means the last foot positions will be taken into account instead of the last note positions.
 		/// Example: numNotes = 1 - left, [mine cannot be left].
 		/// Example: numNotes = 2 - left, right, [mine cannot be left or right].
 		/// </summary>
-		public DisableLastXNotesAndAdjacentRowsRule(int numNotes)
+		public DisableNotesAndAdjacentRowsForLastXFeetRule(int numNotes)
 		{
 			this.numNotes = numNotes;
 		}
@@ -25,37 +26,21 @@ namespace RHTools.Randomizer.Rules
 		public override void Filter(bool[,] panelConfig, GeneratorState state)
 		{
 			var history = state.PanelHistory;
-			var historyIndex = history.Count - 1;
+			var historyIndex = PanelHistoryUtil.GetLastIndexOfLastNote(history);
 			var noteCounter = 0;
 			while (historyIndex >= 0 && noteCounter < numNotes)
 			{
-				var panel = history[historyIndex];
+				var historyItem = history[historyIndex];
+				var panel = historyItem.panel;
 				var row = panel[0];
 				var col = panel[1];
 
 				panelConfig[row, col] = false;
+				DisableAdjacentRows(panelConfig, row, col);
 
-				// TODO: Consolidate logic between this class and DisableAdjacentRowsRule
-				DisableAboveRow(panelConfig, row, col);
-				DisableBelowRow(panelConfig, row, col);
-
-				historyIndex--;
 				noteCounter++;
+				historyIndex = PanelHistoryUtil.GetIndexOfLastFoot(history, historyIndex, historyItem.foot);
 			}
-		}
-
-		private static void DisableAboveRow(bool[,] panelConfig, int row, int col)
-		{
-			var above = row - 1;
-			if (above >= 0)
-				panelConfig[above, col] = false;
-		}
-
-		private static void DisableBelowRow(bool[,] panelConfig, int row, int col)
-		{
-			var below = row + 1;
-			if (below < PanelConfigUtil.maxRows)
-				panelConfig[below, col] = false;
 		}
 	}
 }

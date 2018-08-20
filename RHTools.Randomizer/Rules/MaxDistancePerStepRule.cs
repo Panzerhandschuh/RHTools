@@ -28,7 +28,7 @@ namespace RHTools.Randomizer.Rules
 			if (history.Count < 2)
 				return;
 
-			var historyPanel = history[history.Count - 2];
+			var historyPanel = history[history.Count - 2].panel;
 			var historyRow = historyPanel[0];
 			var historyCol = historyPanel[1];
 			for (var row = 0; row < PanelConfigUtil.maxRows; row++)

@@ -97,12 +97,12 @@ namespace RHTools.Randomizer
 
 			counter.IncrementCounter();
 
+			generatorState.AddPanelToHistory(generatedPanelIndices);
+
 			if (originalNote.type == NoteType.Hold)
 				generatorState.HoldNoteWithCurrentFoot(panelNote);
 			else
 				generatorState.AlternateFoot();
-
-			generatorState.AddPanelToHistory(generatedPanelIndices);
 
 			return true;
 		}

@@ -13,7 +13,7 @@ namespace RHTools.Randomizer
     public class GeneratorState
     {
         public Foot CurrentFoot { get; private set; }
-        public ReadOnlyCollection<int[]> PanelHistory
+        public ReadOnlyCollection<PanelHistoryItem> PanelHistory
 		{
 			get
 			{
@@ -21,13 +21,13 @@ namespace RHTools.Randomizer
 			}
 		}
 
-		private List<int[]> panelHistory;
+		private List<PanelHistoryItem> panelHistory;
 		private Dictionary<Foot, PanelNote> heldPanelNotes;
 		private Dictionary<Foot, bool> footAlternationQueue; // Used to alternate feet at the end of holds
 
 		public GeneratorState(Random random)
         {
-            panelHistory = new List<int[]>();
+            panelHistory = new List<PanelHistoryItem>();
             CurrentFoot = random.NextEnum<Foot>();
 			heldPanelNotes = new Dictionary<Foot, PanelNote>()
 			{
@@ -43,7 +43,8 @@ namespace RHTools.Randomizer
 
 		public void AddPanelToHistory(int[] panel)
         {
-            panelHistory.Add(panel);
+			var item = new PanelHistoryItem(panel, CurrentFoot);
+            panelHistory.Add(item);
         }
 
 		/// <summary>

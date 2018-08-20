@@ -55,6 +55,7 @@
     <Compile Include="Generators\PanelGenerator.cs" />
     <Compile Include="Generators\StepGenerator.cs" />
     <Compile Include="HoldFlags.cs" />
+    <Compile Include="PanelHistoryItem.cs" />
     <Compile Include="RhcRandomizer.cs" />
     <Compile Include="RandomizerSettings.cs" />
     <Compile Include="NoteCounter.cs" />
@@ -65,8 +66,9 @@
     <Compile Include="RhsRandomizer.cs" />
     <Compile Include="RuleGroup.cs" />
     <Compile Include="Rules\DisableAdjacentRowsRule.cs" />
+    <Compile Include="Rules\DisableAdjacentRowsRuleBase.cs" />
     <Compile Include="Rules\DisableColumnForFootRule.cs" />
-    <Compile Include="Rules\DisableLastXNotesAndAdjacentRowsRule.cs" />
+    <Compile Include="Rules\DisableNotesAndAdjacentRowsForLastXFeetRule.cs" />
     <Compile Include="Rules\ForceStartingColumnForFootRule.cs" />
     <Compile Include="Rules\MaxRepetitionsEveryXNotesRule.cs" />
     <Compile Include="Rules\MaxSpanRule.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\NoteConverter.cs" />
     <Compile Include="Utils\PanelConfigUtil.cs" />
+    <Compile Include="Utils\PanelHistoryUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RHTools.Serialization\RHTools.Serialization.csproj">

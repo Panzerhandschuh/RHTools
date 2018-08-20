@@ -29,7 +29,7 @@ namespace RHTools.Randomizer.Rules
 			if (history.Count < numSteps)
 				return;
 
-			var lastPanel = history[history.Count - numSteps];
+			var lastPanel = history[history.Count - numSteps].panel;
 			if (maxRepetitions == 0) // Special case
 			{
 				panelConfig[lastPanel[0], lastPanel[1]] = false;
@@ -41,7 +41,7 @@ namespace RHTools.Randomizer.Rules
 			var repetitionCounter = 0;
 			while (historyIndex > 0 && historyCounter < maxRepetitions)
 			{
-				var panel = history[historyIndex];
+				var panel = history[historyIndex].panel;
 				if (panel[0] == lastPanel[0] && panel[1] == lastPanel[1])
 					repetitionCounter++;
 

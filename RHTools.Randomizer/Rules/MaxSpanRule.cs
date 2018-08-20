@@ -32,7 +32,8 @@ namespace RHTools.Randomizer.Rules
 			if (history.Count < 1)
 				return;
 
-			var startCol = history.Last()[1]; // Note: This logic currently assumes that the other foot pressed the last note. This will not always be the case if hold notes are implemented (ex: left foot could be held multiple notes ago).
+			var indexOfLastFoot = PanelHistoryUtil.GetLastIndexOfLastFoot(history, state.CurrentFoot);
+			var startCol = history[indexOfLastFoot].panel[1];
 			switch (state.CurrentFoot)
 			{
 				case Foot.Left:
