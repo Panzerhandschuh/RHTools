@@ -28,14 +28,16 @@ namespace RHTools.Randomizer.Rules
 			if (history.Count < 2)
 				return;
 
-			var historyPanel = history[history.Count - 2].panel;
-			var historyRow = historyPanel[0];
-			var historyCol = historyPanel[1];
+			var lastPanelIndex = PanelHistoryUtil.GetLastIndexOfLastNote(history);
+			var lastFootIndex = PanelHistoryUtil.GetIndexOfLastFoot(history, lastPanelIndex, history[lastPanelIndex].foot);
+			var lastFootPanel = history[lastFootIndex].panel;
+			var historyRow = lastFootPanel[0];
+			var historyCol = lastFootPanel[1];
 			for (var row = 0; row < PanelConfigUtil.maxRows; row++)
 			{
 				for (var col = 0; col < PanelConfigUtil.maxColumns; col++)
 				{
-					if (row > historyRow + maxHorizontalDistance || col > historyCol + maxVerticalDistance)
+					if (Math.Abs(row - historyRow) > maxHorizontalDistance || Math.Abs(col - historyCol) > maxVerticalDistance)
 						panelConfig[row, col] = false;
 				}
 			}
