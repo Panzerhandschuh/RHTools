@@ -1,11 +1,11 @@
 # RHTools
 Rhythm Horizon Tools
 
-## RHLib
+## RHTools.Serialization
 Provides functionality for reading/writing files from StepMania and Rhythm Horizon
 
-## Converter
+## RHTools.Converter
 Converts StepMania files to Rhythm Horizon files
 
-## Randomizer
+## RHTools.Randomizer
 Randomizes the arrows on Rhythm Horizon charts
